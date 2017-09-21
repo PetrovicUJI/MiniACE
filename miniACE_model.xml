@@ -1,0 +1,619 @@
+<!DOCTYPE xmodel SYSTEM "http://makace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>MiniACE</name>
+	<version>Version 1.1, 16/09/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models>
+		<!--  <model>
+		<file>ConsGoods/model.xml</file>
+		<enabled>true</enabled>
+		</model> -->
+	</models>
+	<environment>
+		<constants>
+			<variable>
+				<type>int</type>
+				<name>total_regions</name>
+				<description>Total number of regions.</description>
+			</variable>
+		</constants>
+		<functionFiles>
+			<file>my_library_functions.c</file>
+			<file>agents_basic_functions.c</file>
+		</functionFiles>
+		<timeUnits>
+			<timeUnit>
+				<name>daily</name>
+				<unit>iteration</unit>
+				<period>1</period>
+			</timeUnit>
+			<timeUnit>
+				<name>weekly</name>
+				<unit>daily</unit>
+				<period>5</period>
+			</timeUnit>
+			<timeUnit>
+				<name>monthly</name>
+				<unit>weekly</unit>
+				<period>4</period>
+			</timeUnit>
+			<timeUnit>
+				<name>quarterly</name>
+				<unit>monthly</unit>
+				<period>3</period>
+			</timeUnit>
+			<timeUnit>
+				<name>yearly</name>
+				<unit>monthly</unit>
+				<period>12</period>
+			</timeUnit>
+			<timeUnit>
+				<name>millionyearly</name>
+				<unit>yearly</unit>
+				<period>1000000</period>
+			</timeUnit>
+		</timeUnits>
+		<dataTypes/>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Firm</name>
+			<description>Consumption/final goods producers.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>last_day_of_month_to_act</name>
+					<description>One day before the activation day.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>bank_id</name>
+					<description>Bank ID at which the agent maintains its payment account.</description>
+				</variable>
+				
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description>Agents' long-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Firm_template</name>
+					<description></description>
+					<currentState>Start_Firm</currentState>
+					<nextState>End_Firm</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Final_Goods_Market_Clearing</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Final_Goods_Market_Clearing_template</name>
+					<description></description>
+					<currentState>Start_Final_Goods_Market_Clearing</currentState>
+					<nextState>End_Final_Goods_Market_Clearing</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Labor_Market_Clearing</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Labor_Market_Clearing_template</name>
+					<description></description>
+					<currentState>Start_Labor_Market_Clearing</currentState>
+					<nextState>End_Labor_Market_Clearing</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Household</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>bank_id</name>
+					<description>Bank ID at which the agent maintains its payment account.</description>
+				</variable>
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description>Agents' long-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Household_template</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>End_Household</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>PCFirm</name>
+			<description>Physical-Capital producers</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>bank_id</name>
+					<description>Bank ID at which the agent maintains its payment account.</description>
+				</variable>
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description>Agents' long-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>PCFirm_template</name>
+					<description></description>
+					<currentState>Start_PCFirm</currentState>
+					<nextState>End_PCFirm</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Statistical_Office</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Country ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Statistical_Office_template</name>
+					<description></description>
+					<currentState>Start_Statistical_Office</currentState>
+					<nextState>End_Statistical_Office</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government  to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account - cash and cash equivalents.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>deposits</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>cb_debt</name>
+					<description>Standing facility with the Central Bank.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description>Agents' long-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Bank_template</name>
+					<description></description>
+					<currentState>Start_Bank</currentState>
+					<nextState>End_Bank</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Credit_Market_Clearing</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Credit_Market_Clearing_template</name>
+					<description></description>
+					<currentState>Start_Credit_Market_Clearing</currentState>
+					<nextState>End_Credit_Market_Clearing</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Government</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int_array</type>
+					<name>list_of_regions</name>
+					<description>List of regions that are associated to the government.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_act</name>
+					<description>Activation day.</description>
+				</variable>
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description>Agents' long-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Government_template</name>
+					<description></description>
+					<currentState>Start_Government</currentState>
+					<nextState>End_Government</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Central_Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government ID to which the agent is associated.</description>
+				</variable>
+				<!-- balance sheet -->
+					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description>Agents' current account - cash and cash equivalents.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description>Agents' short-term asstes.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description>Agents' long-term asstes.</description>
+				</variable>
+					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>fiat_money</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>deposits</name>
+					<description>Agents' short-term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description>Agents' net worth.</description>
+				</variable>		
+			</memory>
+			<functions>
+				<function>
+					<name>Central_Bank_template</name>
+					<description></description>
+					<currentState>Start_Central_Bank</currentState>
+					<nextState>End_Central_Bank</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+	</agents>
+</xmodel>
