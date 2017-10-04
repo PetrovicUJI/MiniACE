@@ -1,5 +1,5 @@
 <!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
-<xmodel version="2" >
+<xmodel version="1" >
 	<name>Initialization</name>
 	<version>Version 1.1, 23/09/2017</version>
 	<description>Authors: Marko Petrovic</description>

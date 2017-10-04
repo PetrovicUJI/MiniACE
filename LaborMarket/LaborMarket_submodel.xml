@@ -1,0 +1,63 @@
+<!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>Labor_Market</name>
+	<version>Version 1.1, 05/10/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models/>
+	<environment>
+		<constants>
+			<!-- <variable>
+			<type>double</type>
+			<name>rawmat2output_innovation</name>
+			<description></description>
+			</variable> -->
+		</constants>
+		<functionFiles>
+		   <file>Firm_Labor_Market_Functions.c</file>
+		</functionFiles>
+		<timeUnits/>
+		<dataTypes>
+			<dataType>
+				<name>employee</name>
+				<description>Employee data.</description>
+				<variables>
+					<variable>
+						<type>int</type>
+						<name>id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>region_id</name>
+						<description>Region ID to which the agent is associated.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>salary</name>
+						<description>Worker salary.</description>
+					</variable>
+				</variables>
+			</dataType>
+		</dataTypes>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Firm</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>employee_array</type>
+					<name>employees</name>
+					<description>A vector of employees in a firm.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>labor_requirement</name>
+					<description>A number of workers needed to fulfill the production plan.</description>
+				</variable>
+			</memory>
+			<functions/>
+				<function/>
+		</xagent>
+	</agents>
+</xmodel>

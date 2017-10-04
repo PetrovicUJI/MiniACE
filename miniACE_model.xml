@@ -12,6 +12,10 @@
 			<file>Initialization/Initialization_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>LaborMarket/LaborMarket_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>
