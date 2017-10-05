@@ -6,28 +6,73 @@
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
-			<type>double</type>
-			<name>rawmat2output_innovation</name>
+			<variable>
+			<type>int</type>
+			<name>physical_capital_duration</name>
 			<description></description>
-			</variable> -->
+			</variable>
+			<variable>
+			<type>double</type>
+			<name>target_profit_rate</name>
+			<description></description>
+			</variable>
+			<variable>
+			<type>double</type>
+			<name>profit_rate_weights</name>
+			<description></description>
+			</variable>
+			<variable>
+			<type>double</type>
+			<name>target_capacity_utilization</name>
+			<description></description>
+			</variable>
+			<variable>
+			<type>double</type>
+			<name>capacity_utilization_weights</name>
+			<description></description>
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_Producer_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
-<!-- 			<dataType>
-				<name>consumption_goods_offer</name>
-				<description>Used by household and mall to hold consumption goods offers</description>
+			<dataType>
+				<name>physical_capital_batch</name>
+				<description>A batch of physical capital.</description>
 				<variables>
 					<variable>
 						<type>int</type>
 						<name>id</name>
 						<description></description>
 					</variable>
+					<variable>
+						<type>int</type>
+						<name>months_in_use</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>capital_units</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>price</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>current_value</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>productivity</name>
+						<description></description>
+					</variable>
 				</variables>
-			</dataType> -->
+			</dataType>
 		</dataTypes>
 	</environment>
 	<agents>
@@ -39,6 +84,11 @@
 					<type>double</type>
 					<name>production_plan</name>
 					<description>A planned production quantity for the current month.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>investment_plan</name>
+					<description>A planned investment quantity for the current month.</description>
 				</variable>
 				<variable>
 					<type>double</type>
@@ -75,13 +125,18 @@
 					<name>sold_quantities_vector</name>
 					<description>A vector of monthly sold quantities in the last "n" months.</description>
 				</variable>
+				<variable>
+					<type>physical_capital_batch_array</type>
+					<name>physical_capital_stock</name>
+					<description>A vector of all the batch of capital goods.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
-					<name>Firm_plan_production_quantity</name>
+					<name>Firm_update_capacity</name>
 					<description></description>
-					<currentState>Firm_production_planning</currentState>
-					<nextState>Firm_labor_demand_planning</nextState>
+					<currentState>Firm_production_activity</currentState>
+					<nextState>Firm_production_planning</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -92,9 +147,25 @@
 					<outputs/>
 				</function>
 				<function>
+					<name>Firm_plan_production_quantity</name>
+					<description></description>
+					<currentState>Firm_production_planning</currentState>
+					<nextState>Firm_labor_demand_planning</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
 					<name>Firm_plan_labor_demand</name>
 					<description></description>
 					<currentState>Firm_labor_demand_planning</currentState>
+					<nextState>Firm_investment_planning</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_plan_investment</name>
+					<description></description>
+					<currentState>Firm_investment_planning</currentState>
 					<nextState>Firm_monthly_accounting</nextState>
 					<inputs/>
 					<outputs/>
@@ -102,7 +173,7 @@
 				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Firm_production_planning</currentState>
+					<currentState>Firm_production_activity</currentState>
 					<nextState>Firm_monthly_accounting</nextState>
 					<condition>
 						<not>

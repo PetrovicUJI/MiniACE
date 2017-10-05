@@ -6,6 +6,52 @@
 
 
 
+
+
+/* \fn: int Firm_update_capacity()
+ 
+* \brief: Firm update capital stock.
+ 
+ 
+* \timing: Monthly on the firm activation day.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 05.10.2017-Marko: First implementation.
+*/
+int Firm_update_capacity()
+{
+	int size = PHYSICAL_CAPITAL_STOCK.size;
+	int i = 0;
+	PHYSICAL_CAPITAL = 0;
+	
+	while(i < size)
+	{
+		//update after the production takes place and before new capital is bouth
+		//PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+
+		if(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use >= PHYSICAL_CAPITAL_DURATION)
+		{
+			remove_physical_capital_batch(&PHYSICAL_CAPITAL_STOCK,i);
+			
+			size--;
+		}
+		else
+		{
+			PHYSICAL_CAPITAL_STOCK.array[i].current_value = PHYSICAL_CAPITAL_STOCK.array[i].capital_units*PHYSICAL_CAPITAL_STOCK.array[i].price*(1-(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use/PHYSICAL_CAPITAL_DURATION));
+			
+			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
+			
+			i++;
+		}
+	}
+
+    return 0;
+}
+
+
+
+
 /* \fn: int Firm_plan_production_quantity()
  
 * \brief: Firm determine production plan.
@@ -28,8 +74,8 @@ int Firm_plan_production_quantity()
 	
 	expected_demand = expected_demand/SOLD_QUANTITIES_VECTOR.size;
 	
-	if(expected_demand < CURRENT_ASSETS) {PRODUCTION_PLAN = 0;}
-	else {PRODUCTION_PLAN = expected_demand - CURRENT_ASSETS;}
+	if(expected_demand < INVENTORIES) {PRODUCTION_PLAN = 0;}
+	else {PRODUCTION_PLAN = expected_demand - INVENTORIES;}
 
     return 0;
 }
@@ -55,6 +101,36 @@ int Firm_plan_labor_demand()
 
     return 0;
 }
+
+
+/* \fn: int Firm_plan_investment()
+ 
+* \brief: Firm plan investment in physical capital.
+ 
+ 
+* \timing: Monthly on the firm activation day.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 05.10.2017-Marko: First implementation.
+*/
+int Firm_plan_investment()
+{
+	double profit_rate = 0.0;
+	double capacity_growth_rate = 0.0;
+	
+	INVESTMENT_PLAN = 0;
+	
+	profit_rate = OPERATING_CASH_FLOW/NON_CURRENT_ASSETS;
+	
+	capacity_growth_rate = PROFIT_RATE_WEIGHTS*((profit_rate-TARGET_PROFIT_RATE)/TARGET_PROFIT_RATE) + CAPACITY_UTILIZATION_WEIGHTS*((CAPACITY_UTILIZATION-TARGET_CAPACITY_UTILIZATION)/TARGET_CAPACITY_UTILIZATION);
+
+	if(capacity_growth_rate > 0) {INVESTMENT_PLAN = capacity_growth_rate*PHYSICAL_CAPITAL;}
+
+    return 0;
+}
+
+
 
 /* \fn: int Firm_compute_sale_statistics()
  

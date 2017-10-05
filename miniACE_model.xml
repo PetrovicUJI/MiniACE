@@ -16,6 +16,10 @@
 			<file>LaborMarket/LaborMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>FinancialManagement/FinancialManagement_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>

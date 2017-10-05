@@ -1,0 +1,48 @@
+<!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>Financial_Management</name>
+	<version>Version 1.1, 05/10/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models/>
+	<environment>
+		<constants>
+			<!-- <variable>
+			<type>double</type>
+			<name>rawmat2output_innovation</name>
+			<description></description>
+			</variable> -->
+		</constants>
+		<functionFiles>
+		   <file>Firm_Financial_Management_Functions.c</file>
+		</functionFiles>
+		<timeUnits/>
+		<dataTypes>
+<!-- 			<dataType>
+				<name>consumption_goods_offer</name>
+				<description>Used by household and mall to hold consumption goods offers</description>
+				<variables>
+					<variable>
+						<type>int</type>
+						<name>id</name>
+						<description></description>
+					</variable>
+				</variables>
+			</dataType> -->
+		</dataTypes>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Firm</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>double</type>
+					<name>operating_cash_flow</name>
+					<description>After tax profits plus capital amortization costs minus changes inventories and principal repayments.</description>
+				</variable>
+			</memory>
+			<functions/>
+				<function/>
+		</xagent>
+	</agents>
+</xmodel>

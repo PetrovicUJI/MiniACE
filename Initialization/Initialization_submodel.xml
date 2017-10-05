@@ -46,7 +46,7 @@
 					<name>Firm_initialization</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
-					<nextState>Firm_production_planning</nextState>
+					<nextState>Firm_production_activity</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -63,7 +63,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
-					<nextState>Firm_production_planning</nextState>
+					<nextState>Firm_production_activity</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
