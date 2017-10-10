@@ -65,17 +65,17 @@ int Firm_update_capacity()
 */
 int Firm_plan_production_quantity()
 {
-	double expected_demand = 0.0;
+	EXPECTED_DEMAND = 0.0;
 	
 	for(int i = 0; i < SOLD_QUANTITIES_VECTOR.size; i++)
 	{
-		expected_demand += SOLD_QUANTITIES_VECTOR.array[i];
+		EXPECTED_DEMAND += SOLD_QUANTITIES_VECTOR.array[i];
 	}
 	
-	expected_demand = expected_demand/SOLD_QUANTITIES_VECTOR.size;
+	EXPECTED_DEMAND = EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size;
 	
-	if(expected_demand < INVENTORIES) {PRODUCTION_PLAN = 0;}
-	else {PRODUCTION_PLAN = expected_demand - INVENTORIES;}
+	if(EXPECTED_DEMAND < INVENTORIES) {PRODUCTION_PLAN = 0;}
+	else {PRODUCTION_PLAN = EXPECTED_DEMAND - INVENTORIES;}
 
     return 0;
 }

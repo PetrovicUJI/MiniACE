@@ -40,9 +40,37 @@
 					<name>operating_cash_flow</name>
 					<description>After tax profits plus capital amortization costs minus changes inventories and principal repayments.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_financial_needs</name>
+					<description>Total monthly financial needs of firms.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>profit_accumulation_rate</name>
+					<description>The percentage of net profit that will be accumulated by firms.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>vat_rate</name>
+					<description>Value added tax rate.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_rate</name>
+					<description>Tax on accumulated profit.</description>
+				</variable>
 			</memory>
-			<functions/>
-				<function/>
+			<functions>
+				<function>
+					<name>Firm_plan_financing</name>
+					<description></description>
+					<currentState>Firm_financial_planning</currentState>
+					<nextState>Firm_monthly_accounting</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
 		</xagent>
 	</agents>
 </xmodel>

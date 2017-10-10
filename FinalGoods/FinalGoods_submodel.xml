@@ -82,6 +82,11 @@
 			<memory>
 				<variable>
 					<type>double</type>
+					<name>expected_demand</name>
+					<description>Expected demand in the current month.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>production_plan</name>
 					<description>A planned production quantity for the current month.</description>
 				</variable>
@@ -130,6 +135,16 @@
 					<name>physical_capital_stock</name>
 					<description>A vector of all the batch of capital goods.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>physical_capital_price</name>
+					<description>The price of physical capital.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price</name>
+					<description>The price of final goods.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -166,7 +181,7 @@
 					<name>Firm_plan_investment</name>
 					<description></description>
 					<currentState>Firm_investment_planning</currentState>
-					<nextState>Firm_monthly_accounting</nextState>
+					<nextState>Firm_financial_planning</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

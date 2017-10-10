@@ -55,6 +55,11 @@
 					<name>labor_requirement</name>
 					<description>A number of workers needed to fulfill the production plan.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>wage</name>
+					<description>Monthly salary per employee.</description>
+				</variable>
 			</memory>
 			<functions/>
 				<function/>

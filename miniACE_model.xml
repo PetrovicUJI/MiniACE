@@ -20,6 +20,10 @@
 			<file>FinancialManagement/FinancialManagement_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>BankingSector/BankingSector_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>
