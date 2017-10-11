@@ -29,7 +29,7 @@ int Firm_plan_financing()
 	
 	for(int i = 0; i < LOANS.size; i++)
 	{
-		expected_instalment_payments += LOANS.array[i].remaining_amount;
+		expected_instalment_payments += LOANS.array[i].instalment;
 		
 		expected_interest_payments += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
 	}
@@ -45,10 +45,10 @@ int Firm_plan_financing()
 		expected_profit = expected_profit*(1-CAPITAL_TAX_RATE);
 	}
 	
-	TOTAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
+	EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
 	
 	// if firms take new loans they will set new prices according to new unit costs, therefore additional costs of new loans will be taken into account.
-	TOTAL_FINANCIAL_NEEDS = max(0, TOTAL_FINANCIAL_NEEDS);
+	EXTERNAL_FINANCIAL_NEEDS = max(0, EXTERNAL_FINANCIAL_NEEDS);
 	
     return 0;
 }

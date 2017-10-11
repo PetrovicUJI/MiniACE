@@ -150,8 +150,8 @@
 				<function>
 					<name>Firm_update_capacity</name>
 					<description></description>
-					<currentState>Firm_production_activity</currentState>
-					<nextState>Firm_production_planning</nextState>
+					<currentState>Firm_ProductionActivity</currentState>
+					<nextState>Firm_ProductionPlanning</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -164,32 +164,32 @@
 				<function>
 					<name>Firm_plan_production_quantity</name>
 					<description></description>
-					<currentState>Firm_production_planning</currentState>
-					<nextState>Firm_labor_demand_planning</nextState>
+					<currentState>Firm_ProductionPlanning</currentState>
+					<nextState>Firm_LaborDemandPlanning</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
 				<function>
 					<name>Firm_plan_labor_demand</name>
 					<description></description>
-					<currentState>Firm_labor_demand_planning</currentState>
-					<nextState>Firm_investment_planning</nextState>
+					<currentState>Firm_LaborDemandPlanning</currentState>
+					<nextState>Firm_InvestmentPlanning</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
 				<function>
 					<name>Firm_plan_investment</name>
 					<description></description>
-					<currentState>Firm_investment_planning</currentState>
-					<nextState>Firm_financial_planning</nextState>
+					<currentState>Firm_InvestmentPlanning</currentState>
+					<nextState>Firm_FinancialPlanning</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
 				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Firm_production_activity</currentState>
-					<nextState>Firm_monthly_accounting</nextState>
+					<currentState>Firm_ProductionActivity</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
 					<condition>
 						<not>
 							<time>
@@ -204,7 +204,7 @@
 				<function>
 					<name>Firm_compute_sale_statistics</name>
 					<description></description>
-					<currentState>Firm_monthly_accounting</currentState>
+					<currentState>Firm_MonthlyAccounting</currentState>
 					<nextState>End_Firm</nextState>
 					<condition>
 						<time>
@@ -218,7 +218,7 @@
 				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Firm_monthly_accounting</currentState>
+					<currentState>Firm_MonthlyAccounting</currentState>
 					<nextState>End_Firm</nextState>
 					<condition>
 						<not>
@@ -226,6 +226,42 @@
 								<period>monthly</period>
 								<phase>a.last_day_of_month_to_act</phase>
 							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_adjust_production_plan</name>
+					<description></description>
+					<currentState>Firm_ProductionPlanAdjustment</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<condition>
+						<lhs>
+							<value>a.external_financial_needs</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_ProductionPlanAdjustment</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.external_financial_needs</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>1</value>
+							</rhs>
 						</not>
 					</condition>
 					<inputs/>

@@ -42,7 +42,7 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>total_financial_needs</name>
+					<name>external_financial_needs</name>
 					<description>Total monthly financial needs of firms.</description>
 				</variable>
 				<variable>
@@ -65,8 +65,8 @@
 				<function>
 					<name>Firm_plan_financing</name>
 					<description></description>
-					<currentState>Firm_financial_planning</currentState>
-					<nextState>Firm_monthly_accounting</nextState>
+					<currentState>Firm_FinancialPlanning</currentState>
+					<nextState>Firm_LoanRequest</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

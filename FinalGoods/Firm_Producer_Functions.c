@@ -21,11 +21,9 @@
 */
 int Firm_update_capacity()
 {
-	int size = PHYSICAL_CAPITAL_STOCK.size;
-	int i = 0;
 	PHYSICAL_CAPITAL = 0;
 	
-	while(i < size)
+	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
 	{
 		//update after the production takes place and before new capital is bouth
 		//PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
@@ -33,16 +31,12 @@ int Firm_update_capacity()
 		if(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use >= PHYSICAL_CAPITAL_DURATION)
 		{
 			remove_physical_capital_batch(&PHYSICAL_CAPITAL_STOCK,i);
-			
-			size--;
 		}
 		else
 		{
 			PHYSICAL_CAPITAL_STOCK.array[i].current_value = PHYSICAL_CAPITAL_STOCK.array[i].capital_units*PHYSICAL_CAPITAL_STOCK.array[i].price*(1-(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use/PHYSICAL_CAPITAL_DURATION));
 			
 			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
-			
-			i++;
 		}
 	}
 
@@ -132,6 +126,73 @@ int Firm_plan_investment()
 
 
 
+/* \fn: int Firm_adjust_production_plan()
+ 
+* \brief: Firm adjust production plan and input demand due to limited financial funds. Firms use maximum utilization rate.
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 11.10.2017-Marko: First implementation.
+*/
+int Firm_adjust_production_plan()
+{
+	PROFIT_ACCUMULATION_RATE = 1;
+	
+	double production = 0.0;
+	double expected_profit = 0.0;
+	double expected_investment_costs = 0.0;
+	double expected_labor_costs = 0.0;
+	double expected_instalment_payments = 0.0;
+	double expected_interest_payments = 0.0;
+	
+	for(int i = 0; i < LOANS.size; i++)
+	{
+		expected_instalment_payments += LOANS.array[i].instalment;
+		
+		expected_interest_payments += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
+	}
+
+	do
+	{
+		INVESTMENT_PLAN--;
+		
+		production = (INVESTMENT_PLAN+PHYSICAL_CAPITAL)*PRODUCTIVITY;
+		
+		production = min(EXPECTED_DEMAND, (production+INVENTORIES));
+		
+		LABOR_REQUIREMENT = production/(CAPITAL_LABOR_RATIO*PRODUCTIVITY);
+		
+		expected_investment_costs = INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE;
+	
+		expected_labor_costs = LABOR_REQUIREMENT*WAGE;
+		
+		expected_profit = production*PRICE*(1-VAT_RATE) - expected_labor_costs - expected_instalment_payments - expected_interest_payments;
+		
+		if(expected_profit > 0)
+		{
+			// profit after dividend payments
+			expected_profit = expected_profit*PROFIT_ACCUMULATION_RATE;
+		
+			// profit after capital tax payments
+			expected_profit = expected_profit*(1-CAPITAL_TAX_RATE);
+		}
+		
+		EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
+		
+	}while(INVESTMENT_PLAN > 0 && EXTERNAL_FINANCIAL_NEEDS > 1);
+	
+	if(INVESTMENT_PLAN <= 1)
+	{
+		INVESTMENT_PLAN = 0;
+	}
+	
+	return 0;
+}
+
+
 /* \fn: int Firm_compute_sale_statistics()
  
 * \brief: Firm store data about a monthly sold quantity.
@@ -153,4 +214,6 @@ int Firm_compute_sale_statistics()
 
     return 0;
 }
+
+
 

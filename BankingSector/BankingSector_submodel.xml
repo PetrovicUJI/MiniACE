@@ -6,24 +6,31 @@
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
-			<type>double</type>
-			<name>rawmat2output_innovation</name>
+			<variable>
+			<type>int</type>
+			<name>loan_repayment_period_months</name>
 			<description></description>
-			</variable> -->
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_Banking_Sector_Functions.c</file>
 		</functionFiles>
+		<functionFiles>
+		   <file>Credit_ClearingHouse_Banking_Sector_Functions.c</file>
+		</functionFiles>
+		<functionFiles>
+		   <file>Bank_Banking_Sector_Functions.c</file>
+		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
 			<dataType>
-				<name>loan</name>
+				<name>Loan</name>
 				<description>Used by firm to store loans.</description>
 				<variables>
+				<!-- (creditor_id, repayment_period_months, remaining_months, remaining_amount, instalment, monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk) -->
 					<variable>
 						<type>int</type>
-						<name>id</name>
+						<name>creditor_id</name>
 						<description>Creditor id.</description>
 					</variable>
 					<variable>
@@ -51,6 +58,70 @@
 						<name>monthly_interest</name>
 						<description>Monthly interest rate on loan.</description>
 					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_value_at_risk</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_instalment_value_at_risk</name>
+						<description></description>
+					</variable>
+				</variables>
+			</dataType>
+			<dataType>
+				<name>Loan_request</name>
+				<description>Used by clearing house to store loan requests.</description>
+				<variables>
+				<!-- (agent_id, equity, total_debt, loan_amount) -->
+					<variable>
+						<type>int</type>
+						<name>agent_id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>equity</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>total_debt</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_amount</name>
+						<description></description>
+					</variable>
+				</variables>
+			</dataType>
+			<dataType>
+				<name>Loan_offer</name>
+				<description>Used by clearing house to store loan offers.</description>
+				<variables>
+				<!-- (agent_id, equity, value_at_risk, alpha) -->
+					<variable>
+						<type>int</type>
+						<name>agent_id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>equity</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>value_at_risk</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>alpha</name>
+						<description></description>
+					</variable>
 				</variables>
 			</dataType>
 		</dataTypes>
@@ -61,13 +132,320 @@
 			<description></description>
 			<memory>
 				<variable>
-					<type>loan_array</type>
+					<type>Loan_array</type>
 					<name>loans</name>
 					<description>A vector of laons taken by a firm.</description>
 				</variable>
 			</memory>
-			<functions/>
-				<function/>
+			<functions>
+				<function>
+					<name>Firm_send_loan_request</name>
+					<description></description>
+					<currentState>Firm_LoanRequest</currentState>
+					<nextState>Firm_LoanReceived</nextState>
+					<condition>
+						<lhs>
+							<value>a.external_financial_needs</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>loan_request</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_receive_loan</name>
+					<description></description>
+					<currentState>Firm_LoanReceived</currentState>
+					<nextState>Firm_ProductionPlanAdjustment</nextState>
+					<inputs>
+						<input>
+							<messageName>new_loan_taken</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.borrower_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_LoanRequest</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.external_financial_needs</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
 		</xagent>
+		<xagent>
+			<name>Credit_ClearingHouse</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>Loan_request_array</type>
+					<name>loan_requests_list</name>
+					<description>A vector of requested loans by creditors.</description>
+				</variable>
+				<variable>
+					<type>Loan_offer_array</type>
+					<name>loan_offers_list</name>
+					<description>A vector of offered loans by creditors.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>cb_interest_rate</name>
+					<description>The interest rate set by the central bank.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>CCH_collect_orders</name>
+					<description></description>
+					<currentState>Start_CreditClearingHouse</currentState>
+					<nextState>CCH_LaonsAllocation</nextState>
+					<inputs>
+						<input>
+							<messageName>loan_request</messageName>
+						</input>
+						<input>
+							<messageName>loan_offer</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+			<functions>
+				<function>
+					<name>CCH_allocate_loans</name>
+					<description></description>
+					<currentState>CCH_LaonsAllocation</currentState>
+					<nextState>End_CreditClearingHouse</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>new_loan_taken</messageName>
+						</output>
+						<output>
+							<messageName>new_loan_given</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>double</type>
+					<name>value_at_risk</name>
+					<description>Risky weighted assets.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>alpha</name>
+					<description>Capital requirement regulation set by the central bank.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Bank_offer_loans</name>
+					<description></description>
+					<currentState>Start_Bank</currentState>
+					<nextState>Bank_LoanAllowed</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>loan_offer</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Bank_give_loans</name>
+					<description></description>
+					<currentState>Bank_LoanAllowed</currentState>
+					<nextState>End_Bank</nextState>
+					<inputs>
+						<input>
+							<messageName>new_loan_given</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.creditor_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>	
 	</agents>
+	<messages>
+		<message>
+			<name>loan_request</name>
+			<description>Message added by agents to demand credit. It contains the financial info of applying agents.</description>
+			<variables>
+			<!-- (agent_id, equity, total_debt, loan_amount) -->
+				<variable>
+					<type>int</type>
+					<name>agent_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_debt</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>loan_amount</name>
+					<description></description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>loan_offer</name>
+			<description>Message added by agents to supply credit. It contains the financial info of lenders.</description>
+			<variables>
+			<!-- (agent_id, equity, value_at_risk, alpha) -->
+				<variable>
+					<type>int</type>
+					<name>agent_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>equity</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>value_at_risk</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>alpha</name>
+					<description></description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>new_loan_taken</name>
+			<description>Message added by credit clearing house to inform borrowers about new loan allowed. It contains the financial info of new loans.</description>
+				<variables>
+				<!-- (borrower_id, creditor_id, repayment_period_months, remaining_months, remaining_amount, instalment, monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk) -->
+					<variable>
+						<type>int</type>
+						<name>borrower_id</name>
+						<description>Creditor id.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>creditor_id</name>
+						<description>Creditor id.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>repayment_period_months</name>
+						<description>During the repayment period, firm repay principal and interest on the loan.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>remaining_months</name>
+						<description>The number of months left to pay off loan.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>remaining_amount</name>
+						<description>Total loan amount left to be paid.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>instalment</name>
+						<description>Loan instalment.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>monthly_interest</name>
+						<description>Monthly interest rate on loan.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_value_at_risk</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_instalment_value_at_risk</name>
+						<description></description>
+					</variable>
+				</variables>
+		</message>
+		<message>
+			<name>new_loan_given</name>
+			<description>Message added by credit clearing house to inform lenders about new loan allowed. It contains the financial info of new loans.</description>
+				<variables>
+				<!-- (creditor_id, credit_allowed, loan_value_at_risk) -->
+					<variable>
+						<type>int</type>
+						<name>creditor_id</name>
+						<description>Creditor id.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>credit_allowed</name>
+						<description>Total loan amount left to be paid.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>loan_value_at_risk</name>
+						<description></description>
+					</variable>
+				</variables>
+		</message>
+	</messages>
 </xmodel>
