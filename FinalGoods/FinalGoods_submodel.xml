@@ -7,29 +7,29 @@
 	<environment>
 		<constants>
 			<variable>
-			<type>int</type>
-			<name>physical_capital_duration</name>
-			<description></description>
+				<type>int</type>
+				<name>physical_capital_duration</name>
+				<description></description>
 			</variable>
 			<variable>
-			<type>double</type>
-			<name>target_profit_rate</name>
-			<description></description>
+				<type>double</type>
+				<name>target_profit_rate</name>
+				<description></description>
 			</variable>
 			<variable>
-			<type>double</type>
-			<name>profit_rate_weights</name>
-			<description></description>
+				<type>double</type>
+				<name>profit_rate_weights</name>
+				<description></description>
 			</variable>
 			<variable>
-			<type>double</type>
-			<name>target_capacity_utilization</name>
-			<description></description>
+				<type>double</type>
+				<name>target_capacity_utilization</name>
+				<description></description>
 			</variable>
 			<variable>
-			<type>double</type>
-			<name>capacity_utilization_weights</name>
-			<description></description>
+				<type>double</type>
+				<name>capacity_utilization_weights</name>
+				<description></description>
 			</variable>
 		</constants>
 		<functionFiles>
@@ -232,9 +232,9 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_adjust_production_plan</name>
+					<name>Firm_adjust_investment_plan</name>
 					<description></description>
-					<currentState>Firm_ProductionPlanAdjustment</currentState>
+					<currentState>Firm_InvestmentPlanAdjustment</currentState>
 					<nextState>Firm_MonthlyAccounting</nextState>
 					<condition>
 						<lhs>
@@ -251,7 +251,7 @@
 				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Firm_ProductionPlanAdjustment</currentState>
+					<currentState>Firm_InvestmentPlanAdjustment</currentState>
 					<nextState>Firm_MonthlyAccounting</nextState>
 					<condition>
 						<not>

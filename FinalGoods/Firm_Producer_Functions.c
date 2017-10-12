@@ -4,10 +4,6 @@
 #include "../Firm_agent_header.h"
 
 
-
-
-
-
 /* \fn: int Firm_update_capacity()
  
 * \brief: Firm update capital stock.
@@ -21,7 +17,7 @@
 */
 int Firm_update_capacity()
 {
-	PHYSICAL_CAPITAL = 0;
+	PHYSICAL_CAPITAL = 0.0;
 	
 	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
 	{
@@ -34,9 +30,15 @@ int Firm_update_capacity()
 		}
 		else
 		{
+			
+			if(PHYSICAL_CAPITAL_DURATION <= 0) {printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL_DURATION = %2.5f\n ", PHYSICAL_CAPITAL_DURATION);}
+			
 			PHYSICAL_CAPITAL_STOCK.array[i].current_value = PHYSICAL_CAPITAL_STOCK.array[i].capital_units*PHYSICAL_CAPITAL_STOCK.array[i].price*(1-(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use/PHYSICAL_CAPITAL_DURATION));
 			
+			
 			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
+			
+			if(PHYSICAL_CAPITAL < 0) {printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL = %2.5f\n ", PHYSICAL_CAPITAL);}
 		}
 	}
 
@@ -66,7 +68,8 @@ int Firm_plan_production_quantity()
 		EXPECTED_DEMAND += SOLD_QUANTITIES_VECTOR.array[i];
 	}
 	
-	EXPECTED_DEMAND = EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size;
+	if(SOLD_QUANTITIES_VECTOR.size > 0) {EXPECTED_DEMAND = 1.1*(EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size);}
+	
 	
 	if(EXPECTED_DEMAND < INVENTORIES) {PRODUCTION_PLAN = 0;}
 	else {PRODUCTION_PLAN = EXPECTED_DEMAND - INVENTORIES;}
@@ -88,14 +91,18 @@ int Firm_plan_production_quantity()
 */
 int Firm_plan_labor_demand()
 {
-
-	CAPACITY_UTILIZATION = min(1,(PRODUCTION_PLAN/(PHYSICAL_CAPITAL*PRODUCTIVITY)));
+	if(PRODUCTIVITY <= 0) {printf("\n ERROR in function Firm_plan_labor_demand: PRODUCTIVITY = %2.5f\n ", PRODUCTIVITY);}
 	
-	LABOR_REQUIREMENT = CAPACITY_UTILIZATION*(PHYSICAL_CAPITAL/CAPITAL_LABOR_RATIO);
+	if(PHYSICAL_CAPITAL > 0) {CAPACITY_UTILIZATION = min(1,(PRODUCTION_PLAN/(PHYSICAL_CAPITAL*PRODUCTIVITY)));}
+	else {CAPACITY_UTILIZATION = 0;}
+	
+	
+	if(CAPITAL_LABOR_RATIO <= 0) {printf("\n ERROR in function Firm_plan_labor_demand: CAPITAL_LABOR_RATIO = %2.5f\n ", CAPITAL_LABOR_RATIO);}
+
+	LABOR_REQUIREMENT = (int)ceil(CAPACITY_UTILIZATION*(PHYSICAL_CAPITAL/CAPITAL_LABOR_RATIO));
 
     return 0;
 }
-
 
 /* \fn: int Firm_plan_investment()
  
@@ -113,9 +120,14 @@ int Firm_plan_investment()
 	double profit_rate = 0.0;
 	double capacity_growth_rate = 0.0;
 	
-	INVESTMENT_PLAN = 0;
+	INVESTMENT_PLAN = 0.0;
 	
-	profit_rate = OPERATING_CASH_FLOW/NON_CURRENT_ASSETS;
+	if(NON_CURRENT_ASSETS > 1) {profit_rate = OPERATING_CASH_FLOW/NON_CURRENT_ASSETS;}
+	else {profit_rate = OPERATING_CASH_FLOW;}
+	
+	
+	if(TARGET_PROFIT_RATE <= 0) {printf("\n ERROR in function Firm_plan_investment: TARGET_PROFIT_RATE = %2.5f\n ", TARGET_PROFIT_RATE);}
+	if(TARGET_CAPACITY_UTILIZATION <= 0) {printf("\n ERROR in function Firm_plan_investment: TARGET_CAPACITY_UTILIZATION = %2.5f\n ", TARGET_CAPACITY_UTILIZATION);}
 	
 	capacity_growth_rate = PROFIT_RATE_WEIGHTS*((profit_rate-TARGET_PROFIT_RATE)/TARGET_PROFIT_RATE) + CAPACITY_UTILIZATION_WEIGHTS*((CAPACITY_UTILIZATION-TARGET_CAPACITY_UTILIZATION)/TARGET_CAPACITY_UTILIZATION);
 
@@ -126,7 +138,7 @@ int Firm_plan_investment()
 
 
 
-/* \fn: int Firm_adjust_production_plan()
+/* \fn: int Firm_adjust_investment_plan()
  
 * \brief: Firm adjust production plan and input demand due to limited financial funds. Firms use maximum utilization rate.
  
@@ -137,11 +149,9 @@ int Firm_plan_investment()
 * \authors: Marko Petrovic
 * \history: 11.10.2017-Marko: First implementation.
 */
-int Firm_adjust_production_plan()
+int Firm_adjust_investment_plan()
 {
-	PROFIT_ACCUMULATION_RATE = 1;
 	
-	double production = 0.0;
 	double expected_profit = 0.0;
 	double expected_investment_costs = 0.0;
 	double expected_labor_costs = 0.0;
@@ -154,22 +164,18 @@ int Firm_adjust_production_plan()
 		
 		expected_interest_payments += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
 	}
-
+	
+	expected_labor_costs = LABOR_REQUIREMENT*WAGE;
+	
+	PROFIT_ACCUMULATION_RATE = 1;
+	INVESTMENT_PLAN++;
 	do
 	{
 		INVESTMENT_PLAN--;
 		
-		production = (INVESTMENT_PLAN+PHYSICAL_CAPITAL)*PRODUCTIVITY;
-		
-		production = min(EXPECTED_DEMAND, (production+INVENTORIES));
-		
-		LABOR_REQUIREMENT = production/(CAPITAL_LABOR_RATIO*PRODUCTIVITY);
-		
 		expected_investment_costs = INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE;
-	
-		expected_labor_costs = LABOR_REQUIREMENT*WAGE;
 		
-		expected_profit = production*PRICE*(1-VAT_RATE) - expected_labor_costs - expected_instalment_payments - expected_interest_payments;
+		expected_profit = EXPECTED_DEMAND*PRICE*(1-VAT_RATE) - expected_labor_costs - expected_instalment_payments - expected_interest_payments;
 		
 		if(expected_profit > 0)
 		{
@@ -184,7 +190,7 @@ int Firm_adjust_production_plan()
 		
 	}while(INVESTMENT_PLAN > 0 && EXTERNAL_FINANCIAL_NEEDS > 1);
 	
-	if(INVESTMENT_PLAN <= 1)
+	if(INVESTMENT_PLAN < 1)
 	{
 		INVESTMENT_PLAN = 0;
 	}

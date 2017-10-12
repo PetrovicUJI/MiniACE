@@ -163,7 +163,7 @@
 					<name>Firm_receive_loan</name>
 					<description></description>
 					<currentState>Firm_LoanReceived</currentState>
-					<nextState>Firm_ProductionPlanAdjustment</nextState>
+					<nextState>Firm_InvestmentPlanAdjustment</nextState>
 					<inputs>
 						<input>
 							<messageName>new_loan_taken</messageName>
