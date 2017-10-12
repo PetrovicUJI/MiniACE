@@ -31,14 +31,16 @@ int Firm_update_capacity()
 		else
 		{
 			
-			if(PHYSICAL_CAPITAL_DURATION <= 0) {printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL_DURATION = %2.5f\n ", PHYSICAL_CAPITAL_DURATION);}
+			if(PHYSICAL_CAPITAL_DURATION <= 0) 
+			printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL_DURATION = %2.5f\n ", PHYSICAL_CAPITAL_DURATION);
 			
 			PHYSICAL_CAPITAL_STOCK.array[i].current_value = PHYSICAL_CAPITAL_STOCK.array[i].capital_units*PHYSICAL_CAPITAL_STOCK.array[i].price*(1-(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use/PHYSICAL_CAPITAL_DURATION));
 			
 			
 			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
 			
-			if(PHYSICAL_CAPITAL < 0) {printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL = %2.5f\n ", PHYSICAL_CAPITAL);}
+			if(PHYSICAL_CAPITAL < 0) 
+			printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL = %2.5f\n ", PHYSICAL_CAPITAL);
 		}
 	}
 
@@ -91,13 +93,15 @@ int Firm_plan_production_quantity()
 */
 int Firm_plan_labor_demand()
 {
-	if(PRODUCTIVITY <= 0) {printf("\n ERROR in function Firm_plan_labor_demand: PRODUCTIVITY = %2.5f\n ", PRODUCTIVITY);}
+	if(PRODUCTIVITY <= 0) 
+	printf("\n ERROR in function Firm_plan_labor_demand: PRODUCTIVITY = %2.5f\n ", PRODUCTIVITY);
 	
 	if(PHYSICAL_CAPITAL > 0) {CAPACITY_UTILIZATION = min(1,(PRODUCTION_PLAN/(PHYSICAL_CAPITAL*PRODUCTIVITY)));}
 	else {CAPACITY_UTILIZATION = 0;}
 	
 	
-	if(CAPITAL_LABOR_RATIO <= 0) {printf("\n ERROR in function Firm_plan_labor_demand: CAPITAL_LABOR_RATIO = %2.5f\n ", CAPITAL_LABOR_RATIO);}
+	if(CAPITAL_LABOR_RATIO <= 0)
+	printf("\n ERROR in function Firm_plan_labor_demand: CAPITAL_LABOR_RATIO = %2.5f\n ", CAPITAL_LABOR_RATIO);
 
 	LABOR_REQUIREMENT = (int)ceil(CAPACITY_UTILIZATION*(PHYSICAL_CAPITAL/CAPITAL_LABOR_RATIO));
 
@@ -126,8 +130,11 @@ int Firm_plan_investment()
 	else {profit_rate = OPERATING_CASH_FLOW;}
 	
 	
-	if(TARGET_PROFIT_RATE <= 0) {printf("\n ERROR in function Firm_plan_investment: TARGET_PROFIT_RATE = %2.5f\n ", TARGET_PROFIT_RATE);}
-	if(TARGET_CAPACITY_UTILIZATION <= 0) {printf("\n ERROR in function Firm_plan_investment: TARGET_CAPACITY_UTILIZATION = %2.5f\n ", TARGET_CAPACITY_UTILIZATION);}
+	if(TARGET_PROFIT_RATE <= 0)
+	printf("\n ERROR in function Firm_plan_investment: TARGET_PROFIT_RATE = %2.5f\n ", TARGET_PROFIT_RATE);
+
+	if(TARGET_CAPACITY_UTILIZATION <= 0) 
+	printf("\n ERROR in function Firm_plan_investment: TARGET_CAPACITY_UTILIZATION = %2.5f\n ", TARGET_CAPACITY_UTILIZATION);
 	
 	capacity_growth_rate = PROFIT_RATE_WEIGHTS*((profit_rate-TARGET_PROFIT_RATE)/TARGET_PROFIT_RATE) + CAPACITY_UTILIZATION_WEIGHTS*((CAPACITY_UTILIZATION-TARGET_CAPACITY_UTILIZATION)/TARGET_CAPACITY_UTILIZATION);
 

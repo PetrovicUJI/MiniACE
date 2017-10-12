@@ -101,6 +101,9 @@ int CCH_allocate_loans()
 		total_debt = LOAN_REQUESTS_LIST.array[i].total_debt;
 		loan_requested = LOAN_REQUESTS_LIST.array[i].loan_amount;
 		
+		if(total_debt+loan_requested+borrower_equity <= 0)
+		printf("\n ERROR in function CCH_allocate_loans: total_debt+loan_requested+borrower_equity = %2.5f\n ", total_debt+loan_requested+borrower_equity);
+		
 		bankruptcy_prob = 2.5*pow((total_debt+loan_requested)/(total_debt+loan_requested+borrower_equity),3);
 		
 		weighted_loan_requested = bankruptcy_prob*loan_requested;

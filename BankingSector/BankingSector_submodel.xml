@@ -184,7 +184,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_LoanRequest</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_LaborMarket</nextState>
 					<condition>
 						<not>
 							<lhs>

@@ -175,37 +175,6 @@
 			</functions>
 		</xagent>
 		<xagent>
-			<name>Labor_Market_Clearing</name>
-			<description>Market clearing mechanism.</description>
-			<memory>
-				<variable>
-					<type>int</type>
-					<name>id</name>
-					<description>Agent ID.</description>
-				</variable>
-				<variable>
-					<type>int</type>
-					<name>region_id</name>
-					<description>Region ID to which the agent is associated.</description>
-				</variable>
-				<variable>
-					<type>int</type>
-					<name>gov_id</name>
-					<description>Government to which the agent is associated.</description>
-				</variable>
-			</memory>
-			<functions>
-				<function>
-					<name>Labor_Market_Clearing_template</name>
-					<description></description>
-					<currentState>Start_Labor_Market_Clearing</currentState>
-					<nextState>End_Labor_Market_Clearing</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
-		</xagent>
-		<xagent>
 			<name>Household</name>
 			<description></description>
 			<memory>
@@ -268,16 +237,6 @@
 					<description>Agents' net worth.</description>
 				</variable>
 			</memory>
-			<functions>
-				<function>
-					<name>Household_template</name>
-					<description></description>
-					<currentState>Start_Household</currentState>
-					<nextState>End_Household</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
 		</xagent>
 		<xagent>
 			<name>PCFirm</name>

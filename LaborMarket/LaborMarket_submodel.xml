@@ -15,6 +15,12 @@
 		<functionFiles>
 		   <file>Firm_Labor_Market_Functions.c</file>
 		</functionFiles>
+		<functionFiles>
+		   <file>ClearingHouse_Labor_Market_Functions.c</file>
+		</functionFiles>
+		<functionFiles>
+		   <file>Household_Labor_Market_Functions.c</file>
+		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
 			<dataType>
@@ -33,8 +39,8 @@
 					</variable>
 					<variable>
 						<type>double</type>
-						<name>salary</name>
-						<description>Worker salary.</description>
+						<name>wage</name>
+						<description>Workers' monthly salary.</description>
 					</variable>
 				</variables>
 			</dataType>
@@ -60,9 +66,165 @@
 					<name>wage</name>
 					<description>Monthly salary per employee.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>vacancies</name>
+					<description>The number of vacancies.</description>
+				</variable>
 			</memory>
-			<functions/>
-				<function/>
+			<functions>
+				<function>
+					<name>Firm_send_redundancies_or_open_new_vacancies</name>
+					<description></description>
+					<currentState>Firm_LaborMarket</currentState>
+					<nextState>Firm_HiringProcess</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>vacancies</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+			<functions>
+				<function>
+					<name>Firm_hire_new_workers</name>
+					<description></description>
+					<currentState>Firm_HiringProcess</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<condition>
+						<lhs>
+							<value>a.vacancies</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+			<functions>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_HiringProcess</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.vacancies</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Labor_Market_Clearing</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>LMC_collect_vacancies_and_job_applications</name>
+					<description></description>
+					<currentState>Start_LaborMarketClearing</currentState>
+					<nextState>End_LaborMarketClearing</nextState>
+					<inputs>
+						<input>
+							<messageName>job_applications</messageName>
+						</input>
+						<input>
+							<messageName>vacancies</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Household</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>double</type>
+					<name>reservation_wage</name>
+					<description>Households' reservation wage.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Household_send_job_applications</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>End_Household</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>job_applications</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
 		</xagent>
 	</agents>
+	<messages>
+		<message>
+			<name>vacancies</name>
+			<description>Message added by agents to post new vacancies.</description>
+				<variables>
+				<!-- (employer_id, number_of_vacancies) -->
+					<variable>
+						<type>int</type>
+						<name>employer_id</name>
+						<description>ID of agents that demand labor.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>number_of_vacancies</name>
+						<description>The number of posted vacancies.</description>
+					</variable>
+				</variables>
+		</message>
+		<message>
+			<name>job_applications</name>
+			<description>Message added by agents to post new vacancies.</description>
+				<variables>
+				<!-- (employee_id, reservation_wage) -->
+					<variable>
+						<type>int</type>
+						<name>employee_id</name>
+						<description>ID of agents that supply labor.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>reservation_wage</name>
+						<description>The reservation wage of agents that are looking for a job.</description>
+					</variable>
+				</variables>
+		</message>
+	</messages>
 </xmodel>
