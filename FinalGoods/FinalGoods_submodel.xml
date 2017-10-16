@@ -235,7 +235,7 @@
 					<name>Firm_adjust_investment_plan</name>
 					<description></description>
 					<currentState>Firm_InvestmentPlanAdjustment</currentState>
-					<nextState>Firm_LaborMarket</nextState>
+					<nextState>Firm_LaborDemand</nextState>
 					<condition>
 						<lhs>
 							<value>a.external_financial_needs</value>
@@ -252,7 +252,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_InvestmentPlanAdjustment</currentState>
-					<nextState>Firm_LaborMarket</nextState>
+					<nextState>Firm_LaborDemand</nextState>
 					<condition>
 						<not>
 							<lhs>

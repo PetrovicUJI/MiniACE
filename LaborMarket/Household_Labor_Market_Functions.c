@@ -2,6 +2,7 @@
 #include "../my_library_header.h"
 
 #include "../Household_agent_header.h"
+#include "Household_Labor_Market_AUX_Headers.h"
 
 /* \fn: int Household_send_unemployment_benefit_request()
  
@@ -27,17 +28,6 @@ int Household_send_unemployment_benefit_request()
 	
 	return 0;
 }
-
-
-
-int Household_send_job_applications()
-{
-	
-
-    return 0;
-}
-
-
 
 /* \fn: int Household_get_fired()
  
@@ -66,3 +56,120 @@ int Household_get_fired()
 
     return 0;
 }
+
+/* \fn: int Household_read_vacancies_and_send_job_applications()
+ 
+* \brief: Household read vacancies and send job applications.
+ 
+* \timing: Monthly.
+* \condition: Given that they are employed
+ 
+ 
+*\ 
+*\ vacancies mesage structure: <!-- (employer_id, number_of_vacancies, wage_offer) -->
+*\ job applications message   <!-- (employer_id, employee_id, wage) -->
+ 
+* \authors: Marko Petrovic
+* \history: 13.10.2017-Marko: First implementation.
+*/
+int Household_read_vacancies_and_send_job_applications()
+{
+	Vacancy_array  vacancy_list;
+    init_Vacancy_array(&vacancy_list);
+	
+	START_VACANCIES_MESSAGE_LOOP
+	
+		add_Vacancy(&vacancy_list,
+		vacancies_message->employer_id,
+		vacancies_message->number_of_vacancies,
+		vacancies_message->wage_offer);
+		
+    FINISH_VACANCIES_MESSAGE_LOOP
+	
+	int i;
+	while(vacancy_list.size > MAX_NUMBER_OF_JOB_APPLICATIONS)
+	{
+		i = random_int(0, (vacancy_list.size-1));
+		remove_Vacancy(&vacancy_list, i);
+	}
+	
+	for(i = 0; i < (vacancy_list.size); i++)
+    {
+        add_job_applications_message(vacancy_list.array[i].employer_id, ID, RESERVATION_WAGE);
+    }
+	
+	free_Vacancy_array(&vacancy_list);
+
+    return 0;
+}
+
+/* \fn: int Household_accept_job()
+ 
+* \brief: Household accept job.
+ 
+* \timing: Monthly.
+* \condition: Given that they are unemployed
+ 
+ 
+*\ message filter: a.id == m.employee_id 
+*\ job offer message structure	 <!-- (employer_id, employee_id, wage) -->
+*\ job offer data type structure <!-- (employer_id, employee_id, wage) -->
+
+*\ 	job_acceptance message structure <!-- (employer_id, employee_id, wage) -->
+ 
+* \authors: Marko Petrovic
+* \history: 16.10.2017-Marko: First implementation.
+*/
+int Household_accept_job()
+{
+	/* Create a job offer dynamic array*/
+    Job_offer_array job_offer_list;
+    init_Job_offer_array(&job_offer_list);
+	
+	START_JOB_OFFER_MESSAGE_LOOP
+	
+		add_Job_offer(&job_offer_list,
+		job_offer_message->employer_id,
+		job_offer_message->employee_id,
+		job_offer_message->wage);
+		
+    FINISH_JOB_OFFER_MESSAGE_LOOP
+	
+	/*Ranks job offers regarding the posted wage offer.*/
+    qsort(job_offer_list.array, job_offer_list.size, sizeof(Job_offer),job_offer_list_rank_wage_offer_function);
+	
+	if(job_offer_list.array[0].employer_id != -1)
+	{
+		EMPLOYER_ID = job_offer_list.array[0].employer_id;
+		WAGE = job_offer_list.array[0].wage;
+		RESERVATION_WAGE = job_offer_list.array[0].wage;
+		DAY_OF_MONTH_TO_ACT = DAY%20;
+		
+		add_job_acceptance_message(EMPLOYER_ID, ID, WAGE);
+	}
+	else
+	{
+		RESERVATION_WAGE = 0.95*RESERVATION_WAGE;
+	}
+	
+	/*Free the job offer dynamic array.*/
+    free_Job_offer_array(&job_offer_list);
+	
+    return 0;
+}
+
+
+int Household_read_vacancies_and_send_job_applications_2()
+{
+	
+    return 0;
+}
+
+
+int Household_accept_job_2()
+{
+	
+
+    return 0;
+}
+
