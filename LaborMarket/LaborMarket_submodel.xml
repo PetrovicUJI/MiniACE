@@ -6,11 +6,11 @@
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
-			<type>double</type>
-			<name>rawmat2output_innovation</name>
+			<variable>
+			<type>int</type>
+			<name>number_of_firms2apply4job</name>
 			<description></description>
-			</variable> -->
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_Labor_Market_Functions.c</file>
@@ -24,7 +24,7 @@
 		<timeUnits/>
 		<dataTypes>
 			<dataType>
-				<name>employee</name>
+				<name>Employee</name>
 				<description>Employee data.</description>
 				<variables>
 					<variable>
@@ -44,6 +44,45 @@
 					</variable>
 				</variables>
 			</dataType>
+			<dataType>
+				<name>Vacancy</name>
+				<description>A vacancy send by an employer.</description>
+				<variables>
+					<!-- (employer_id, number_of_vacancies) -->
+					<variable>
+						<type>int</type>
+						<name>employer_id</name>
+						<description>ID of agents that demand labor.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>number_of_vacancies</name>
+						<description>The number of posted vacancies.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>wage_offer</name>
+						<description>Firms offer wage for new vacancies.</description>
+					</variable>
+				</variables>
+			</dataType>
+			<dataType>
+				<name>Job_application</name>
+				<description>A job application send by an unemployed agent.</description>
+				<variables>
+				<!-- (employee_id, reservation_wage) -->
+					<variable>
+						<type>int</type>
+						<name>employee_id</name>
+						<description>ID of agents that supply labor.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>reservation_wage</name>
+						<description>The reservation wage of agents that are looking for a job.</description>
+					</variable>
+				</variables>
+			</dataType>
 		</dataTypes>
 	</environment>
 	<agents>
@@ -52,7 +91,7 @@
 			<description></description>
 			<memory>
 				<variable>
-					<type>employee_array</type>
+					<type>Employee_array</type>
 					<name>employees</name>
 					<description>A vector of employees in a firm.</description>
 				</variable>
@@ -68,8 +107,8 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>vacancies</name>
-					<description>The number of vacancies.</description>
+					<name>wage_offer</name>
+					<description>Offered salary for new employees.</description>
 				</variable>
 			</memory>
 			<functions>
@@ -83,45 +122,16 @@
 						<output>
 							<messageName>vacancies</messageName>
 						</output>
+						<output>
+							<messageName>redundancies</messageName>
+						</output>
 					</outputs>
 				</function>
-			</functions>
-			<functions>
 				<function>
 					<name>Firm_hire_new_workers</name>
 					<description></description>
 					<currentState>Firm_HiringProcess</currentState>
 					<nextState>Firm_MonthlyAccounting</nextState>
-					<condition>
-						<lhs>
-							<value>a.vacancies</value>
-						</lhs>
-						<op>GT</op>
-						<rhs>
-							<value>0</value>
-						</rhs>
-					</condition>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
-			<functions>
-				<function>
-					<name>Idle</name>
-					<description></description>
-					<currentState>Firm_HiringProcess</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
-					<condition>
-						<not>
-							<lhs>
-								<value>a.vacancies</value>
-							</lhs>
-							<op>GT</op>
-							<rhs>
-								<value>0</value>
-							</rhs>
-						</not>
-					</condition>
 					<inputs/>
 					<outputs/>
 				</function>
@@ -146,13 +156,23 @@
 					<name>gov_id</name>
 					<description>Government to which the agent is associated.</description>
 				</variable>
+				<variable>
+					<type>Vacancy_array</type>
+					<name>vacancy_list</name>
+					<description>A vector of all vacancies ofered at time t.</description>
+				</variable>
+				<variable>
+					<type>Job_application_array</type>
+					<name>job_application_list</name>
+					<description>A vector of all job applications at time t.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>LMC_collect_vacancies_and_job_applications</name>
 					<description></description>
 					<currentState>Start_LaborMarketClearing</currentState>
-					<nextState>End_LaborMarketClearing</nextState>
+					<nextState>LMC_MatchingMechanism</nextState>
 					<inputs>
 						<input>
 							<messageName>job_applications</messageName>
@@ -161,6 +181,14 @@
 							<messageName>vacancies</messageName>
 						</input>
 					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>LMC_match_labor_demand_and_supply</name>
+					<description></description>
+					<currentState>LMC_MatchingMechanism</currentState>
+					<nextState>End_LaborMarketClearing</nextState>
+					<inputs/>
 					<outputs/>
 				</function>
 			</functions>
@@ -174,12 +202,39 @@
 					<name>reservation_wage</name>
 					<description>Households' reservation wage.</description>
 				</variable>
+				<variable>
+					<type>int</type>
+					<name>employer_id</name>
+					<description>Households' reservation wage.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>days_of_unemployment</name>
+					<description>Households count days of being unemployed.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
-					<name>Household_send_job_applications</name>
+					<name>Household_send_unemployment_benefit_request</name>
 					<description></description>
 					<currentState>Start_Household</currentState>
+					<nextState>Household_JobApplication</nextState>
+					<condition>
+						<lhs>
+							<value>a.employer_id</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>-1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_send_job_applications</name>
+					<description></description>
+					<currentState>Household_JobApplication</currentState>
 					<nextState>End_Household</nextState>
 					<inputs/>
 					<outputs>
@@ -187,6 +242,38 @@
 							<messageName>job_applications</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>Household_get_fired</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>End_Household</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.employer_id</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>-1</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs>
+						<input>
+							<messageName>redundancies</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employee_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>
@@ -196,7 +283,7 @@
 			<name>vacancies</name>
 			<description>Message added by agents to post new vacancies.</description>
 				<variables>
-				<!-- (employer_id, number_of_vacancies) -->
+				<!-- (employer_id, number_of_vacancies, wage_offer) -->
 					<variable>
 						<type>int</type>
 						<name>employer_id</name>
@@ -206,6 +293,28 @@
 						<type>int</type>
 						<name>number_of_vacancies</name>
 						<description>The number of posted vacancies.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>wage_offer</name>
+						<description>Firms offer wage for new vacancies.</description>
+					</variable>
+				</variables>
+		</message>
+		<message>
+			<name>redundancies</name>
+			<description>Message added by agents to fire redundant employees.</description>
+				<variables>
+				<!-- (employer_id, employee_id) -->
+					<variable>
+						<type>int</type>
+						<name>employer_id</name>
+						<description>It is set to -1 meaning that an agent will lose its job.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>employee_id</name>
+						<description>ID of agent who will lose his/her job.</description>
 					</variable>
 				</variables>
 		</message>

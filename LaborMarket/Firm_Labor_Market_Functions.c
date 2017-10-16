@@ -11,21 +11,33 @@
 * \timing: Monthly on the firm activation day.
  * \condition:
  
+  *\ redundancies mesage structure: <!-- (employer_id, employee_id) -->
+  
+  *\ vacancies mesage structure: <!-- (employer_id, number_of_vacancies, wage_offer) -->
+
 * \authors: Marko Petrovic
-* \history: 12.10.2017-Marko: First implementation.
+* \history: 13.10.2017-Marko: First implementation.
 */
 int Firm_send_redundancies_or_open_new_vacancies()
 {
-	VACANCIES = 0.0;
-	
-	
-	if(LABOR_REQUIREMENT >= EMPLOYEES.size)
+	if(LABOR_REQUIREMENT < 0)
+	printf("\n ERROR in function Firm_send_redundancies_or_open_new_vacancies: LABOR_REQUIREMENT = %2.5f\n ", LABOR_REQUIREMENT);
+
+
+	if(LABOR_REQUIREMENT > EMPLOYEES.size)
 	{
-		VACANCIES = LABOR_REQUIREMENT-EMPLOYEES.size;
+		add_vacancies_message(ID, LABOR_REQUIREMENT - EMPLOYEES.size, WAGE_OFFER);
 	}
-	else
+	
+	if(LABOR_REQUIREMENT < EMPLOYEES.size)
 	{
-		
+		int i = 0;
+		while(EMPLOYEES.size == LABOR_REQUIREMENT)
+		{
+			i = random_int(0,(EMPLOYEES.size-1));
+			add_redundancies_message(-1, EMPLOYEES.array[i].id);
+			remove_Employee(&EMPLOYEES,i);
+		}
 	}
 	
 
