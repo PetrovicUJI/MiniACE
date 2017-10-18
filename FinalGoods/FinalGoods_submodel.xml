@@ -145,6 +145,56 @@
 					<name>price</name>
 					<description>The price of final goods.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_last_month</name>
+					<description>The price of final goods in month t-1.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>production</name>
+					<description>Produced quantity of final goods.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>physical_capital_depreciation_cost</name>
+					<description>The value of physical capital depreciation.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>labor_cost</name>
+					<description>The cost of labor.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_interest_payment</name>
+					<description>The sum of all monthly interest payments.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_instalment_payment</name>
+					<description>The sum of all monthly interest payments.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unit_costs</name>
+					<description>Unit_production_costs.</description>
+				</variable>	
+				<variable>
+					<type>double</type>
+					<name>mark_up</name>
+					<description>Markup rate.</description>
+				</variable>	
+				<variable>
+					<type>double</type>
+					<name>cb_trust</name>
+					<description>The trust in the central bank.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>inflation_target</name>
+					<description>The inflation target of the central bank.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -264,6 +314,22 @@
 							</rhs>
 						</not>
 					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_produce_final_goods</name>
+					<description></description>
+					<currentState>Firm_Production</currentState>
+					<nextState>Firm_PriceSetting</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_calculate_unit_costs_and_set_price</name>
+					<description></description>
+					<currentState>Firm_PriceSetting</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

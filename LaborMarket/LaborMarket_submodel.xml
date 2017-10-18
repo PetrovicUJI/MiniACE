@@ -39,7 +39,7 @@
 				<name>Vacancy</name>
 				<description>A vacancy send by an employer.</description>
 				<variables>
-					<!-- (employer_id, number_of_vacancies) -->
+					<!-- (employer_id, number_of_vacancies, wage_offer) -->
 					<variable>
 						<type>int</type>
 						<name>employer_id</name>
@@ -142,7 +142,7 @@
 					<name>Firm_send_redundancies</name>
 					<description></description>
 					<currentState>Firm_LaborMarket</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_Production</nextState>
 					<condition>
 						<lhs>
 							<value>a.delta_labor_requirement</value>
@@ -232,7 +232,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_StillDemandLabor</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_Production</nextState>
 					<condition>
 						<lhs>
 							<value>a.delta_labor_requirement</value>
@@ -276,6 +276,15 @@
 					<inputs>
 						<input>
 							<messageName>job_applications_2</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employer_id</value>
+								</rhs>
+							</filter>
 						</input>
 					</inputs>
 					<outputs>
@@ -288,10 +297,19 @@
 					<name>Firm_hire_new_workers_2</name>
 					<description></description>
 					<currentState>Firm_HiringProcess_2</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_Production</nextState>
 					<inputs>
 						<input>
 							<messageName>job_acceptance_2</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employer_id</value>
+								</rhs>
+							</filter>
 						</input>
 					</inputs>
 					<outputs/>
@@ -310,6 +328,11 @@
 				<variable>
 					<type>double</type>
 					<name>reservation_wage</name>
+					<description>Households' reservation wage.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>min_reservation_wage</name>
 					<description>Households' reservation wage.</description>
 				</variable>
 				<variable>
@@ -464,6 +487,15 @@
 					<inputs>
 						<input>
 							<messageName>job_offer_2</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employee_id</value>
+								</rhs>
+							</filter>
 						</input>
 					</inputs>
 					<outputs>

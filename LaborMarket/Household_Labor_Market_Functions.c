@@ -16,15 +16,7 @@
 */
 int Household_send_unemployment_benefit_request()
 {
-	if(DAYS_OF_UNEMPLOYMENT%20 != 0)
-	{
-		DAYS_OF_UNEMPLOYMENT++;
-	}
-	else
-	{
-		DAYS_OF_UNEMPLOYMENT++;
-		// send message to the government
-	}
+	// delete this function!!!
 	
 	return 0;
 }
@@ -51,7 +43,7 @@ int Household_get_fired()
 		
     FINISH_REDUNDANCIES_MESSAGE_LOOP
 	
-	DAYS_OF_UNEMPLOYMENT = 0;
+	DAYS_OF_UNEMPLOYMENT = 1;
 	
 
     return 0;
@@ -68,7 +60,8 @@ int Household_get_fired()
 *\ 
 *\ vacancies mesage structure: <!-- (employer_id, number_of_vacancies, wage_offer) -->
 *\ job applications message   <!-- (employer_id, employee_id, wage) -->
- 
+*\ vacancy data structure <!-- (employer_id, number_of_vacancies, wage_offer) -->
+
 * \authors: Marko Petrovic
 * \history: 13.10.2017-Marko: First implementation.
 */
@@ -95,8 +88,11 @@ int Household_read_vacancies_and_send_job_applications()
 	
 	for(i = 0; i < (vacancy_list.size); i++)
     {
-        add_job_applications_message(vacancy_list.array[i].employer_id, ID, RESERVATION_WAGE);
-    }
+		if(vacancy_list.array[i].wage_offer >= RESERVATION_WAGE)
+		{
+			add_job_applications_message(vacancy_list.array[i].employer_id, ID, RESERVATION_WAGE);	
+		}
+	}
 	
 	free_Vacancy_array(&vacancy_list);
 
@@ -149,7 +145,8 @@ int Household_accept_job()
 	}
 	else
 	{
-		RESERVATION_WAGE = 0.95*RESERVATION_WAGE;
+		// reservation wage decreases from 1-5% on the yearly base.
+		RESERVATION_WAGE = max((1-((random_int(1,5)/100)/12))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
 	}
 	
 	/*Free the job offer dynamic array.*/
@@ -158,17 +155,113 @@ int Household_accept_job()
     return 0;
 }
 
+/* \fn: int Household_read_vacancies_and_send_job_applications_2()
+ 
+* \brief: Household read vacancies and send job applications second round.
+ 
+* \timing: Monthly.
+* \condition: Given that they are employed
+ 
+ 
+*\ 
+*\ vacancies mesage structure: <!-- (employer_id, number_of_vacancies, wage_offer) -->
+*\ job applications message   <!-- (employer_id, employee_id, wage) -->
+*\ vacancy data structure <!-- (employer_id, number_of_vacancies, wage_offer) -->
 
+* \authors: Marko Petrovic
+* \history: 13.10.2017-Marko: First implementation.
+*/
 int Household_read_vacancies_and_send_job_applications_2()
 {
+	
+	Vacancy_array  vacancy_list;
+    init_Vacancy_array(&vacancy_list);
+	
+	START_VACANCIES_2_MESSAGE_LOOP
+	
+		add_Vacancy(&vacancy_list,
+		vacancies_2_message->employer_id,
+		vacancies_2_message->number_of_vacancies,
+		vacancies_2_message->wage_offer);
+		
+    FINISH_VACANCIES_2_MESSAGE_LOOP
+	
+	int i;
+	while(vacancy_list.size > MAX_NUMBER_OF_JOB_APPLICATIONS)
+	{
+		i = random_int(0, (vacancy_list.size-1));
+		remove_Vacancy(&vacancy_list, i);
+	}
+	
+	for(i = 0; i < (vacancy_list.size); i++)
+    {
+		if(vacancy_list.array[i].wage_offer >= RESERVATION_WAGE)
+		{
+			add_job_applications_2_message(vacancy_list.array[i].employer_id, ID, RESERVATION_WAGE);
+		}
+	}
+	
+	free_Vacancy_array(&vacancy_list);
 	
     return 0;
 }
 
+/* \fn: int Household_accept_job_2()
+ 
+* \brief: Household accept job second round.
+ 
+* \timing: Monthly.
+* \condition: Given that they are unemployed
+ 
+ 
+*\ message filter: a.id == m.employee_id 
+*\ job offer message structure	 <!-- (employer_id, employee_id, wage) -->
+*\ job offer data type structure <!-- (employer_id, employee_id, wage) -->
 
+*\ 	job_acceptance message structure <!-- (employer_id, employee_id, wage) -->
+ 
+* \authors: Marko Petrovic
+* \history: 16.10.2017-Marko: First implementation.
+*/
 int Household_accept_job_2()
 {
+	/* Create a job offer dynamic array*/
+    Job_offer_array job_offer_list;
+    init_Job_offer_array(&job_offer_list);
 	
+	START_JOB_OFFER_2_MESSAGE_LOOP
+	
+		add_Job_offer(&job_offer_list,
+		job_offer_2_message->employer_id,
+		job_offer_2_message->employee_id,
+		job_offer_2_message->wage);
+		
+    FINISH_JOB_OFFER_2_MESSAGE_LOOP
+	
+	/*Ranks job offers regarding the posted wage offer.*/
+    qsort(job_offer_list.array, job_offer_list.size, sizeof(Job_offer),job_offer_list_rank_wage_offer_function);
+	
+	if(job_offer_list.array[0].employer_id != -1)
+	{
+		EMPLOYER_ID = job_offer_list.array[0].employer_id;
+		WAGE = job_offer_list.array[0].wage;
+		RESERVATION_WAGE = job_offer_list.array[0].wage;
+		DAY_OF_MONTH_TO_ACT = DAY%20;
+		
+		if(DAY_OF_MONTH_TO_ACT == 0) DAY_OF_MONTH_TO_ACT = 20;
+		
+		add_job_acceptance_2_message(EMPLOYER_ID, ID, WAGE);
+	}
+	else
+	{
+		// reservation wage decreases from 1-5% on the yearly base.
+		RESERVATION_WAGE = max((1-((random_int(1,5)/100)/12))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
+	}
+	
+	/*Free the job offer dynamic array.*/
+    free_Job_offer_array(&job_offer_list);
+
+	if(EMPLOYER_ID == -1) DAYS_OF_UNEMPLOYMENT++;
 
     return 0;
 }

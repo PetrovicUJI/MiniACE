@@ -18,6 +18,7 @@
 int Firm_update_capacity()
 {
 	PHYSICAL_CAPITAL = 0.0;
+	PHYSICAL_CAPITAL_DEPRECIATION_COST = 0.0;
 	
 	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
 	{
@@ -29,13 +30,13 @@ int Firm_update_capacity()
 			remove_physical_capital_batch(&PHYSICAL_CAPITAL_STOCK,i);
 		}
 		else
-		{
-			
+		{			
 			if(PHYSICAL_CAPITAL_DURATION <= 0) 
-			printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL_DURATION = %2.5f\n ", PHYSICAL_CAPITAL_DURATION);
+			printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL_DURATION = %2.5f\n ", PHYSICAL_CAPITAL_DURATION);		
 			
 			PHYSICAL_CAPITAL_STOCK.array[i].current_value = PHYSICAL_CAPITAL_STOCK.array[i].capital_units*PHYSICAL_CAPITAL_STOCK.array[i].price*(1-(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use/PHYSICAL_CAPITAL_DURATION));
 			
+			PHYSICAL_CAPITAL_DEPRECIATION_COST += (PHYSICAL_CAPITAL_STOCK.array[i].capital_units/PHYSICAL_CAPITAL_DURATION)*PHYSICAL_CAPITAL_PRICE;
 			
 			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
 			
@@ -204,6 +205,79 @@ int Firm_adjust_investment_plan()
 	
 	return 0;
 }
+
+/* \fn: int Firm_produce_final_goods()
+ 
+* \brief: Firm produce final goods.
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 17.10.2017-Marko: First implementation.
+*/
+int Firm_produce_final_goods()
+{
+	PRODUCTION = min(CAPITAL_LABOR_RATIO*EMPLOYEES.size,PHYSICAL_CAPITAL)*PRODUCTIVITY;
+	
+    return 0;
+}
+
+
+
+/* \fn: int Firm_calculate_unit_costs_and_set_price()
+ 
+* \brief: Firm use unit costs and markup rate to set new price.
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 17.10.2017-Marko: First implementation.
+*/
+int Firm_calculate_unit_costs_and_set_price()
+{
+	double unit_costs_old = 0.0;
+	double current_costs = 0.0;
+	
+	TOTAL_INSTALMENT_PAYMENT = 0;
+	TOTAL_INTEREST_PAYMENT = 0;
+	
+	for(int i = 0; i < LOANS.size; i++)
+	{
+		TOTAL_INSTALMENT_PAYMENT += LOANS.array[i].instalment;
+		
+		TOTAL_INTEREST_PAYMENT += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
+	}
+	
+	LABOR_COST = 0;
+	
+	for(int i = 0; i < EMPLOYEES.size; i++)
+	{
+		LABOR_COST += EMPLOYEES.array[i].wage;
+	}
+	
+	if(PRODUCTION !=0)
+	{
+		unit_costs_old = UNIT_COSTS;
+		current_costs = LABOR_COST + PHYSICAL_CAPITAL_DEPRECIATION_COST + TOTAL_INSTALMENT_PAYMENT + TOTAL_INTEREST_PAYMENT;
+		UNIT_COSTS = (unit_costs_old*INVENTORIES + current_costs)/(INVENTORIES+PRODUCTION);
+		
+		PRICE_LAST_MONTH = PRICE;
+		PRICE = UNIT_COSTS*(1 + MARK_UP)*(1 + VAT_RATE);
+		PRICE = (1-CB_TRUST)*PRICE + CB_TRUST*(PRICE_LAST_MONTH * (INFLATION_TARGET/12 + 1));
+	}
+	
+	
+
+	
+	
+	
+    return 0;
+}
+
 
 
 /* \fn: int Firm_compute_sale_statistics()
