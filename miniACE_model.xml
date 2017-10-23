@@ -24,6 +24,10 @@
 			<file>BankingSector/BankingSector_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>PhysicalCapitalMarket/PhysicalCapitalMarket_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>
@@ -301,16 +305,8 @@
 					<description>Agents' net worth.</description>
 				</variable>
 			</memory>
-			<functions>
-				<function>
-					<name>PCFirm_template</name>
-					<description></description>
-					<currentState>Start_PCFirm</currentState>
-					<nextState>End_PCFirm</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
+			<functions/>
+				<function/>
 		</xagent>
 		<xagent>
 			<name>Statistical_Office</name>

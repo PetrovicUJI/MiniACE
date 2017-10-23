@@ -22,12 +22,11 @@ int Firm_update_capacity()
 	
 	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
 	{
-		//update after the production takes place and before new capital is bouth
-		//PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+		//update after the production takes place and before new capital is bouth: months_in_use++
 
 		if(PHYSICAL_CAPITAL_STOCK.array[i].months_in_use >= PHYSICAL_CAPITAL_DURATION)
 		{
-			remove_physical_capital_batch(&PHYSICAL_CAPITAL_STOCK,i);
+			remove_Physical_capital_batch(&PHYSICAL_CAPITAL_STOCK,i);
 		}
 		else
 		{			
@@ -221,6 +220,16 @@ int Firm_produce_final_goods()
 {
 	PRODUCTION = min(CAPITAL_LABOR_RATIO*EMPLOYEES.size,PHYSICAL_CAPITAL)*PRODUCTIVITY;
 	
+	// update physical capital stock
+	
+	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
+	{
+		//update after the production takes place and before new capital is bouth
+		//PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+		
+		PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+	}
+	
     return 0;
 }
 
@@ -269,10 +278,6 @@ int Firm_calculate_unit_costs_and_set_price()
 		PRICE = UNIT_COSTS*(1 + MARK_UP)*(1 + VAT_RATE);
 		PRICE = (1-CB_TRUST)*PRICE + CB_TRUST*(PRICE_LAST_MONTH * (INFLATION_TARGET/12 + 1));
 	}
-	
-	
-
-	
 	
 	
     return 0;

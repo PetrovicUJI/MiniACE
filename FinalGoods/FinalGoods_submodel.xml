@@ -38,8 +38,9 @@
 		<timeUnits/>
 		<dataTypes>
 			<dataType>
-				<name>physical_capital_batch</name>
+				<name>Physical_capital_batch</name>
 				<description>A batch of physical capital.</description>
+				<!-- id, months_in_use, capital_units, price, current_value, productivity  -->
 				<variables>
 					<variable>
 						<type>int</type>
@@ -131,7 +132,7 @@
 					<description>A vector of monthly sold quantities in the last "n" months.</description>
 				</variable>
 				<variable>
-					<type>physical_capital_batch_array</type>
+					<type>Physical_capital_batch_array</type>
 					<name>physical_capital_stock</name>
 					<description>A vector of all the batch of capital goods.</description>
 				</variable>
@@ -329,7 +330,7 @@
 					<name>Firm_calculate_unit_costs_and_set_price</name>
 					<description></description>
 					<currentState>Firm_PriceSetting</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_PhysicalCapitalMarket</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
