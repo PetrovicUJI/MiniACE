@@ -4,22 +4,6 @@
 #include "../Household_agent_header.h"
 #include "Household_Labor_Market_AUX_Headers.h"
 
-/* \fn: int Household_send_unemployment_benefit_request()
- 
-* \brief: Households count days of being unemployed and ask for unemployment benefits every month (20 days).
- 
-* \timing: .
- * \condition:
- 
-* \authors: Marko Petrovic
-* \history: 13.10.2017-Marko: First implementation.
-*/
-int Household_send_unemployment_benefit_request()
-{
-	// delete this function!!!
-	
-	return 0;
-}
 
 /* \fn: int Household_get_fired()
  
@@ -139,14 +123,19 @@ int Household_accept_job()
 		EMPLOYER_ID = job_offer_list.array[0].employer_id;
 		WAGE = job_offer_list.array[0].wage;
 		RESERVATION_WAGE = job_offer_list.array[0].wage;
+		
 		DAY_OF_MONTH_TO_ACT = DAY%20;
+		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY-1)%20;
+		
+		if(DAY_OF_MONTH_TO_ACT == 0) DAY_OF_MONTH_TO_ACT = 20;
+		if(DAY_OF_MONTH_TO_RECEIVE_INCOME == 0) DAY_OF_MONTH_TO_RECEIVE_INCOME = 20;
 		
 		add_job_acceptance_message(EMPLOYER_ID, ID, WAGE);
 	}
 	else
 	{
-		// reservation wage decreases from 1-5% on the yearly base.
-		RESERVATION_WAGE = max((1-((random_int(1,5)/100)/12))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
+		// reservation wage decreases from 1-50% on the yearly base.
+		RESERVATION_WAGE = max((1-((random_int(1,50)/100)/YEAR))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
 	}
 	
 	/*Free the job offer dynamic array.*/
@@ -246,23 +235,106 @@ int Household_accept_job_2()
 		EMPLOYER_ID = job_offer_list.array[0].employer_id;
 		WAGE = job_offer_list.array[0].wage;
 		RESERVATION_WAGE = job_offer_list.array[0].wage;
+		
 		DAY_OF_MONTH_TO_ACT = DAY%20;
+		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY-1)%20;
 		
 		if(DAY_OF_MONTH_TO_ACT == 0) DAY_OF_MONTH_TO_ACT = 20;
+		if(DAY_OF_MONTH_TO_RECEIVE_INCOME == 0) DAY_OF_MONTH_TO_RECEIVE_INCOME = 20;
 		
 		add_job_acceptance_2_message(EMPLOYER_ID, ID, WAGE);
 	}
 	else
 	{
-		// reservation wage decreases from 1-5% on the yearly base.
-		RESERVATION_WAGE = max((1-((random_int(1,5)/100)/12))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
+		// reservation wage decreases from 1-50% on yearly base.
+		RESERVATION_WAGE = max((1-((random_int(1,50)/100)/YEAR))*RESERVATION_WAGE, MIN_RESERVATION_WAGE);
 	}
 	
 	/*Free the job offer dynamic array.*/
     free_Job_offer_array(&job_offer_list);
 
-	if(EMPLOYER_ID == -1) DAYS_OF_UNEMPLOYMENT++;
+    return 0;
+}
+
+/* \fn: int Household_require_unemployment_benefits()
+ 
+* \brief: Households require unemployment benefits.
+ 
+* \timing:
+ * \condition: If households found a new job
+ 
+*\ unemployment_benefit message structure <!-- (gov_id, amount) -->
+ 
+* \authors: Marko Petrovic
+* \history: 25.10.2017-Marko: First implementation.
+*/
+int Household_require_unemployment_benefits()
+{
+	double amount = 0.0;
+	
+	amount = (UNEMPLOYMENT_BENEFIT/20)*DAYS_OF_UNEMPLOYMENT;
+	
+	add_unemployment_benefit_message(GOV_ID, amount);
+	
+	PAYMENT_ACCOUNT += amount;
+	
+	DAYS_OF_UNEMPLOYMENT = 0;
 
     return 0;
 }
+
+/* \fn: int Household_update_unemployment_period()
+ 
+* \brief: Household update unemployment period.
+ 
+* \timing:
+ * \condition: If households is still unemployed.
+ 
+ 
+* \authors: Marko Petrovic
+* \history: 25.10.2017-Marko: First implementation.
+*/
+int Household_update_unemployment_period()
+{
+	DAYS_OF_UNEMPLOYMENT++;
+
+    return 0;
+}
+
+/* \fn: int Household_receive_dividends()
+ 
+* \brief: Household receive dividends.
+ 
+* \timing: Daily
+ * \condition: 
+ 
+ 
+* \authors: Marko Petrovic
+* \history: 25.10.2017-Marko: First implementation.
+*/
+int Household_receive_dividends()
+{
+	
+
+    return 0;
+}
+
+/* \fn: int Household_receive_wage()
+ 
+* \brief: Household receive wage.
+ 
+* \timing: Monthly
+ * \condition: if employer_id != -1 and day_of_month_to_receive_income
+ 
+ 
+* \authors: Marko Petrovic
+* \history: 25.10.2017-Marko: First implementation.
+*/
+int Household_receive_wage()
+{
+
+    return 0;
+}
+
+
 

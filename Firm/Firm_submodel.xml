@@ -253,36 +253,6 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_compute_sale_statistics</name>
-					<description></description>
-					<currentState>Firm_MonthlyAccounting</currentState>
-					<nextState>End_Firm</nextState>
-					<condition>
-						<time>
-							<period>monthly</period>
-							<phase>a.last_day_of_month_to_act</phase>
-						</time>
-					</condition>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
-					<name>Idle</name>
-					<description></description>
-					<currentState>Firm_MonthlyAccounting</currentState>
-					<nextState>End_Firm</nextState>
-					<condition>
-						<not>
-							<time>
-								<period>monthly</period>
-								<phase>a.last_day_of_month_to_act</phase>
-							</time>
-						</not>
-					</condition>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
 					<name>Firm_adjust_investment_plan</name>
 					<description></description>
 					<currentState>Firm_InvestmentPlanAdjustment</currentState>
@@ -331,6 +301,36 @@
 					<description></description>
 					<currentState>Firm_PriceSetting</currentState>
 					<nextState>Firm_FinalGoodsShipping</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_compute_sale_statistics</name>
+					<description></description>
+					<currentState>Firm_MonthlyAccounting</currentState>
+					<nextState>End_Firm</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>a.last_day_of_month_to_act</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_MonthlyAccounting</currentState>
+					<nextState>End_Firm</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.last_day_of_month_to_act</phase>
+							</time>
+						</not>
+					</condition>
 					<inputs/>
 					<outputs/>
 				</function>

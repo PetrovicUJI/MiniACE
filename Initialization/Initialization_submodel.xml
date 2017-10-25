@@ -13,7 +13,8 @@
 			</variable> -->
 		</constants>
 		<functionFiles>
-		   <file>Firm_Initialization_Functions.c</file>
+			<file>Firm_Initialization_Functions.c</file>
+			<file>Household_Initialization_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
@@ -64,6 +65,53 @@
 					<description></description>
 					<currentState>Start_Firm</currentState>
 					<nextState>Firm_ProductionActivity</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Household</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Household_initialization</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>Household_LaborMarket</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>Household_LaborMarket</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>

@@ -1,0 +1,60 @@
+<!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>Government</name>
+	<version>Version 1.1, 25/10/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models/>
+	<environment>
+		<constants>
+			<!-- <variable>
+			<type>double</type>
+			<name>rawmat2output_innovation</name>
+			<description></description>
+			</variable> -->
+		</constants>
+		<functionFiles>
+			<file>Government_Functions.c</file>
+		</functionFiles>
+		<timeUnits/>
+		<dataTypes>
+<!-- 			<dataType>
+				<name>consumption_goods_offer</name>
+				<description>Used by household and mall to hold consumption goods offers</description>
+				<variables>
+					<variable>
+						<type>int</type>
+						<name>id</name>
+						<description></description>
+					</variable>
+				</variables>
+			</dataType> -->
+		</dataTypes>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Government</name>
+			<description></description>
+			<!-- <memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+			</memory> -->
+			<functions>
+				<function>
+					<name>Government_pays_unemployment_benefits</name>
+					<description></description>
+					<currentState>Start_Government</currentState>
+					<nextState>End_Government</nextState>
+					<inputs>
+						<input>
+							<messageName>unemployment_benefit</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+	</agents>
+</xmodel>

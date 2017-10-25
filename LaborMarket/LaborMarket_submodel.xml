@@ -323,7 +323,12 @@
 				<variable>
 					<type>double</type>
 					<name>wage</name>
-					<description>Households' reservation wage.</description>
+					<description>Households' wage.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unemployment_benefit</name>
+					<description>Unemployment benefit received from the government.</description>
 				</variable>
 				<variable>
 					<type>double</type>
@@ -348,37 +353,29 @@
 			</memory>
 			<functions>
 				<function>
-					<name>Household_send_unemployment_benefit_request</name>
-					<description></description>
-					<currentState>Start_Household</currentState>
-					<nextState>Household_LaborMarket</nextState>
-					<condition>
-						<lhs>
-							<value>a.employer_id</value>
-						</lhs>
-						<op>EQ</op>
-						<rhs>
-							<value>-1</value>
-						</rhs>
-					</condition>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
 					<name>Household_get_fired</name>
 					<description></description>
-					<currentState>Start_Household</currentState>
-					<nextState>End_Household</nextState>
+					<currentState>Household_LaborMarket</currentState>
+					<nextState>Household_Income</nextState>
 					<condition>
-						<not>
-							<lhs>
-								<value>a.employer_id</value>
-							</lhs>
-							<op>EQ</op>
-							<rhs>
-								<value>-1</value>
-							</rhs>
-						</not>
+						<lhs>
+							<not>
+								<lhs>
+									<value>a.employer_id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>-1</value>
+								</rhs>
+							</not>
+						</lhs>
+						<op>AND</op>
+						<rhs>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_act</phase>
+							</time>
+						</rhs>
 					</condition>
 					<inputs>
 						<input>
@@ -397,10 +394,49 @@
 					<outputs/>
 				</function>
 				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Household_LaborMarket</currentState>
+					<nextState>Household_Income</nextState>
+					<condition>
+						<lhs>
+							<not>
+								<lhs>
+									<value>a.employer_id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>-1</value>
+								</rhs>
+							</not>
+						</lhs>
+						<op>AND</op>
+						<rhs>
+							<not>
+								<time>
+									<period>monthly</period>
+									<phase>a.day_of_month_to_act</phase>
+								</time>
+							</not>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
 					<name>Household_read_vacancies_and_send_job_applications</name>
 					<description></description>
 					<currentState>Household_LaborMarket</currentState>
 					<nextState>Household_JobAcceptance</nextState>
+					<condition>
+						<lhs>
+							<value>a.employer_id</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>-1</value>
+						</rhs>
+					</condition>
 					<inputs>
 						<input>
 							<messageName>vacancies</messageName>
@@ -441,7 +477,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Household_StillUnemployed</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_EndLaborMarket</nextState>
 					<condition>
 						<not>
 							<lhs>
@@ -483,7 +519,7 @@
 					<name>Household_accept_job_2</name>
 					<description></description>
 					<currentState>Household_JobAcceptance_2</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_EndLaborMarket</nextState>
 					<inputs>
 						<input>
 							<messageName>job_offer_2</messageName>
@@ -503,6 +539,124 @@
 							<messageName>job_acceptance_2</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>Household_require_unemployment_benefits</name>
+					<description></description>
+					<currentState>Household_EndLaborMarket</currentState>
+					<nextState>Household_NewBudgetPlanning</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.employer_id</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>-1</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>unemployment_benefit</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Household_update_unemployment_period</name>
+					<description></description>
+					<currentState>Household_EndLaborMarket</currentState>
+					<nextState>Household_Income</nextState>
+					<condition>
+						<lhs>
+							<value>a.employer_id</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>-1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_receive_dividends</name>
+					<description></description>
+					<currentState>Household_Income</currentState>
+					<nextState>Household_WageAndBenefitIncome</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_receive_wage</name>
+					<description></description>
+					<currentState>Household_WageAndBenefitIncome</currentState>
+					<nextState>Household_BudgetPlanning</nextState>
+					<condition>
+						<lhs>
+							<not>
+								<lhs>
+									<value>a.employer_id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>-1</value>
+								</rhs>
+							</not>
+						</lhs>
+						<op>AND</op>
+						<rhs>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_receive_income</phase>
+							</time>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_require_unemployment_benefits</name>
+					<description></description>
+					<currentState>Household_WageAndBenefitIncome</currentState>
+					<nextState>Household_BudgetPlanning</nextState>
+					<condition>
+						<lhs>
+							<lhs>
+								<value>a.employer_id</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>-1</value>
+							</rhs>
+						</lhs>
+						<op>AND</op>
+						<rhs>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_receive_income</phase>
+							</time>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Household_WageAndBenefitIncome</currentState>
+					<nextState>Household_BudgetPlanning</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_receive_income</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>
@@ -698,6 +852,23 @@
 						<type>double</type>
 						<name>wage</name>
 						<description>The accepted wage.</description>
+					</variable>
+				</variables>
+		</message>
+		<message>
+			<name>unemployment_benefit</name>
+			<description>Message added by agents to require unemployment benefit.</description>
+				<variables>
+				<!-- (gov_id, amount) -->
+					<variable>
+						<type>int</type>
+						<name>gov_id</name>
+						<description>ID of the government.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>amount</name>
+						<description>The unemplyment benefit payment.</description>
 					</variable>
 				</variables>
 		</message>

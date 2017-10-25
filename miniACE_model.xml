@@ -32,6 +32,10 @@
 			<file>FinalGoodsMarket/FinalGoodsMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>Government/Government_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>
@@ -173,7 +177,17 @@
 				<variable>
 					<type>int</type>
 					<name>day_of_month_to_act</name>
-					<description>Activation day.</description>
+					<description>Employer monthly activation day.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_month_to_receive_income</name>
+					<description>Employer last day of month to act.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>day_of_week_to_act</name>
+					<description>Weekly activation day.</description>
 				</variable>
 				<variable>
 					<type>int</type>
@@ -441,16 +455,6 @@
 					<description>Agents' net worth.</description>
 				</variable>
 			</memory>
-			<functions>
-				<function>
-					<name>Government_template</name>
-					<description></description>
-					<currentState>Start_Government</currentState>
-					<nextState>End_Government</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
 		</xagent>
 		<xagent>
 			<name>Central_Bank</name>

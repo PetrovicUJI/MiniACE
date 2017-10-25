@@ -16,6 +16,7 @@
 		   <file>Firm_FinalGoods_Market_Functions.c</file>
 		   <file>Household_FinalGoods_Market_Functions.c</file>
 		   <file>FinalGoods_Market_Functions.c</file>
+		   <file>FinalGoods_Market_AUX_Functions.c</file>		    
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
@@ -23,7 +24,7 @@
 				<name>Final_good</name>
 				<description>A final good that is offerd by a seller.</description>
 				<variables>
-				<!-- (seller_id, quantity, price) -->
+				<!-- (seller_id, quantity, price, sold_quantity) -->
 					<variable>
 						<type>int</type>
 						<name>seller_id</name>
@@ -38,6 +39,28 @@
 						<type>double</type>
 						<name>price</name>
 						<description>The price of the final good.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>sold_quantity</name>
+						<description>Daily sold quantity of a final good.</description>
+					</variable>
+				</variables>
+			</dataType>
+			<dataType>
+				<name>Final_goods_order</name>
+				<description>An order of final goods by buyers.</description>
+				<variables>
+				<!-- (buyer_id, budget) -->
+					<variable>
+						<type>int</type>
+						<name>buyer_id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>budget</name>
+						<description>Budget for purchising the final goods.</description>
 					</variable>
 				</variables>
 			</dataType>
@@ -66,21 +89,41 @@
 				<variable>
 					<type>Final_good_array</type>
 					<name>final_goods_list</name>
-					<description>A vector of all final goods at the market.</description>
+					<description>A vector of all final goods on the market.</description>
+				</variable>
+				<variable>
+					<type>Final_goods_order_array</type>
+					<name>final_goods_orders_list</name>
+					<description>A vector of all final goods' orders on the market.</description>
 				</variable>
 			</memory>
 			<functions>
 				<function>
-					<name>Final_goods_market_receive_products</name>
+					<name>Final_goods_market_receive_products_and_orders</name>
 					<description></description>
 					<currentState>Start_Final_Goods_Market</currentState>
-					<nextState>End_Final_Goods_Market</nextState>
+					<nextState>FGM_delivery</nextState>
 					<inputs>
 						<input>
-							<messageName>final_good</messageName>
+							<messageName>final_goods_shipping</messageName>
+						</input>
+						<input>
+							<messageName>final_goods_order</messageName>
 						</input>
 					</inputs>
 					<outputs/>
+				</function>
+				<function>
+					<name>Final_goods_market_send_products_to_buyers</name>
+					<description></description>
+					<currentState>FGM_delivery</currentState>
+					<nextState>End_Final_Goods_Market</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_goods_delivery_to_buyers</messageName>
+						</output>
+					</outputs>
 				</function>
 			</functions>
 		</xagent>
@@ -103,7 +146,7 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>final_good</messageName>
+							<messageName>final_goods_shipping</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -112,20 +155,113 @@
 		<xagent>
 			<name>Household</name>
 			<description></description>
-			<!-- <memory>
+			<memory>
 				<variable>
 					<type>double</type>
-					<name>wage</name>
-					<description>Households' reservation wage.</description>
+					<name>weekly_budget</name>
+					<description>Households' weekly consumption budget.</description>
 				</variable>
-			</memory> -->
-			<functions/>
-				<function/>
+			</memory>
+			<functions>
+				<function>
+					<name>Household_plan_consumption_budget</name>
+					<description></description>
+					<currentState>Household_NewBudgetPlanning</currentState>
+					<nextState>Household_Income</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_plan_consumption_budget</name>
+					<description></description>
+					<currentState>Household_BudgetPlanning</currentState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>a.day_of_month_to_receive_income</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Household_BudgetPlanning</currentState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_receive_income</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Household_FinalGoodsPurchase</currentState>
+					<nextState>End_Household</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>weekly</period>
+								<phase>a.day_of_week_to_act</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_purchase_final_goods</name>
+					<description></description>
+					<currentState>Household_FinalGoodsPurchase</currentState>
+					<nextState>Household_FinalGoodsDelivery</nextState>
+					<condition>
+						<time>
+							<period>weekly</period>
+							<phase>a.day_of_week_to_act</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_goods_order</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Household_receive_final_goods</name>
+					<description></description>
+					<currentState>Household_FinalGoodsDelivery</currentState>
+					<nextState>End_Household</nextState>
+					<inputs>
+						<input>
+							<messageName>final_goods_delivery_to_buyers</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.buyer_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
 		</xagent>
 	</agents>
 	<messages>
 		<message>
-			<name>final_good</name>
+			<name>final_goods_shipping</name>
 			<description>Message added by a producer to send final products to the market.</description>
 			<variables>
 			<!-- (seller_id, quantity, price) -->
@@ -143,6 +279,50 @@
 					<type>double</type>
 					<name>price</name>
 					<description>The price of the final good.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>final_goods_order</name>
+			<description>Message added by an agent to buy final goods.</description>
+			<variables>
+			<!-- (buyer_id, budget) -->
+				<variable>
+					<type>int</type>
+					<name>buyer_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>budget</name>
+					<description>Budget for purchising the final goods.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>final_goods_delivery_to_buyers</name>
+			<description>Message added by an agent to deliver final goods to buyers.</description>
+			<variables>
+			<!-- (buyer_id, remaining_budget, costs, quantity) -->
+				<variable>
+					<type>int</type>
+					<name>buyer_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>remaining_budget</name>
+					<description>Remaining budget for purchising the final goods.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>costs</name>
+					<description>Purchising costs.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>quantity</name>
+					<description>Delivered quantity of public goods.</description>
 				</variable>
 			</variables>
 		</message>
