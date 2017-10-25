@@ -330,7 +330,7 @@
 					<name>Firm_calculate_unit_costs_and_set_price</name>
 					<description></description>
 					<currentState>Firm_PriceSetting</currentState>
-					<nextState>Firm_PhysicalCapitalMarket</nextState>
+					<nextState>Firm_FinalGoodsShipping</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

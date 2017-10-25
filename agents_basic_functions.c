@@ -7,11 +7,6 @@ int Firm_template()
     return 0;
 }
 
-int Final_Goods_Market_Clearing_template()
-{
-
-    return 0;
-}
 
 int Labor_Market_Clearing_template()
 {

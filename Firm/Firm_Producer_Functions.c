@@ -64,6 +64,7 @@ int Firm_update_capacity()
 int Firm_plan_production_quantity()
 {
 	EXPECTED_DEMAND = 0.0;
+	PRODUCTION_PLAN = 0.0;
 	
 	for(int i = 0; i < SOLD_QUANTITIES_VECTOR.size; i++)
 	{
@@ -73,8 +74,8 @@ int Firm_plan_production_quantity()
 	if(SOLD_QUANTITIES_VECTOR.size > 0) {EXPECTED_DEMAND = 1.1*(EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size);}
 	
 	
-	if(EXPECTED_DEMAND < INVENTORIES) {PRODUCTION_PLAN = 0;}
-	else {PRODUCTION_PLAN = EXPECTED_DEMAND - INVENTORIES;}
+	if(EXPECTED_DEMAND > INVENTORIES)
+	PRODUCTION_PLAN = EXPECTED_DEMAND - INVENTORIES;
 
     return 0;
 }
@@ -103,7 +104,11 @@ int Firm_plan_labor_demand()
 	if(CAPITAL_LABOR_RATIO <= 0)
 	printf("\n ERROR in function Firm_plan_labor_demand: CAPITAL_LABOR_RATIO = %2.5f\n ", CAPITAL_LABOR_RATIO);
 
+
 	LABOR_REQUIREMENT = (int)ceil(CAPACITY_UTILIZATION*(PHYSICAL_CAPITAL/CAPITAL_LABOR_RATIO));
+	
+	// For a small production plan the number of employess is reduced by 50%. Minimum will be 1 worker.
+	LABOR_REQUIREMENT = max(LABOR_REQUIREMENT, (int)ceil(EMPLOYEES.size*0.5));
 
     return 0;
 }
@@ -121,6 +126,12 @@ int Firm_plan_labor_demand()
 */
 int Firm_plan_investment()
 {
+	if(PHYSICAL_CAPITAL == 0)
+	{
+		INVESTMENT_PLAN = LABOR_REQUIREMENT*CAPITAL_LABOR_RATIO;
+		return 0;
+	}
+	
 	double profit_rate = 0.0;
 	double capacity_growth_rate = 0.0;
 	
@@ -139,7 +150,7 @@ int Firm_plan_investment()
 	capacity_growth_rate = PROFIT_RATE_WEIGHTS*((profit_rate-TARGET_PROFIT_RATE)/TARGET_PROFIT_RATE) + CAPACITY_UTILIZATION_WEIGHTS*((CAPACITY_UTILIZATION-TARGET_CAPACITY_UTILIZATION)/TARGET_CAPACITY_UTILIZATION);
 
 	if(capacity_growth_rate > 0) {INVESTMENT_PLAN = capacity_growth_rate*PHYSICAL_CAPITAL;}
-
+	
     return 0;
 }
 
@@ -195,12 +206,15 @@ int Firm_adjust_investment_plan()
 		
 		EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
 		
-	}while(INVESTMENT_PLAN > 0 && EXTERNAL_FINANCIAL_NEEDS > 1);
+	}while(INVESTMENT_PLAN >= 1 && EXTERNAL_FINANCIAL_NEEDS >= 1);
 	
 	if(INVESTMENT_PLAN < 1)
-	{
-		INVESTMENT_PLAN = 0;
-	}
+	INVESTMENT_PLAN = 0;
+
+	
+	if(EXTERNAL_FINANCIAL_NEEDS < 0)
+	EXTERNAL_FINANCIAL_NEEDS = 0;
+
 	
 	return 0;
 }
@@ -218,14 +232,18 @@ int Firm_adjust_investment_plan()
 */
 int Firm_produce_final_goods()
 {
+	PRODUCTION = 0.0;
+	
+	if(PRODUCTION_PLAN > 0)
 	PRODUCTION = min(CAPITAL_LABOR_RATIO*EMPLOYEES.size,PHYSICAL_CAPITAL)*PRODUCTIVITY;
+
+	if(PRODUCTION < 0)
+	printf("\n ERROR in function Firm_produce_final_goods: PRODUCTION = %2.5f\n ", PRODUCTION);
 	
 	// update physical capital stock
-	
 	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
 	{
-		//update after the production takes place and before new capital is bouth
-		//PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+		//update after the production takes place and before new capital is bought: months_in_use++
 		
 		PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
 	}
@@ -261,6 +279,7 @@ int Firm_calculate_unit_costs_and_set_price()
 		TOTAL_INTEREST_PAYMENT += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
 	}
 	
+
 	LABOR_COST = 0;
 	
 	for(int i = 0; i < EMPLOYEES.size; i++)
@@ -268,17 +287,15 @@ int Firm_calculate_unit_costs_and_set_price()
 		LABOR_COST += EMPLOYEES.array[i].wage;
 	}
 	
-	if(PRODUCTION !=0)
-	{
-		unit_costs_old = UNIT_COSTS;
-		current_costs = LABOR_COST + PHYSICAL_CAPITAL_DEPRECIATION_COST + TOTAL_INSTALMENT_PAYMENT + TOTAL_INTEREST_PAYMENT;
-		UNIT_COSTS = (unit_costs_old*INVENTORIES + current_costs)/(INVENTORIES+PRODUCTION);
-		
-		PRICE_LAST_MONTH = PRICE;
-		PRICE = UNIT_COSTS*(1 + MARK_UP)*(1 + VAT_RATE);
-		PRICE = (1-CB_TRUST)*PRICE + CB_TRUST*(PRICE_LAST_MONTH * (INFLATION_TARGET/12 + 1));
-	}
+	unit_costs_old = UNIT_COSTS;
+	current_costs = LABOR_COST + PHYSICAL_CAPITAL_DEPRECIATION_COST + TOTAL_INSTALMENT_PAYMENT + TOTAL_INTEREST_PAYMENT + EXTERNAL_FINANCIAL_NEEDS;
+	UNIT_COSTS = (unit_costs_old*INVENTORIES + current_costs)/(INVENTORIES+PRODUCTION);
 	
+	PRICE_LAST_MONTH = PRICE;
+	PRICE = UNIT_COSTS*(1 + MARK_UP)*(1 + VAT_RATE);
+	PRICE = (1-CB_TRUST)*PRICE + CB_TRUST*(PRICE_LAST_MONTH * (INFLATION_TARGET/12 + 1));
+	
+	INVENTORIES += PRODUCTION;
 	
     return 0;
 }

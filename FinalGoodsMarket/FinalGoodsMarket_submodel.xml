@@ -1,0 +1,150 @@
+<!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>FinalGoods_Market</name>
+	<version>Version 1.1, 24/10/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models/>
+	<environment>
+		<constants>
+			<!-- <variable>
+			<type>int</type>
+			<name>max_number_of_job_applications</name>
+			<description></description>
+			</variable> -->
+		</constants>
+		<functionFiles>
+		   <file>Firm_FinalGoods_Market_Functions.c</file>
+		   <file>Household_FinalGoods_Market_Functions.c</file>
+		   <file>FinalGoods_Market_Functions.c</file>
+		</functionFiles>
+		<timeUnits/>
+		<dataTypes>
+			<dataType>
+				<name>Final_good</name>
+				<description>A final good that is offerd by a seller.</description>
+				<variables>
+				<!-- (seller_id, quantity, price) -->
+					<variable>
+						<type>int</type>
+						<name>seller_id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>quantity</name>
+						<description>The stock of the final good.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>price</name>
+						<description>The price of the final good.</description>
+					</variable>
+				</variables>
+			</dataType>
+		</dataTypes>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Final_Goods_Market</name>
+			<description>Market clearing mechanism.</description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description>Government to which the agent is associated.</description>
+				</variable>
+				<variable>
+					<type>Final_good_array</type>
+					<name>final_goods_list</name>
+					<description>A vector of all final goods at the market.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Final_goods_market_receive_products</name>
+					<description></description>
+					<currentState>Start_Final_Goods_Market</currentState>
+					<nextState>End_Final_Goods_Market</nextState>
+					<inputs>
+						<input>
+							<messageName>final_good</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Firm</name>
+			<description></description>
+			<!-- <memory>
+				<variable>
+					<type>Employee_array</type>
+					<name>employees</name>
+					<description>A vector of employees in a firm.</description>
+				</variable>
+			</memory> -->
+			<functions>
+				<function>
+					<name>Firm_send_final_goods_to_the_market</name>
+					<description></description>
+					<currentState>Firm_FinalGoodsShipping</currentState>
+					<nextState>Firm_PhysicalCapitalMarket</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_good</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Household</name>
+			<description></description>
+			<!-- <memory>
+				<variable>
+					<type>double</type>
+					<name>wage</name>
+					<description>Households' reservation wage.</description>
+				</variable>
+			</memory> -->
+			<functions/>
+				<function/>
+		</xagent>
+	</agents>
+	<messages>
+		<message>
+			<name>final_good</name>
+			<description>Message added by a producer to send final products to the market.</description>
+			<variables>
+			<!-- (seller_id, quantity, price) -->
+				<variable>
+					<type>int</type>
+					<name>seller_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>quantity</name>
+					<description>The stock of the final good.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price</name>
+					<description>The price of the final good.</description>
+				</variable>
+			</variables>
+		</message>
+	</messages>
+</xmodel>

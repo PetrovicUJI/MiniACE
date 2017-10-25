@@ -5,7 +5,7 @@
 	<description>Authors: Marko Petrovic</description>
 	<models>
 		<model>
-			<file>FinalGoods/FinalGoods_submodel.xml</file>
+			<file>Firm/Firm_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
@@ -26,6 +26,10 @@
 		</model>
 		<model>
 			<file>PhysicalCapitalMarket/PhysicalCapitalMarket_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
+		<model>
+			<file>FinalGoodsMarket/FinalGoodsMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 	</models>
@@ -146,37 +150,6 @@
 				</variable>
 			</memory>
 			<functions/>
-		</xagent>
-		<xagent>
-			<name>Final_Goods_Market_Clearing</name>
-			<description>Market clearing mechanism.</description>
-			<memory>
-				<variable>
-					<type>int</type>
-					<name>id</name>
-					<description>Agent ID.</description>
-				</variable>
-				<variable>
-					<type>int</type>
-					<name>region_id</name>
-					<description>Region ID to which the agent is associated.</description>
-				</variable>
-				<variable>
-					<type>int</type>
-					<name>gov_id</name>
-					<description>Government to which the agent is associated.</description>
-				</variable>
-			</memory>
-			<functions>
-				<function>
-					<name>Final_Goods_Market_Clearing_template</name>
-					<description></description>
-					<currentState>Start_Final_Goods_Market_Clearing</currentState>
-					<nextState>End_Final_Goods_Market_Clearing</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
 		</xagent>
 		<xagent>
 			<name>Household</name>
