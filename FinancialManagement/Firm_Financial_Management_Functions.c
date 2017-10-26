@@ -52,3 +52,35 @@ int Firm_plan_financing()
 	
     return 0;
 }
+
+/* \fn: int Firm_account_and_pay_salaries()
+ 
+* \brief: Firm account and pay salaries to eployees.
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+ *\ wage_payment_message structure: <!-- (employee_id, wage) -->
+ 
+ *\ Employee data structure: 	<!-- id, wage -->
+ 
+* \authors: Marko Petrovic
+* \history: 26.10.2017-Marko: First implementation.
+*/
+int Firm_account_and_pay_salaries()
+{
+	MONTHLY_WAGE_PAYMENT = 0.0;
+	
+	for(int i = 0; i < EMPLOYEES.size; i++)
+	{
+		add_wage_payment_message(EMPLOYEES.array[i].id, EMPLOYEES.array[i].wage);
+		
+		MONTHLY_WAGE_PAYMENT += EMPLOYEES.array[i].wage;
+	}
+	
+	PAYMENT_ACCOUNT -= MONTHLY_WAGE_PAYMENT;
+	
+
+    return 0;
+}

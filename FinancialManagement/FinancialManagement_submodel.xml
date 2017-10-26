@@ -60,6 +60,21 @@
 					<name>capital_tax_rate</name>
 					<description>Tax on accumulated profit.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_revenue</name>
+					<description>Monthly operating revenue.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_level</name>
+					<description>The price level in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_wage_payment</name>
+					<description>Total monthly wage payment to employees.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -70,7 +85,60 @@
 					<inputs/>
 					<outputs/>
 				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_MonthlyAccounting</currentState>
+					<nextState>End_Firm</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.last_day_of_month_to_act</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_account_and_pay_salaries</name>
+					<description></description>
+					<currentState>Firm_MonthlyAccounting</currentState>
+					<nextState>Firm_MonthlyStatistics</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>a.last_day_of_month_to_act</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>wage_payment</messageName>
+						</output>
+					</outputs>
+				</function>
 			</functions>
 		</xagent>
 	</agents>
+	<messages>
+		<message>
+			<name>wage_payment</name>
+			<description>Message added by an agent to pay salaries to employees.</description>
+			<variables>
+			<!-- (employee_id, wage) -->
+				<variable>
+					<type>int</type>
+					<name>employee_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>wage</name>
+					<description>Daily sold quantities.</description>
+				</variable>
+			</variables>
+		</message>
+	</messages>
 </xmodel>

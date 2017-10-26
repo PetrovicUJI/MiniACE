@@ -326,12 +326,20 @@ int Household_receive_dividends()
 * \timing: Monthly
  * \condition: if employer_id != -1 and day_of_month_to_receive_income
  
+  *\ wage_payment_message structure: <!-- (employee_id, wage) -->
+  *\ message filter: a.id == m.employee_id
  
 * \authors: Marko Petrovic
 * \history: 25.10.2017-Marko: First implementation.
 */
 int Household_receive_wage()
 {
+	START_WAGE_PAYMENT_MESSAGE_LOOP
+	
+		PAYMENT_ACCOUNT += wage_payment_message->wage;
+		
+    FINISH_WAGE_PAYMENT_MESSAGE_LOOP
+	
 
     return 0;
 }

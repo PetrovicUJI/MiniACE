@@ -96,13 +96,33 @@
 					<name>final_goods_orders_list</name>
 					<description>A vector of all final goods' orders on the market.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>daily_sold_quantity</name>
+					<description>Daily sold quantity on the market.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>daily_market_turnover</name>
+					<description>Value of daily sold quantities.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_sold_quantity</name>
+					<description>Mnthly sold quantity on the market.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_market_turnover</name>
+					<description>Value of monthly sold quantities.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>Final_goods_market_receive_products_and_orders</name>
 					<description></description>
 					<currentState>Start_Final_Goods_Market</currentState>
-					<nextState>FGM_delivery</nextState>
+					<nextState>FGM_Delivery</nextState>
 					<inputs>
 						<input>
 							<messageName>final_goods_shipping</messageName>
@@ -116,12 +136,24 @@
 				<function>
 					<name>Final_goods_market_send_products_to_buyers</name>
 					<description></description>
-					<currentState>FGM_delivery</currentState>
-					<nextState>End_Final_Goods_Market</nextState>
+					<currentState>FGM_Delivery</currentState>
+					<nextState>FGM_Accounting</nextState>
 					<inputs/>
 					<outputs>
 						<output>
 							<messageName>final_goods_delivery_to_buyers</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Final_goods_market_update_sellers</name>
+					<description></description>
+					<currentState>FGM_Accounting</currentState>
+					<nextState>End_Final_Goods_Market</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_goods_market_transaction_update</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -150,6 +182,27 @@
 						</output>
 					</outputs>
 				</function>
+				<function>
+					<name>Firm_receive_updates_from_the_final_goods_market</name>
+					<description></description>
+					<currentState>Firm_DailyAccounting</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
+					<inputs>
+						<input>
+							<messageName>final_goods_market_transaction_update</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.seller_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
 			</functions>
 		</xagent>
 		<xagent>
@@ -161,13 +214,28 @@
 					<name>weekly_budget</name>
 					<description>Households' weekly consumption budget.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>remaining_weekly_budget</name>
+					<description>Households' weekly consumption budget that is not spent.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>weekly_consumption_quantity</name>
+					<description>Households' weekly consumption quantity.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>weekly_consumption_costs</name>
+					<description>Households' weekly consumption costs.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>Household_plan_consumption_budget</name>
 					<description></description>
 					<currentState>Household_NewBudgetPlanning</currentState>
-					<nextState>Household_Income</nextState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
@@ -175,7 +243,7 @@
 					<name>Household_plan_consumption_budget</name>
 					<description></description>
 					<currentState>Household_BudgetPlanning</currentState>
-					<nextState>Household_FinalGoodsPurchase</nextState>
+					<nextState>End_Household</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -189,7 +257,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Household_BudgetPlanning</currentState>
-					<nextState>Household_FinalGoodsPurchase</nextState>
+					<nextState>End_Household</nextState>
 					<condition>
 						<not>
 							<time>
@@ -205,7 +273,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Household_FinalGoodsPurchase</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_Income</nextState>
 					<condition>
 						<not>
 							<time>
@@ -239,7 +307,7 @@
 					<name>Household_receive_final_goods</name>
 					<description></description>
 					<currentState>Household_FinalGoodsDelivery</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_Income</nextState>
 					<inputs>
 						<input>
 							<messageName>final_goods_delivery_to_buyers</messageName>
@@ -303,7 +371,7 @@
 			<name>final_goods_delivery_to_buyers</name>
 			<description>Message added by an agent to deliver final goods to buyers.</description>
 			<variables>
-			<!-- (buyer_id, remaining_budget, costs, quantity) -->
+			<!-- (buyer_id, remaining_budget, costs, purchased_quantity) -->
 				<variable>
 					<type>int</type>
 					<name>buyer_id</name>
@@ -321,8 +389,30 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>quantity</name>
-					<description>Delivered quantity of public goods.</description>
+					<name>purchased_quantity</name>
+					<description>Delivered quantity of final goods.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>final_goods_market_transaction_update</name>
+			<description>Message added by an agent to daily update sellers.</description>
+			<variables>
+			<!-- (seller_id, sold_quantity, revenue) -->
+				<variable>
+					<type>int</type>
+					<name>seller_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>sold_quantity</name>
+					<description>Daily sold quantities.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>revenue</name>
+					<description>Daily revenues.</description>
 				</variable>
 			</variables>
 		</message>

@@ -22,6 +22,7 @@
 			<dataType>
 				<name>Employee</name>
 				<description>Employee data.</description>
+				<!-- id, wage -->
 				<variables>
 					<variable>
 						<type>int</type>
@@ -356,7 +357,7 @@
 					<name>Household_get_fired</name>
 					<description></description>
 					<currentState>Household_LaborMarket</currentState>
-					<nextState>Household_Income</nextState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
 					<condition>
 						<lhs>
 							<not>
@@ -397,7 +398,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Household_LaborMarket</currentState>
-					<nextState>Household_Income</nextState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
 					<condition>
 						<lhs>
 							<not>
@@ -567,7 +568,7 @@
 					<name>Household_update_unemployment_period</name>
 					<description></description>
 					<currentState>Household_EndLaborMarket</currentState>
-					<nextState>Household_Income</nextState>
+					<nextState>Household_FinalGoodsPurchase</nextState>
 					<condition>
 						<lhs>
 							<value>a.employer_id</value>
@@ -613,7 +614,20 @@
 							</time>
 						</rhs>
 					</condition>
-					<inputs/>
+					<inputs>
+						<input>
+							<messageName>wage_payment</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employee_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
 					<outputs/>
 				</function>
 				<function>
@@ -640,7 +654,11 @@
 						</rhs>
 					</condition>
 					<inputs/>
-					<outputs/>
+					<outputs>
+						<output>
+							<messageName>unemployment_benefit</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
 					<name>Idle</name>

@@ -319,7 +319,8 @@ int Firm_compute_sale_statistics()
 	remove_double(&SOLD_QUANTITIES_VECTOR,0);
     add_double(&SOLD_QUANTITIES_VECTOR,MONTHLY_SOLD_QUANTITY);
 	
-	MONTHLY_SOLD_QUANTITY = 0;
+	MONTHLY_SOLD_QUANTITY = 0.0;
+	MONTHLY_REVENUE = 0.0;
 
     return 0;
 }

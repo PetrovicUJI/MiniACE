@@ -68,7 +68,7 @@
 					<name>Firm_receive_physical_capital</name>
 					<description></description>
 					<currentState>Firm_PhysicalCapitalDelivery</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_DailyAccounting</nextState>
 					<inputs>
 						<input>
 							<messageName>physical_capital_delivery</messageName>
@@ -89,7 +89,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_PhysicalCapitalMarket</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_DailyAccounting</nextState>
 					<condition>
 						<not>
 							<lhs>
