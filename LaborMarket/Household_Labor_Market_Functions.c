@@ -301,29 +301,12 @@ int Household_update_unemployment_period()
     return 0;
 }
 
-/* \fn: int Household_receive_dividends()
- 
-* \brief: Household receive dividends.
- 
-* \timing: Daily
- * \condition: 
- 
- 
-* \authors: Marko Petrovic
-* \history: 25.10.2017-Marko: First implementation.
-*/
-int Household_receive_dividends()
-{
-	
-
-    return 0;
-}
 
 /* \fn: int Household_receive_wage()
  
 * \brief: Household receive wage.
  
-* \timing: Monthly
+* \timing: Monthly day of month to receive income
  * \condition: if employer_id != -1 and day_of_month_to_receive_income
  
   *\ wage_payment_message structure: <!-- (employee_id, wage) -->
@@ -343,6 +326,53 @@ int Household_receive_wage()
 
     return 0;
 }
+
+/* \fn: int Household_require_transfers()
+ 
+* \brief: Household require transfers.
+ 
+* \timing: Monthly day of month to receive income
+ * \condition: 
+ 
+ *\ public_transfers message structure <!-- (gov_id, amount) -->
+ 
+* \authors: Marko Petrovic
+* \history: 27.10.2017-Marko: First implementation.
+*/
+int Household_require_transfers()
+{
+	add_public_transfers_message(GOV_ID, PUBLIC_TRANSFERS);
+	
+	PAYMENT_ACCOUNT += PUBLIC_TRANSFERS;
+
+    return 0;
+}
+
+/* \fn: int Household_receive_dividends()
+ 
+* \brief: Household receive dividends.
+
+*\ dividend_payment message structure: 	<!-- (stockholder_id, dividend) -->
+*\ message filter: a.id == m.stockholder_id
+ 
+* \timing: Daily
+ * \condition: 
+ 
+ 
+* \authors: Marko Petrovic
+* \history: 27.10.2017-Marko: First implementation.
+*/
+int Household_receive_dividends()
+{
+	START_DIVIDEND_PAYMENT_MESSAGE_LOOP
+	
+		PAYMENT_ACCOUNT += dividend_payment_message->dividend;
+		
+    FINISH_DIVIDEND_PAYMENT_MESSAGE_LOOP
+	
+    return 0;
+}
+
 
 
 

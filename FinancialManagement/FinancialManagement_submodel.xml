@@ -17,17 +17,23 @@
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
-<!-- 			<dataType>
-				<name>consumption_goods_offer</name>
-				<description>Used by household and mall to hold consumption goods offers</description>
+			<dataType>
+				<name>Stockholder</name>
+				<description>Used by agents to pay dividends to their stockholders.</description>
+				<!-- (stockholder_id, shares) -->
 				<variables>
 					<variable>
 						<type>int</type>
-						<name>id</name>
+						<name>stockholder_id</name>
+						<description></description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>shares</name>
 						<description></description>
 					</variable>
 				</variables>
-			</dataType> -->
+			</dataType>
 		</dataTypes>
 	</environment>
 	<agents>
@@ -35,6 +41,11 @@
 			<name>Firm</name>
 			<description></description>
 			<memory>
+				<variable>
+					<type>Stockholder_array</type>
+					<name>stockholders_list</name>
+					<description>A vector of stockholders.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>operating_cash_flow</name>
@@ -75,6 +86,56 @@
 					<name>monthly_wage_payment</name>
 					<description>Total monthly wage payment to employees.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_loan_interest_payment</name>
+					<description>Total interest to be payed on long term loans.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_loan_instalment_payment</name>
+					<description>Total instalments to be payed on long term loans.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>short_term_borrowing_interest_payment</name>
+					<description>Interest to be payed on short-term borrowing.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>total_financial_payment</name>
+					<description>Total financial payment for the period.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_interest_rate_on_short_term_borrowing</name>
+					<description>Interest rate to be payed on short-term borrowing.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>vat_payment</name>
+					<description>Value added tax payment.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>ebt</name>
+					<description>Earnings before tax.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>dividend_payment</name>
+					<description>Earnings before tax.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>net_earnings</name>
+					<description>Earnings after income tax.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_payment</name>
+					<description>Tax payment on accumulated profit.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -82,6 +143,14 @@
 					<description></description>
 					<currentState>Firm_FinancialPlanning</currentState>
 					<nextState>Firm_LoanRequest</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_account_interest_on_short_term_borrowing</name>
+					<description></description>
+					<currentState>Firm_ShortTermBorrowing</currentState>
+					<nextState>Firm_MonthlyAccounting</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
@@ -105,7 +174,7 @@
 					<name>Firm_account_and_pay_salaries</name>
 					<description></description>
 					<currentState>Firm_MonthlyAccounting</currentState>
-					<nextState>Firm_MonthlyStatistics</nextState>
+					<nextState>Firm_CapacityUpdate</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -118,6 +187,65 @@
 							<messageName>wage_payment</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>Firm_update_capacity</name>
+					<description></description>
+					<currentState>Firm_CapacityUpdate</currentState>
+					<nextState>Firm_FinancialAccounting</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_compute_financial_payments</name>
+					<description></description>
+					<currentState>Firm_FinancialAccounting</currentState>
+					<nextState>Firm_IncomeStatement</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_compute_income_statement</name>
+					<description></description>
+					<currentState>Firm_IncomeStatement</currentState>
+					<nextState>Firm_DividendPayments</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_pay_dividends</name>
+					<description></description>
+					<currentState>Firm_DividendPayments</currentState>
+					<nextState>Firm_FinancialPayments</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>dividend_payment</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_pay_financial_expenses</name>
+					<description></description>
+					<currentState>Firm_FinancialPayments</currentState>
+					<nextState>Firm_BalanceSheet</nextState>
+					<inputs/>
+	<!-- 				<outputs>
+						<output>
+							<messageName>financial_payments</messageName>
+						</output>
+						<output>
+							<messageName>tax_payments</messageName>
+						</output>
+					</outputs> -->
+				</function>
+				<function>
+					<name>Firm_compute_balance_sheet</name>
+					<description></description>
+					<currentState>Firm_BalanceSheet</currentState>
+					<nextState>Firm_MonthlyStatistics</nextState>
+					<inputs/>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>
@@ -136,7 +264,73 @@
 				<variable>
 					<type>double</type>
 					<name>wage</name>
-					<description>Daily sold quantities.</description>
+					<description>Monthly wage.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>dividend_payment</name>
+			<description>Message added by an agent to pay dividends.</description>
+			<variables>
+			<!-- (stockholder_id, dividend) -->
+				<variable>
+					<type>int</type>
+					<name>stockholder_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>dividend</name>
+					<description>Monthly dividend payment.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>financial_payments</name>
+			<description>Message added by an agent to pay interests and instalments.</description>
+			<variables>
+			<!-- (borrower_id, lender_id, instalment_payments, interest_payments) -->
+				<variable>
+					<type>int</type>
+					<name>borrower_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>lender_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>instalment_payments</name>
+					<description>Monthly instalment payments.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>interest_payments</name>
+					<description>Monthly interest payments.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>tax_payments</name>
+			<description>Message added by an agent to pay taxes.</description>
+			<variables>
+			<!-- (taxpayer_id, tax_payment) -->
+				<variable>
+					<type>int</type>
+					<name>taxpayer_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>tax_payment</name>
+					<description>Monthly tax payments.</description>
 				</variable>
 			</variables>
 		</message>

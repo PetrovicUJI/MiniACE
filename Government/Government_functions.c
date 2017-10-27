@@ -29,3 +29,27 @@ int Government_pays_unemployment_benefits()
     return 0;
 }
 
+/* \fn: int Government_pays_transfers()
+ 
+* \brief: Government pays transfers.
+ 
+ 
+* \timing: Daily
+*\ public_transfers message structure <!-- (gov_id, amount) -->
+ 
+
+ 
+* \authors: Marko Petrovic
+* \history: 27.10.2017-Marko: First implementation.
+*/
+int Government_pays_transfers()
+{
+	START_PUBLIC_TRANSFERS_MESSAGE_LOOP
+		
+		PAYMENT_ACCOUNT -= public_transfers_message->amount;
+		
+    FINISH_PUBLIC_TRANSFERS_MESSAGE_LOOP
+
+    return 0;
+}
+

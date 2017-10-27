@@ -118,9 +118,19 @@
 					<name>bank_id</name>
 					<description>Bank ID at which the agent maintains its payment account.</description>
 				</variable>
+				<variable>
+					<type>int</type>
+					<name>active</name>
+					<description>An indicator equal to 1 if a firm is active, and 0 otherwise.</description>
+				</variable>
 				
 				<!-- balance sheet -->
 					<!-- assets -->
+				<variable>
+					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>payment_account</name>
@@ -137,6 +147,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>current_liabilities</name>
@@ -198,6 +213,11 @@
 					<!-- assets -->
 				<variable>
 					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>payment_account</name>
 					<description>Agents' current account.</description>
 				</variable>
@@ -212,6 +232,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>current_liabilities</name>
@@ -262,6 +287,11 @@
 					<!-- assets -->
 				<variable>
 					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>payment_account</name>
 					<description>Agents' current account.</description>
 				</variable>
@@ -276,6 +306,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>current_liabilities</name>
@@ -359,6 +394,11 @@
 					<!-- assets -->
 				<variable>
 					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>payment_account</name>
 					<description>Agents' current account - cash and cash equivalents.</description>
 				</variable>
@@ -373,6 +413,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>deposits</name>
@@ -400,7 +445,7 @@
 				</variable>
 			</memory>
 			<functions/>
-				<function/>
+			<function/>
 		</xagent>
 		<xagent>
 			<name>Government</name>
@@ -425,6 +470,11 @@
 					<!-- assets -->
 				<variable>
 					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>payment_account</name>
 					<description>Agents' current account.</description>
 				</variable>
@@ -439,6 +489,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>current_liabilities</name>
@@ -474,6 +529,11 @@
 					<!-- assets -->
 				<variable>
 					<type>double</type>
+					<name>total_assets</name>
+					<description>Agents' total assets.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>payment_account</name>
 					<description>Agents' current account - cash and cash equivalents.</description>
 				</variable>
@@ -488,6 +548,11 @@
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->
+				<variable>
+					<type>double</type>
+					<name>total_liabilities</name>
+					<description>Agents' total liabilities.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>fiat_money</name>

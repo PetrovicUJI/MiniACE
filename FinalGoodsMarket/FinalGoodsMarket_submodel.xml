@@ -186,7 +186,7 @@
 					<name>Firm_receive_updates_from_the_final_goods_market</name>
 					<description></description>
 					<currentState>Firm_DailyAccounting</currentState>
-					<nextState>Firm_MonthlyAccounting</nextState>
+					<nextState>Firm_ShortTermBorrowing</nextState>
 					<inputs>
 						<input>
 							<messageName>final_goods_market_transaction_update</messageName>

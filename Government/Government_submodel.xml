@@ -46,10 +46,22 @@
 					<name>Government_pays_unemployment_benefits</name>
 					<description></description>
 					<currentState>Start_Government</currentState>
-					<nextState>End_Government</nextState>
+					<nextState>GOV_Transfers</nextState>
 					<inputs>
 						<input>
 							<messageName>unemployment_benefit</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Government_pays_transfers</name>
+					<description></description>
+					<currentState>GOV_Transfers</currentState>
+					<nextState>End_Government</nextState>
+					<inputs>
+						<input>
+							<messageName>public_transfers</messageName>
 						</input>
 					</inputs>
 					<outputs/>

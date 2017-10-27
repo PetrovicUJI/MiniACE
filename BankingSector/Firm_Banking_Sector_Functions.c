@@ -40,8 +40,12 @@ int Firm_send_loan_request()
 		monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk)
 		
 		 *\ message filter: a.id == m.borrower_id
+		 
+*\ Loan data structure: 
+<!-- (creditor_id, repayment_period_months, remaining_months, remaining_amount, 
+instalment, monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk) -->
 
- 
+							  
 * \authors: Marko Petrovic
 * \history: 11.10.2017-Marko: First implementation.
 */

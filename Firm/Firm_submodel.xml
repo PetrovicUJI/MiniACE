@@ -163,21 +163,6 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>labor_cost</name>
-					<description>The cost of labor.</description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>total_interest_payment</name>
-					<description>The sum of all monthly interest payments.</description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>total_instalment_payment</name>
-					<description>The sum of all monthly interest payments.</description>
-				</variable>
-				<variable>
-					<type>double</type>
 					<name>unit_costs</name>
 					<description>Unit_production_costs.</description>
 				</variable>	
@@ -199,24 +184,16 @@
 			</memory>
 			<functions>
 				<function>
-					<name>Firm_update_capacity</name>
+					<name>Firm_plan_production_quantity</name>
 					<description></description>
 					<currentState>Firm_ProductionActivity</currentState>
-					<nextState>Firm_ProductionPlanning</nextState>
+					<nextState>Firm_LaborDemandPlanning</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
 							<phase>a.day_of_month_to_act</phase>
 						</time>
 					</condition>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
-					<name>Firm_plan_production_quantity</name>
-					<description></description>
-					<currentState>Firm_ProductionPlanning</currentState>
-					<nextState>Firm_LaborDemandPlanning</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

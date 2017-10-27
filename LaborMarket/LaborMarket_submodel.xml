@@ -333,6 +333,11 @@
 				</variable>
 				<variable>
 					<type>double</type>
+					<name>public_transfers</name>
+					<description>Public transfers received from the government.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>reservation_wage</name>
 					<description>Households' reservation wage.</description>
 				</variable>
@@ -582,18 +587,10 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Household_receive_dividends</name>
-					<description></description>
-					<currentState>Household_Income</currentState>
-					<nextState>Household_WageAndBenefitIncome</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
 					<name>Household_receive_wage</name>
 					<description></description>
-					<currentState>Household_WageAndBenefitIncome</currentState>
-					<nextState>Household_BudgetPlanning</nextState>
+					<currentState>Household_Income</currentState>
+					<nextState>Household_PublicTransfers</nextState>
 					<condition>
 						<lhs>
 							<not>
@@ -633,8 +630,8 @@
 				<function>
 					<name>Household_require_unemployment_benefits</name>
 					<description></description>
-					<currentState>Household_WageAndBenefitIncome</currentState>
-					<nextState>Household_BudgetPlanning</nextState>
+					<currentState>Household_Income</currentState>
+					<nextState>Household_PublicTransfers</nextState>
 					<condition>
 						<lhs>
 							<lhs>
@@ -661,10 +658,22 @@
 					</outputs>
 				</function>
 				<function>
+					<name>Household_require_transfers</name>
+					<description></description>
+					<currentState>Household_PublicTransfers</currentState>
+					<nextState>Household_CapitalIncome</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>public_transfers</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Household_WageAndBenefitIncome</currentState>
-					<nextState>Household_BudgetPlanning</nextState>
+					<currentState>Household_Income</currentState>
+					<nextState>Household_CapitalIncome</nextState>
 					<condition>
 						<not>
 							<time>
@@ -674,6 +683,27 @@
 						</not>
 					</condition>
 					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_receive_dividends</name>
+					<description></description>
+					<currentState>Household_CapitalIncome</currentState>
+					<nextState>Household_BudgetPlanning</nextState>
+					<inputs>
+						<input>
+							<messageName>dividend_payment</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.stockholder_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
 					<outputs/>
 				</function>
 			</functions>
@@ -890,5 +920,25 @@
 					</variable>
 				</variables>
 		</message>
+		<message>
+			<name>public_transfers</name>
+			<description>Message added by agents to require public transfers.</description>
+				<variables>
+				<!-- (gov_id, amount) -->
+					<variable>
+						<type>int</type>
+						<name>gov_id</name>
+						<description>ID of the government.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>amount</name>
+						<description>The unemplyment benefit payment.</description>
+					</variable>
+				</variables>
+		</message>
+		
+		
+		
 	</messages>
 </xmodel>
