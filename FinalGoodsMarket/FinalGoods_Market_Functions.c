@@ -34,19 +34,26 @@ int Final_goods_market_receive_products_and_orders()
 		quantity = final_goods_shipping_message->quantity;
 		price = final_goods_shipping_message->price;
 		
-		int not_present = 1;
+		int present = 0;
 		for(int i = 0; i < FINAL_GOODS_LIST.size; i++)
 		{
 			if (FINAL_GOODS_LIST.array[i].seller_id == seller_id)
 			{
+				// remove a seller from the market!
+				if(FINAL_GOODS_LIST.array[i].price == -1)
+				{
+					remove_Final_good(&FINAL_GOODS_LIST,i);
+					break;
+				}
+				
 				FINAL_GOODS_LIST.array[i].quantity += quantity;
 				FINAL_GOODS_LIST.array[i].price = price;
-				not_present = 0;
+				present = 1;
 				break;
 			}
 		}
 		
-		if(not_present)
+		if(present == 0 && final_goods_shipping_message->price > 0)
 		add_Final_good(&FINAL_GOODS_LIST, seller_id, quantity, price, 0);
 	
     FINISH_FINAL_GOODS_SHIPPING_MESSAGE_LOOP

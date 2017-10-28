@@ -298,7 +298,7 @@
 					<name>Bank_give_loans</name>
 					<description></description>
 					<currentState>Bank_LoanAllowed</currentState>
-					<nextState>End_Bank</nextState>
+					<nextState>Bank_LoanRepayments</nextState>
 					<inputs>
 						<input>
 							<messageName>new_loan_given</messageName>
@@ -309,6 +309,48 @@
 								<op>EQ</op>
 								<rhs>
 									<value>m.creditor_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Bank_receive_loan_repayments</name>
+					<description></description>
+					<currentState>Bank_LoanRepayments</currentState>
+					<nextState>Bank_AccountUpdate</nextState>
+					<inputs>
+						<input>
+							<messageName>loan_repayment</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.creditor_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Bank_receive_account_update</name>
+					<description></description>
+					<currentState>Bank_AccountUpdate</currentState>
+					<nextState>End_Bank</nextState>
+					<inputs>
+						<input>
+							<messageName>bank_account_update</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.bank_id</value>
 								</rhs>
 							</filter>
 						</input>

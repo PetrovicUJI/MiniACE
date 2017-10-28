@@ -34,13 +34,13 @@
 		<xagent>
 			<name>Government</name>
 			<description></description>
-			<!-- <memory>
+			<memory>
 				<variable>
-					<type>int</type>
-					<name>initialization</name>
-					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+					<type>double</type>
+					<name>tax_income</name>
+					<description>Montlhly government tax income.</description>
 				</variable>
-			</memory> -->
+			</memory>
 			<functions>
 				<function>
 					<name>Government_pays_unemployment_benefits</name>
@@ -58,10 +58,22 @@
 					<name>Government_pays_transfers</name>
 					<description></description>
 					<currentState>GOV_Transfers</currentState>
-					<nextState>End_Government</nextState>
+					<nextState>GOV_TaxIncome</nextState>
 					<inputs>
 						<input>
 							<messageName>public_transfers</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Government_collect_tax</name>
+					<description></description>
+					<currentState>GOV_TaxIncome</currentState>
+					<nextState>End_Government</nextState>
+					<inputs>
+						<input>
+							<messageName>tax_payments</messageName>
 						</input>
 					</inputs>
 					<outputs/>

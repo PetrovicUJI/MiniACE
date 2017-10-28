@@ -285,7 +285,7 @@
 					<name>Firm_compute_sale_statistics</name>
 					<description></description>
 					<currentState>Firm_MonthlyStatistics</currentState>
-					<nextState>End_Firm</nextState>
+					<nextState>Firm_BalanceSheet</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
