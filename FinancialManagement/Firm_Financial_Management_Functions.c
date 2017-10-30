@@ -157,8 +157,6 @@ int Firm_update_capacity()
 		}
 	}
 	
-	// inventories are estimated at average market price
-	CURRENT_ASSETS = INVENTORIES*PRICE_LEVEL;
 
     return 0;
 }
@@ -217,13 +215,14 @@ int Firm_compute_financial_payments()
 int Firm_compute_income_statement_and_check_bankruptcy()
 {
 	DIVIDEND_PAYMENT = 0.0;
+	CAPITAL_TAX_PAYMENT = 0.0;
 	
 	double predicted_capital_tax_payment = 0.0;
 	double predicted_payment_account = 0.0;
 	double predicted_current_liabilities = CURRENT_LIABILITIES;
 	double predicted_non_current_liabilities = NON_CURRENT_LIABILITIES - TOTAL_LOAN_INSTALMENT_PAYMENT;
 	double predicted_equity = 0.0;
-	double short_term_loan_repayment_target = CURRENT_LIABILITIES*0.2;
+	double loan_repayment_target = CURRENT_LIABILITIES*SHORT_TERM_LOAN_REPAYMENT_TARGET;
 
 	if(MONTHLY_REVENUE < 0) 
 	printf("\n ERROR in function Firm_compute_income_statement: MONTHLY_REVENUE = %2.5f\n ", MONTHLY_REVENUE);	
@@ -247,6 +246,7 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 		if(predicted_equity < 0)
 		{
 			ACTIVE = 0;
+			CAPITAL_TAX_PAYMENT = predicted_capital_tax_payment;
 			return 0;
 		}
 	}
@@ -256,7 +256,7 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		// companies will target to repay x% of short term loan (CURRENT_LIABILITIES)
-		if(predicted_payment_account - short_term_loan_repayment_target < 0 || EBT < 0)
+		if(predicted_payment_account - loan_repayment_target < 0 || EBT < 0)
 		{
 			PROFIT_ACCUMULATION_RATE = 1;
 		}
@@ -269,18 +269,17 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 		
 		predicted_capital_tax_payment = (EBT-DIVIDEND_PAYMENT)*CAPITAL_TAX_RATE;
 		
-		predicted_payment_account = PAYMENT_ACCOUNT - VAT_PAYMENT - TOTAL_FINANCIAL_PAYMENT - predicted_capital_tax_payment - DIVIDEND_PAYMENT - short_term_loan_repayment_target;
+		predicted_payment_account = PAYMENT_ACCOUNT - VAT_PAYMENT - TOTAL_FINANCIAL_PAYMENT - predicted_capital_tax_payment - DIVIDEND_PAYMENT - loan_repayment_target;
 		
 		if(predicted_payment_account < 0)
 		{
 			predicted_capital_tax_payment = EBT*CAPITAL_TAX_RATE;
-			DIVIDEND_PAYMENT = max(0, PAYMENT_ACCOUNT - VAT_PAYMENT - TOTAL_FINANCIAL_PAYMENT - predicted_capital_tax_payment - short_term_loan_repayment_target);
+			DIVIDEND_PAYMENT = max(0, PAYMENT_ACCOUNT - VAT_PAYMENT - TOTAL_FINANCIAL_PAYMENT - predicted_capital_tax_payment - loan_repayment_target);
 		}			
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	CAPITAL_TAX_PAYMENT = 0.0;
-	
+
 	EBT -= DIVIDEND_PAYMENT;
 	
 	if(EBT > 0)
@@ -361,6 +360,13 @@ instalment, monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk)
 */
 int Firm_pay_financial_expenses()
 {
+	/* if there is no money on the payment account, the interest payment 
+	on short term borrowing will be transformed in a new short term loan. */
+	add_loan_repayment_message(BANK_ID, 0, SHORT_TERM_BORROWING_INTEREST_PAYMENT, 0);
+	
+	PAYMENT_ACCOUNT -= SHORT_TERM_BORROWING_INTEREST_PAYMENT;
+	SHORT_TERM_BORROWING_INTEREST_PAYMENT = 0.0;
+	
 	if(ACTIVE == 0)
 	return 0;
 	
@@ -393,12 +399,7 @@ int Firm_pay_financial_expenses()
 		remove_Loan(&LOANS,i);
 	}
 	
-	add_loan_repayment_message(BANK_ID, 0, SHORT_TERM_BORROWING_INTEREST_PAYMENT, 0);
-	
-	PAYMENT_ACCOUNT -= SHORT_TERM_BORROWING_INTEREST_PAYMENT;
-	SHORT_TERM_BORROWING_INTEREST_PAYMENT = 0.0;
-
-	total_tax_payments = CAPITAL_TAX_PAYMENT+VAT_PAYMENT;
+	total_tax_payments = CAPITAL_TAX_PAYMENT + VAT_PAYMENT;
 	
 	add_tax_payments_message(GOV_ID, total_tax_payments);
 	
@@ -407,9 +408,32 @@ int Firm_pay_financial_expenses()
     return 0;
 }
 
-/* \fn: int Firm_compute_balance_sheet_and_send_payments_to_bank()
+/* \fn: int Firm_compute_balance_sheet()
  
-* \brief: Firm compute balance sheet and send payments to bank.
+* \brief: Firm compute balance sheet.
+ 
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+
+* \authors: Marko Petrovic
+* \history: 30.10.2017-Marko: First implementation.
+*/
+int Firm_compute_balance_sheet()
+{
+	TOTAL_ASSETS = PAYMENT_ACCOUNT + CURRENT_ASSETS + NON_CURRENT_ASSETS;
+	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
+	EQUITY = TOTAL_ASSETS - TOTAL_LIABILITIES;
+	
+    return 0;
+}
+
+
+/* \fn: int Firm_send_payments_to_bank()
+ 
+* \brief: Firm send payments to bank.
  
  
  *\ bank_account_update_message structure: 
@@ -422,7 +446,7 @@ int Firm_pay_financial_expenses()
 * \authors: Marko Petrovic
 * \history: 27.10.2017-Marko: First implementation.
 */
-int Firm_compute_balance_sheet_and_send_payments_to_bank()
+int Firm_send_payments_to_bank()
 {
 	double delta_loan = 0.0;
 	double delta_value_at_risk = 0.0;
@@ -431,7 +455,7 @@ int Firm_compute_balance_sheet_and_send_payments_to_bank()
 	{
 		delta_loan = fabs(PAYMENT_ACCOUNT);
 		PAYMENT_ACCOUNT = 0;
-		NON_CURRENT_LIABILITIES += delta_loan;
+		CURRENT_LIABILITIES += delta_loan;
 		
 		//default probabulity is 50%
 		delta_value_at_risk = delta_loan*1.5;
@@ -440,14 +464,14 @@ int Firm_compute_balance_sheet_and_send_payments_to_bank()
 	}
 	else
 	{
-		if(PAYMENT_ACCOUNT >= NON_CURRENT_LIABILITIES)
+		if(PAYMENT_ACCOUNT >= CURRENT_LIABILITIES)
 		{
-			PAYMENT_ACCOUNT -= NON_CURRENT_LIABILITIES;
+			PAYMENT_ACCOUNT -= CURRENT_LIABILITIES;
 			
-			delta_loan = (-1)*NON_CURRENT_LIABILITIES;
-			delta_value_at_risk = (-1.5)*NON_CURRENT_LIABILITIES;
+			delta_loan = (-1)*CURRENT_LIABILITIES;
+			delta_value_at_risk = (-1.5)*CURRENT_LIABILITIES;
 
-			NON_CURRENT_LIABILITIES = 0.0;
+			CURRENT_LIABILITIES = 0.0;
 			
 			add_bank_account_update_message(BANK_ID, PAYMENT_ACCOUNT, delta_loan, delta_value_at_risk);
 		}
@@ -456,16 +480,12 @@ int Firm_compute_balance_sheet_and_send_payments_to_bank()
 			delta_loan = (-1)*PAYMENT_ACCOUNT;
 			delta_value_at_risk = (-1.5)*PAYMENT_ACCOUNT;
 
-			NON_CURRENT_LIABILITIES -= PAYMENT_ACCOUNT;
+			CURRENT_LIABILITIES -= PAYMENT_ACCOUNT;
 			PAYMENT_ACCOUNT = 0.0;
 			
 			add_bank_account_update_message(BANK_ID, PAYMENT_ACCOUNT, delta_loan, delta_value_at_risk);
 		}
 	}
-	
-	TOTAL_ASSETS = PAYMENT_ACCOUNT + CURRENT_ASSETS + NON_CURRENT_ASSETS;
-	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
-	EQUITY = TOTAL_ASSETS - TOTAL_LIABILITIES;
 	
     return 0;
 }

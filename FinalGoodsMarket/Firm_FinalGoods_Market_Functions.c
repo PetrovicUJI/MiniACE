@@ -51,6 +51,8 @@ int Firm_receive_updates_from_the_final_goods_market()
 		
     FINISH_FINAL_GOODS_MARKET_TRANSACTION_UPDATE_MESSAGE_LOOP
 	
+	// inventories are estimated at average market price
+	CURRENT_ASSETS = INVENTORIES*PRICE_LEVEL;
 
     return 0;
 }

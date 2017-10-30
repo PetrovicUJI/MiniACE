@@ -6,11 +6,11 @@
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
+			<variable>
 			<type>double</type>
-			<name>rawmat2output_innovation</name>
-			<description></description>
-			</variable> -->
+			<name>short_term_loan_repayment_target</name>
+			<description>Monthly target for short term loan repayment given in percentage.</description>
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_Financial_Management_Functions.c</file>
@@ -158,7 +158,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_MonthlyAccounting</currentState>
-					<nextState>Firm_BalanceSheet</nextState>
+					<nextState>Firm_BankAccountUpdate</nextState>
 					<condition>
 						<not>
 							<time>
@@ -228,7 +228,7 @@
 					<name>Firm_pay_financial_expenses</name>
 					<description></description>
 					<currentState>Firm_FinancialPayments</currentState>
-					<nextState>Firm_MonthlyStatistics</nextState>
+					<nextState>Firm_BalanceSheet</nextState>
 					<inputs/>
 					<outputs>
 						<output>
@@ -240,9 +240,17 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_compute_balance_sheet_and_send_payments_to_bank</name>
+					<name>Firm_compute_balance_sheet</name>
 					<description></description>
 					<currentState>Firm_BalanceSheet</currentState>
+					<nextState>Firm_MonthlyStatistics</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_send_payments_to_bank</name>
+					<description></description>
+					<currentState>Firm_BankAccountUpdate</currentState>
 					<nextState>End_Firm</nextState>
 					<inputs/>
 					<outputs>

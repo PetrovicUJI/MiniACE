@@ -159,7 +159,7 @@ int Firm_adjust_investment_plan()
 			expected_profit = expected_profit*(1-CAPITAL_TAX_RATE);
 		}
 		
-		EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
+		EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES*SHORT_TERM_LOAN_REPAYMENT_TARGET - PAYMENT_ACCOUNT - expected_profit;
 		
 	}while(INVESTMENT_PLAN >= 1 && EXTERNAL_FINANCIAL_NEEDS >= 1);
 	
@@ -250,6 +250,9 @@ int Firm_calculate_unit_costs_and_set_price()
 	PRICE = (1-CB_TRUST)*PRICE + CB_TRUST*(PRICE_LAST_MONTH * (INFLATION_TARGET/12 + 1));
 	
 	INVENTORIES += PRODUCTION;
+	
+	// inventories are estimated at average market price
+	CURRENT_ASSETS = INVENTORIES*PRICE_LEVEL;
 	
     return 0;
 }
