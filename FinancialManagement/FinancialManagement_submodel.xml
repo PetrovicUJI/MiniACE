@@ -7,9 +7,14 @@
 	<environment>
 		<constants>
 			<variable>
-			<type>double</type>
-			<name>short_term_loan_repayment_target</name>
-			<description>Monthly target for short term loan repayment given in percentage.</description>
+				<type>double</type>
+				<name>short_term_loan_repayment_target</name>
+				<description>Monthly target for short term loan repayment given in percentage.</description>
+			</variable>
+			<variable>
+				<type>double</type>
+				<name>profit_accumulation_rate</name>
+				<description>The percentage of net profit that will be accumulated by firms.</description>
 			</variable>
 		</constants>
 		<functionFiles>
@@ -55,11 +60,6 @@
 					<type>double</type>
 					<name>external_financial_needs</name>
 					<description>Total monthly financial needs of firms.</description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>profit_accumulation_rate</name>
-					<description>The percentage of net profit that will be accumulated by firms.</description>
 				</variable>
 				<variable>
 					<type>double</type>
@@ -228,7 +228,7 @@
 					<name>Firm_pay_financial_expenses</name>
 					<description></description>
 					<currentState>Firm_FinancialPayments</currentState>
-					<nextState>Firm_BalanceSheet</nextState>
+					<nextState>Firm_MonthlyStatistics</nextState>
 					<inputs/>
 					<outputs>
 						<output>
@@ -240,10 +240,10 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_compute_balance_sheet</name>
+					<name>Firm_compute_sale_statistics</name>
 					<description></description>
-					<currentState>Firm_BalanceSheet</currentState>
-					<nextState>Firm_MonthlyStatistics</nextState>
+					<currentState>Firm_MonthlyStatistics</currentState>
+					<nextState>Firm_BankAccountUpdate</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
@@ -251,13 +251,21 @@
 					<name>Firm_send_payments_to_bank</name>
 					<description></description>
 					<currentState>Firm_BankAccountUpdate</currentState>
-					<nextState>End_Firm</nextState>
+					<nextState>Firm_BalanceSheet</nextState>
 					<inputs/>
 					<outputs>
 						<output>
 							<messageName>bank_account_update</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>Firm_compute_balance_sheet</name>
+					<description></description>
+					<currentState>Firm_BalanceSheet</currentState>
+					<nextState>End_Firm</nextState>
+					<inputs/>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>

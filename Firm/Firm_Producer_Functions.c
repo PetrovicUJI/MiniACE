@@ -4,6 +4,84 @@
 #include "../Firm_agent_header.h"
 
 
+/* \fn: int Firm_count_days_in_bankruptcy()
+ 
+* \brief: Firm count days in bankruptcy.
+ 
+ 
+* \timing: Daily.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 06.11.2017-Marko: First implementation.
+*/
+int Firm_count_days_in_bankruptcy()
+{
+	REMAINING_DAYS_OF_BANKRUPTCY--;
+
+    return 0;
+}
+
+/* \fn: int Firm_update_physical_capital_and_price()
+ 
+* \brief: Firm update price.
+ 
+ 
+* \timing: Daily.
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 06.11.2017-Marko: First implementation.
+*/
+int Firm_update_physical_capital_and_price()
+{
+	
+	// update physical capital stock
+	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
+	{		
+		PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
+	}
+	
+	PRICE = PRICE_LEVEL*0.5;
+	PRODUCTION = 0.0;
+
+    return 0;
+}
+
+
+
+/* \fn: int Firm_calculate_financial_needs()
+ 
+* \brief: Firm calculate financial needs.
+ 
+ 
+* \timing: 
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 06.11.2017-Marko: First implementation.
+*/
+int Firm_calculate_financial_needs()
+{
+	EXTERNAL_FINANCIAL_NEEDS = 0.0;
+	
+	double non_current_liabilities = 0.0;
+	
+	for(int i = 0; i < LOANS.size; i++)
+	{
+		non_current_liabilities += LOANS.array[i].remaining_amount;
+	}
+	
+	if(fabs(NON_CURRENT_LIABILITIES - non_current_liabilities) >= 0.1) 
+	printf("\n ERROR in function Firm_calculate_financial_needs: fabs(NON_CURRENT_LIABILITIES - non_current_liabilities) = %2.5f\n ", fabs(NON_CURRENT_LIABILITIES - non_current_liabilities));
+	
+	EXTERNAL_FINANCIAL_NEEDS = NON_CURRENT_LIABILITIES + CURRENT_LIABILITIES - PAYMENT_ACCOUNT;
+
+    return 0;
+}
+
+
+
 
 /* \fn: int Firm_plan_production_quantity()
  
@@ -131,6 +209,9 @@ int Firm_adjust_investment_plan()
 	double expected_instalment_payments = 0.0;
 	double expected_interest_payments = 0.0;
 	
+	double profit_accumulation_rate = 1.0;
+	double investment_plan = 0.0;
+	
 	for(int i = 0; i < LOANS.size; i++)
 	{
 		expected_instalment_payments += LOANS.array[i].instalment;
@@ -140,20 +221,22 @@ int Firm_adjust_investment_plan()
 	
 	expected_labor_costs = LABOR_REQUIREMENT*WAGE;
 	
-	PROFIT_ACCUMULATION_RATE = 1;
-	INVESTMENT_PLAN++;
+	int denum = 20;
+	int num = denum + 1;
 	do
 	{
-		INVESTMENT_PLAN--;
+		num--;
 		
-		expected_investment_costs = INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE;
+		investment_plan = INVESTMENT_PLAN * (num/denum);
+		
+		expected_investment_costs = investment_plan*PHYSICAL_CAPITAL_PRICE;
 		
 		expected_profit = EXPECTED_DEMAND*PRICE*(1-VAT_RATE) - expected_labor_costs - expected_instalment_payments - expected_interest_payments;
 		
 		if(expected_profit > 0)
 		{
 			// profit after dividend payments
-			expected_profit = expected_profit*PROFIT_ACCUMULATION_RATE;
+			expected_profit = expected_profit*profit_accumulation_rate;
 		
 			// profit after capital tax payments
 			expected_profit = expected_profit*(1-CAPITAL_TAX_RATE);
@@ -161,7 +244,9 @@ int Firm_adjust_investment_plan()
 		
 		EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES*SHORT_TERM_LOAN_REPAYMENT_TARGET - PAYMENT_ACCOUNT - expected_profit;
 		
-	}while(INVESTMENT_PLAN >= 1 && EXTERNAL_FINANCIAL_NEEDS >= 1);
+	}while(investment_plan >= 1 && EXTERNAL_FINANCIAL_NEEDS >= 1);
+	
+	INVESTMENT_PLAN = investment_plan;
 	
 	if(INVESTMENT_PLAN < 1)
 	INVESTMENT_PLAN = 0;
@@ -254,31 +339,6 @@ int Firm_calculate_unit_costs_and_set_price()
 	// inventories are estimated at average market price
 	CURRENT_ASSETS = INVENTORIES*PRICE_LEVEL;
 	
-    return 0;
-}
-
-
-
-/* \fn: int Firm_compute_sale_statistics()
- 
-* \brief: Firm store data about a monthly sold quantity.
- 
- 
-* \timing: Monthly on the last activation day.
- * \condition:
- 
-* \authors: Marko Petrovic
-* \history: 27.09.2017-Marko: First implementation.
-*/
-int Firm_compute_sale_statistics()
-{
-	
-	remove_double(&SOLD_QUANTITIES_VECTOR,0);
-    add_double(&SOLD_QUANTITIES_VECTOR,MONTHLY_SOLD_QUANTITY);
-	
-	MONTHLY_SOLD_QUANTITY = 0.0;
-	MONTHLY_REVENUE = 0.0;
-
     return 0;
 }
 

@@ -31,6 +31,11 @@
 				<name>capacity_utilization_weights</name>
 				<description></description>
 			</variable>
+			<variable>
+				<type>int</type>
+				<name>bankruptcy_period</name>
+				<description></description>
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_Producer_Functions.c</file>
@@ -81,6 +86,11 @@
 			<name>Firm</name>
 			<description></description>
 			<memory>
+				<variable>
+					<type>int</type>
+					<name>remaining_days_of_bankruptcy</name>
+					<description></description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>expected_demand</name>
@@ -184,6 +194,169 @@
 			</memory>
 			<functions>
 				<function>
+					<name>Firm_count_days_in_bankruptcy</name>
+					<description></description>
+					<currentState>Firm_Status</currentState>
+					<nextState>Firm_BankruptcyState</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.active</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>1</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_BankruptcyState</currentState>
+					<nextState>Firm_BankruptcyPriceSetting</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.remaining_days_of_bankruptcy</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_count_days_in_bankruptcy</name>
+					<description></description>
+					<currentState>Firm_BankruptcyState</currentState>
+					<nextState>Firm_BankAccountUpdate</nextState>
+					<condition>
+							<lhs>
+								<value>a.remaining_days_of_bankruptcy</value>
+							</lhs>
+							<op>EQ</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_BankruptcyPriceSetting</currentState>
+					<nextState>Firm_BankruptcyDailyAccounting</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.day_of_month_to_act</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_update_physical_capital_and_price</name>
+					<description></description>
+					<currentState>Firm_BankruptcyPriceSetting</currentState>
+					<nextState>Firm_FireSell</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>a.day_of_month_to_act</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_FireSell</currentState>
+					<nextState>Firm_BankruptcyDailyAccounting</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.inventories</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_send_final_goods_to_the_market</name>
+					<description></description>
+					<currentState>Firm_FireSell</currentState>
+					<nextState>Firm_BankruptcyDailyAccounting</nextState>
+					<condition>
+						<lhs>
+							<value>a.inventories</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_goods_shipping</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_receive_updates_from_the_final_goods_market</name>
+					<description></description>
+					<currentState>Firm_BankruptcyDailyAccounting</currentState>
+					<nextState>Firm_BankAccountUpdate</nextState>
+					<inputs>
+						<input>
+							<messageName>final_goods_market_transaction_update</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.seller_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_Status</currentState>
+					<nextState>Firm_ProductionActivity</nextState>
+					<condition>
+						<lhs>
+							<value>a.active</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
 					<name>Firm_plan_production_quantity</name>
 					<description></description>
 					<currentState>Firm_ProductionActivity</currentState>
@@ -278,14 +451,6 @@
 					<description></description>
 					<currentState>Firm_PriceSetting</currentState>
 					<nextState>Firm_FinalGoodsShipping</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-				<function>
-					<name>Firm_compute_sale_statistics</name>
-					<description></description>
-					<currentState>Firm_MonthlyStatistics</currentState>
-					<nextState>Firm_BankAccountUpdate</nextState>
 					<inputs/>
 					<outputs/>
 				</function>

@@ -16,13 +16,15 @@
 * \history: 10.10.2017-Marko: First implementation.
 */
 int Firm_plan_financing()
-{
+{	
 	double expected_investment_costs = 0.0;
 	double expected_labor_costs = 0.0;
 	double expected_instalment_payments = 0.0;
 	double expected_interest_payments = 0.0;
 	double expected_profit = 0.0;
 	
+	double profit_accomulation_rate = PROFIT_ACCUMULATION_RATE;
+
 	expected_investment_costs = INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE;
 	
 	expected_labor_costs = LABOR_REQUIREMENT*WAGE;
@@ -39,12 +41,13 @@ int Firm_plan_financing()
 	if(expected_profit > 0)
 	{
 		// profit after dividend payments
-		expected_profit = expected_profit*PROFIT_ACCUMULATION_RATE;
+		expected_profit = expected_profit*profit_accomulation_rate;
 	
 		// profit after capital tax payments
 		expected_profit = expected_profit*(1-CAPITAL_TAX_RATE);
 	}
 	
+	// firms will target to convert all current liabilities into long term debt
 	EXTERNAL_FINANCIAL_NEEDS = expected_investment_costs + CURRENT_LIABILITIES - PAYMENT_ACCOUNT - expected_profit;
 	
 	// if firms take new loans they will set new prices according to new unit costs, therefore additional costs of new loans will be taken into account.
@@ -216,6 +219,7 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 {
 	DIVIDEND_PAYMENT = 0.0;
 	CAPITAL_TAX_PAYMENT = 0.0;
+	VAT_PAYMENT = 0.0;
 	
 	double predicted_capital_tax_payment = 0.0;
 	double predicted_payment_account = 0.0;
@@ -223,6 +227,8 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 	double predicted_non_current_liabilities = NON_CURRENT_LIABILITIES - TOTAL_LOAN_INSTALMENT_PAYMENT;
 	double predicted_equity = 0.0;
 	double loan_repayment_target = CURRENT_LIABILITIES*SHORT_TERM_LOAN_REPAYMENT_TARGET;
+	
+	double profit_accumulation_rate = PROFIT_ACCUMULATION_RATE;
 
 	if(MONTHLY_REVENUE < 0) 
 	printf("\n ERROR in function Firm_compute_income_statement: MONTHLY_REVENUE = %2.5f\n ", MONTHLY_REVENUE);	
@@ -247,6 +253,7 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 		{
 			ACTIVE = 0;
 			CAPITAL_TAX_PAYMENT = predicted_capital_tax_payment;
+			REMAINING_DAYS_OF_BANKRUPTCY = BANKRUPTCY_PERIOD;
 			return 0;
 		}
 	}
@@ -257,15 +264,10 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 	
 		// companies will target to repay x% of short term loan (CURRENT_LIABILITIES)
 		if(predicted_payment_account - loan_repayment_target < 0 || EBT < 0)
-		{
-			PROFIT_ACCUMULATION_RATE = 1;
-		}
-		else
-		{
-			PROFIT_ACCUMULATION_RATE = 0.2;
-		}
+		profit_accumulation_rate = 1;
+
 		
-		DIVIDEND_PAYMENT = EBT*(1-PROFIT_ACCUMULATION_RATE);
+		DIVIDEND_PAYMENT = EBT*(1-profit_accumulation_rate);
 		
 		predicted_capital_tax_payment = (EBT-DIVIDEND_PAYMENT)*CAPITAL_TAX_RATE;
 		
@@ -273,6 +275,7 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 		
 		if(predicted_payment_account < 0)
 		{
+			// the difference between predicted_capital_tax_payment and the final capital payment will be profit accomulation.
 			predicted_capital_tax_payment = EBT*CAPITAL_TAX_RATE;
 			DIVIDEND_PAYMENT = max(0, PAYMENT_ACCOUNT - VAT_PAYMENT - TOTAL_FINANCIAL_PAYMENT - predicted_capital_tax_payment - loan_repayment_target);
 		}			
@@ -408,28 +411,30 @@ int Firm_pay_financial_expenses()
     return 0;
 }
 
-/* \fn: int Firm_compute_balance_sheet()
+
+
+/* \fn: int Firm_compute_sale_statistics()
  
-* \brief: Firm compute balance sheet.
- 
+* \brief: Firm store data about a monthly sold quantity.
  
  
 * \timing: Monthly on the last activation day.
  * \condition:
  
-
 * \authors: Marko Petrovic
-* \history: 30.10.2017-Marko: First implementation.
+* \history: 27.09.2017-Marko: First implementation.
 */
-int Firm_compute_balance_sheet()
+int Firm_compute_sale_statistics()
 {
-	TOTAL_ASSETS = PAYMENT_ACCOUNT + CURRENT_ASSETS + NON_CURRENT_ASSETS;
-	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
-	EQUITY = TOTAL_ASSETS - TOTAL_LIABILITIES;
 	
+	remove_double(&SOLD_QUANTITIES_VECTOR,0);
+    add_double(&SOLD_QUANTITIES_VECTOR,MONTHLY_SOLD_QUANTITY);
+	
+	MONTHLY_SOLD_QUANTITY = 0.0;
+	MONTHLY_REVENUE = 0.0;
+
     return 0;
 }
-
 
 /* \fn: int Firm_send_payments_to_bank()
  
@@ -486,6 +491,28 @@ int Firm_send_payments_to_bank()
 			add_bank_account_update_message(BANK_ID, PAYMENT_ACCOUNT, delta_loan, delta_value_at_risk);
 		}
 	}
+	
+    return 0;
+}
+
+/* \fn: int Firm_compute_balance_sheet()
+ 
+* \brief: Firm compute balance sheet.
+ 
+ 
+ 
+* \timing: Monthly on the last activation day.
+ * \condition:
+ 
+
+* \authors: Marko Petrovic
+* \history: 30.10.2017-Marko: First implementation.
+*/
+int Firm_compute_balance_sheet()
+{
+	TOTAL_ASSETS = PAYMENT_ACCOUNT + CURRENT_ASSETS + NON_CURRENT_ASSETS;
+	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
+	EQUITY = TOTAL_ASSETS - TOTAL_LIABILITIES;
 	
     return 0;
 }
