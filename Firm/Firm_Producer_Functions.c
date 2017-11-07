@@ -22,7 +22,157 @@ int Firm_count_days_in_bankruptcy()
     return 0;
 }
 
-/* \fn: int Firm_update_physical_capital_and_price()
+/* \fn: int Firm_calculate_physical_capital_needs()
+ 
+* \brief: Firm calculate physical capital needs.
+ 
+ 
+* \timing: The last day of bankruptcy
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 07.11.2017-Marko: First implementation.
+*/
+int Firm_calculate_physical_capital_needs()
+{
+	for(int i = 0; i < SOLD_QUANTITIES_VECTOR.size; i++)
+	{
+		SOLD_QUANTITIES_VECTOR.array[i] = AVERAGE_DEMAND_LEVEL;
+	}
+	
+	INVESTMENT_PLAN = max(0, (AVERAGE_DEMAND_LEVEL/PRODUCTIVITY)-PHYSICAL_CAPITAL);
+	
+    return 0;
+}
+
+/* \fn: int Firm_reset_to_enter_the_market()
+ 
+* \brief: Firm_reset_to_enter_the_market.
+ 
+ 
+* \timing: The last day of bankruptcy
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 07.11.2017-Marko: First implementation.
+*/
+int Firm_reset_to_enter_the_market()
+{
+	PRICE = PRICE_LEVEL;
+	WAGE = AVERAGE_WAGE_LEVEL;
+	PRODUCTION = 0.0;
+	
+	if(INVENTORIES > 0)
+	add_final_goods_shipping_message(ID, PRODUCTION, -1);
+	
+	INVENTORIES = 0.0;
+	CURRENT_ASSETS = 0.0;
+	
+    return 0;
+}
+
+
+/* \fn: int Firm_calculate_financial_needs()
+ 
+* \brief: Firm calculate financial needs.
+ 
+ 
+* \timing: The last day of bankruptcy
+ * \condition:
+ 
+* \authors: Marko Petrovic
+* \history: 06.11.2017-Marko: First implementation.
+*/
+int Firm_calculate_financial_needs()
+{
+	EXTERNAL_FINANCIAL_NEEDS = 0.0;
+		
+	EXTERNAL_FINANCIAL_NEEDS = max(0, INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE + NON_CURRENT_LIABILITIES + CURRENT_LIABILITIES - PAYMENT_ACCOUNT);
+
+    return 0;
+}
+
+/* \fn: int Firm_send_bailout_notification()
+ 
+* \brief: Firm send bailout message to the government.
+ 
+ 
+* \timing: The last day of bankruptcy
+ * \condition:
+ 
+ *\ bailout message structure: <!-- (gov_id, agent_id, bailout_amount) -->
+ 
+* \authors: Marko Petrovic
+* \history: 07.11.2017-Marko: First implementation.
+*/
+int Firm_send_bailout_notification()
+{
+	if(EXTERNAL_FINANCIAL_NEEDS > 0)
+	{
+		add_bailout_message(GOV_ID, ID, EXTERNAL_FINANCIAL_NEEDS);
+	
+		PAYMENT_ACCOUNT += EXTERNAL_FINANCIAL_NEEDS;
+	}
+	
+    return 0;
+}
+
+/* \fn: int Firm_repay_debt()
+ 
+* \brief: Firm repay all debt.
+ 
+ 
+* \timing: The last day of bankruptcy
+ * \condition:
+ 
+ *\ loan_repayment_message structure: 
+<!-- (creditor_id, instalment_payments, interest_payments, loan_instalment_value_at_risk) -->
+
+*\ Loan data structure: 
+<!-- (creditor_id, repayment_period_months, remaining_months, remaining_amount, 
+instalment, monthly_interest, loan_value_at_risk, loan_instalment_value_at_risk) -->
+
+ 
+* \authors: Marko Petrovic
+* \history: 07.11.2017-Marko: First implementation.
+*/
+int Firm_repay_debt()
+{
+	int creditor_id = 0;
+	double instalment_payments = 0.0;
+	double interest_payments = 0.0;
+	double loan_instalment_value_at_risk = 0.0;
+	
+	for(int i = 0; i < LOANS.size; i++)
+	{
+		creditor_id = LOANS.array[i].creditor_id;
+		instalment_payments = LOANS.array[i].remaining_amount;
+		interest_payments = 0;
+		loan_instalment_value_at_risk = LOANS.array[i].loan_value_at_risk;
+		
+		add_loan_repayment_message(creditor_id, instalment_payments, interest_payments, loan_instalment_value_at_risk);
+		
+		LOANS.array[i].remaining_months = 0;
+		LOANS.array[i].remaining_amount -= instalment_payments;
+		LOANS.array[i].loan_value_at_risk -= loan_instalment_value_at_risk;
+		
+		PAYMENT_ACCOUNT -= instalment_payments + interest_payments;
+		NON_CURRENT_LIABILITIES -= instalment_payments;
+		
+		
+		if(LOANS.array[i].remaining_months == 0)
+		remove_Loan(&LOANS,i);
+	}
+	
+	if(fabs(NON_CURRENT_LIABILITIES) >= 0.1) 
+	printf("\n ERROR in function Firm_repay_debt: fabs(NON_CURRENT_LIABILITIES) = %2.5f\n ", fabs(NON_CURRENT_LIABILITIES));
+
+
+    return 0;
+}
+
+
+/* \fn: int Firm_update_price()
  
 * \brief: Firm update price.
  
@@ -33,55 +183,44 @@ int Firm_count_days_in_bankruptcy()
 * \authors: Marko Petrovic
 * \history: 06.11.2017-Marko: First implementation.
 */
-int Firm_update_physical_capital_and_price()
-{
-	
-	// update physical capital stock
-	for (int i=PHYSICAL_CAPITAL_STOCK.size-1; i>-1; i--)
-	{		
-		PHYSICAL_CAPITAL_STOCK.array[i].months_in_use++;
-	}
-	
+int Firm_update_price()
+{	
 	PRICE = PRICE_LEVEL*0.5;
 	PRODUCTION = 0.0;
 
     return 0;
 }
 
-
-
-/* \fn: int Firm_calculate_financial_needs()
+/* \fn: int Firm_fire_workers()
  
-* \brief: Firm calculate financial needs.
+* \brief: Firm fire workers.
  
  
-* \timing: 
+* \timing: Monthly on the firm activation day.
  * \condition:
  
+  *\ redundancies mesage structure: <!-- (employer_id, employee_id) -->
+  
+
 * \authors: Marko Petrovic
-* \history: 06.11.2017-Marko: First implementation.
+* \history: 07.11.2017-Marko: First implementation.
 */
-int Firm_calculate_financial_needs()
+int Firm_fire_workers()
 {
-	EXTERNAL_FINANCIAL_NEEDS = 0.0;
+	if(EMPLOYEES.size == 0)
+	return 0;	
 	
-	double non_current_liabilities = 0.0;
 	
-	for(int i = 0; i < LOANS.size; i++)
+	int i = 0;
+	while(EMPLOYEES.size > 0)
 	{
-		non_current_liabilities += LOANS.array[i].remaining_amount;
+		add_redundancies_message(-1, EMPLOYEES.array[i].id);
+		remove_Employee(&EMPLOYEES,i);
 	}
 	
-	if(fabs(NON_CURRENT_LIABILITIES - non_current_liabilities) >= 0.1) 
-	printf("\n ERROR in function Firm_calculate_financial_needs: fabs(NON_CURRENT_LIABILITIES - non_current_liabilities) = %2.5f\n ", fabs(NON_CURRENT_LIABILITIES - non_current_liabilities));
-	
-	EXTERNAL_FINANCIAL_NEEDS = NON_CURRENT_LIABILITIES + CURRENT_LIABILITIES - PAYMENT_ACCOUNT;
 
     return 0;
 }
-
-
-
 
 /* \fn: int Firm_plan_production_quantity()
  

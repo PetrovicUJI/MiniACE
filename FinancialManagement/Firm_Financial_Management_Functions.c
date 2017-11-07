@@ -128,6 +128,7 @@ int Firm_update_capacity()
 {	
 	PHYSICAL_CAPITAL = 0.0;
 	PHYSICAL_CAPITAL_DEPRECIATION_COST = 0.0;
+	PRODUCTIVITY = 0.0;
 	
 	NON_CURRENT_ASSETS = 0.0;
 	
@@ -153,12 +154,16 @@ int Firm_update_capacity()
 			
 			PHYSICAL_CAPITAL += PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
 			
+			PRODUCTIVITY += PHYSICAL_CAPITAL_STOCK.array[i].productivity*PHYSICAL_CAPITAL_STOCK.array[i].capital_units;
+			
 			NON_CURRENT_ASSETS += PHYSICAL_CAPITAL_STOCK.array[i].current_value;
 			
 			if(PHYSICAL_CAPITAL < 0) 
 			printf("\n ERROR in function Firm_update_capacity: PHYSICAL_CAPITAL = %2.5f\n ", PHYSICAL_CAPITAL);
 		}
 	}
+	
+	PRODUCTIVITY = PRODUCTIVITY/PHYSICAL_CAPITAL;
 	
 
     return 0;

@@ -63,6 +63,9 @@
 						<input>
 							<messageName>public_transfers</messageName>
 						</input>
+						<input>
+							<messageName>bailout</messageName>
+						</input>
 					</inputs>
 					<outputs/>
 				</function>

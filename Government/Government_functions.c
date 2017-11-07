@@ -36,6 +36,8 @@ int Government_pays_unemployment_benefits()
  
 * \timing: Daily
 *\ public_transfers message structure <!-- (gov_id, amount) -->
+
+*\ bailout message structure: <!-- (gov_id, agent_id, bailout_amount) -->
  
 
  
@@ -49,6 +51,13 @@ int Government_pays_transfers()
 		PAYMENT_ACCOUNT -= public_transfers_message->amount;
 		
     FINISH_PUBLIC_TRANSFERS_MESSAGE_LOOP
+	
+	
+	START_BAILOUT_MESSAGE_LOOP
+		
+		PAYMENT_ACCOUNT -= bailout_message->bailout_amount;
+		
+    FINISH_BAILOUT_MESSAGE_LOOP
 
     return 0;
 }

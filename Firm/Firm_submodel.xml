@@ -191,13 +191,23 @@
 					<name>inflation_target</name>
 					<description>The inflation target of the central bank.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>average_demand_level</name>
+					<description>The average demand per company in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>average_wage_level</name>
+					<description>The average wage in the economy.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>Firm_count_days_in_bankruptcy</name>
 					<description></description>
 					<currentState>Firm_Status</currentState>
-					<nextState>Firm_BankruptcyState</nextState>
+					<nextState>Firm_BankruptcyCapacityUpdate</nextState>
 					<condition>
 						<not>
 							<lhs>
@@ -208,6 +218,36 @@
 								<value>1</value>
 							</rhs>
 						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_BankruptcyCapacityUpdate</currentState>
+					<nextState>Firm_BankruptcyState</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>a.last_day_of_month_to_act</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_update_capacity</name>
+					<description></description>
+					<currentState>Firm_BankruptcyCapacityUpdate</currentState>
+					<nextState>Firm_BankruptcyState</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>a.last_day_of_month_to_act</phase>
+						</time>
 					</condition>
 					<inputs/>
 					<outputs/>
@@ -232,10 +272,10 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_count_days_in_bankruptcy</name>
+					<name>Firm_calculate_physical_capital_needs</name>
 					<description></description>
 					<currentState>Firm_BankruptcyState</currentState>
-					<nextState>Firm_BankAccountUpdate</nextState>
+					<nextState>Firm_Reset</nextState>
 					<condition>
 							<lhs>
 								<value>a.remaining_days_of_bankruptcy</value>
@@ -247,6 +287,111 @@
 					</condition>
 					<inputs/>
 					<outputs/>
+				</function>
+				<function>
+					<name>Firm_reset_to_enter_the_market</name>
+					<description></description>
+					<currentState>Firm_Reset</currentState>
+					<nextState>Firm_BankruptcyFinancialPlanning</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>final_goods_shipping</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_calculate_financial_needs</name>
+					<description></description>
+					<currentState>Firm_BankruptcyFinancialPlanning</currentState>
+					<nextState>Firm_Bailout</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_send_bailout_notification</name>
+					<description></description>
+					<currentState>Firm_Bailout</currentState>
+					<nextState>Firm_BankruptcyPhysicalCapitalMarket</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>bailout</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_BankruptcyPhysicalCapitalMarket</currentState>
+					<nextState>Firm_BankruptcyFinancialPayments</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.investment_plan</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_send_physical_capital_order</name>
+					<description></description>
+					<currentState>Firm_BankruptcyPhysicalCapitalMarket</currentState>
+					<nextState>Firm_BankruptcyPhysicalCapitalDelivery</nextState>
+					<condition>
+						<lhs>
+							<value>a.investment_plan</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>physical_capital_order</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_receive_physical_capital</name>
+					<description></description>
+					<currentState>Firm_BankruptcyPhysicalCapitalDelivery</currentState>
+					<nextState>Firm_BankruptcyFinancialPayments</nextState>
+					<inputs>
+						<input>
+							<messageName>physical_capital_delivery</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.buyer_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Firm_repay_debt</name>
+					<description></description>
+					<currentState>Firm_BankruptcyFinancialPayments</currentState>
+					<nextState>Firm_BankAccountUpdate</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>loan_repayment</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
 					<name>Idle</name>
@@ -265,10 +410,10 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_update_physical_capital_and_price</name>
+					<name>Firm_update_price</name>
 					<description></description>
 					<currentState>Firm_BankruptcyPriceSetting</currentState>
-					<nextState>Firm_FireSell</nextState>
+					<nextState>Firm_BankruptcyLaborMarket</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -277,6 +422,18 @@
 					</condition>
 					<inputs/>
 					<outputs/>
+				</function>
+				<function>
+					<name>Firm_fire_workers</name>
+					<description></description>
+					<currentState>Firm_BankruptcyLaborMarket</currentState>
+					<nextState>Firm_FireSell</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>redundancies</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
 					<name>Idle</name>
@@ -457,4 +614,28 @@
 			</functions>
 		</xagent>
 	</agents>
+	<messages>
+		<message>
+			<name>bailout</name>
+			<description>Message added by an agent to the government.</description>
+			<variables>
+			<!-- (gov_id, agent_id, bailout_amount) -->
+				<variable>
+					<type>int</type>
+					<name>gov_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>agent_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>bailout_amount</name>
+					<description>The amount of money needed.</description>
+				</variable>
+			</variables>
+		</message>
+	</messages>
 </xmodel>

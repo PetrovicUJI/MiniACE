@@ -22,7 +22,6 @@ int Firm_send_physical_capital_order()
 {
 	add_physical_capital_order_message(ID, INVESTMENT_PLAN);
 	
-
     return 0;
 }
 
@@ -63,7 +62,12 @@ int Firm_receive_physical_capital()
 		add_Physical_capital_batch(&PHYSICAL_CAPITAL_STOCK, 
 		seller_id, 0, quantity, price, price*quantity, technology);
 		
-		PAYMENT_ACCOUNT -= quantity*PRICE;
+		PAYMENT_ACCOUNT -= quantity*price;
+		
+		
+		PHYSICAL_CAPITAL += quantity;		
+		NON_CURRENT_ASSETS += price*quantity;
+		
 		
     FINISH_PHYSICAL_CAPITAL_DELIVERY_MESSAGE_LOOP
 	
