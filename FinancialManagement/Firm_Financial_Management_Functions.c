@@ -306,12 +306,8 @@ int Firm_compute_income_statement_and_check_bankruptcy()
 * \timing: Monthly on the last activation day.
  * \condition:
  
-*\ dividend_payment message structure: 	<!-- (stockholder_id, dividend) -->
-*\ message filter: a.id == m.stockholder_id
+*\ dividend_payment message structure: <!-- (firm_id, dividend) -->
 
-
-*\ Stockholder data structure:  <!-- (stockholder_id, shares) -->
- 
 
 * \authors: Marko Petrovic
 * \history: 27.10.2017-Marko: First implementation.
@@ -321,22 +317,13 @@ int Firm_pay_dividends()
 	if(DIVIDEND_PAYMENT == 0)
 	return 0;
 	
-	int total_number_of_shares = 0;
-	int stockholder_id = 0;
+	
 	double dividend = 0.0;
+
+	dividend = (DIVIDEND_PAYMENT/OUTSTANDING_SHARES);
 	
-	for(int i = 0; i < STOCKHOLDERS_LIST.size; i++)
-	{
-		total_number_of_shares += STOCKHOLDERS_LIST.array[i].shares;
-	}
+	add_dividend_payment_message(ID, dividend);
 	
-	for(int i = 0; i < STOCKHOLDERS_LIST.size; i++)
-	{
-		stockholder_id = STOCKHOLDERS_LIST.array[i].stockholder_id;
-		dividend = (DIVIDEND_PAYMENT/total_number_of_shares)*STOCKHOLDERS_LIST.array[i].shares;
-		
-		add_dividend_payment_message(stockholder_id, dividend);
-	}
 	
 	PAYMENT_ACCOUNT -= DIVIDEND_PAYMENT;
 

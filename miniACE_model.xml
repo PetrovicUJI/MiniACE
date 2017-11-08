@@ -36,6 +36,10 @@
 			<file>Government/Government_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>StatisticalOffice/Statistics_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>
@@ -355,16 +359,8 @@
 					<description>Activation day.</description>
 				</variable>
 			</memory>
-			<functions>
-				<function>
-					<name>Statistical_Office_template</name>
-					<description></description>
-					<currentState>Start_Statistical_Office</currentState>
-					<nextState>End_Statistical_Office</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
+			<functions/>
+				<function/>
 		</xagent>
 		<xagent>
 			<name>Bank</name>
@@ -569,16 +565,7 @@
 					<description>Agents' net worth.</description>
 				</variable>		
 			</memory>
-			<functions>
-				<function>
-					<name>Central_Bank_template</name>
-					<description></description>
-					<currentState>Start_Central_Bank</currentState>
-					<nextState>End_Central_Bank</nextState>
-					<inputs/>
-					<outputs/>
-				</function>
-			</functions>
+			<functions/>
 		</xagent>
 	</agents>
 </xmodel>

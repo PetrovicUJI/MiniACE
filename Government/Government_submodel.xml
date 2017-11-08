@@ -45,7 +45,7 @@
 				<function>
 					<name>Government_pays_unemployment_benefits</name>
 					<description></description>
-					<currentState>Start_Government</currentState>
+					<currentState>GOV_BenefitPayment</currentState>
 					<nextState>GOV_Transfers</nextState>
 					<inputs>
 						<input>

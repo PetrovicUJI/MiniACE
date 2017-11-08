@@ -14,21 +14,36 @@
 		</constants>
 		<functionFiles>
 			<file>Firm_Initialization_Functions.c</file>
+			<file>PCFirm_Initialization_Functions.c</file>
 			<file>Household_Initialization_Functions.c</file>
+			<file>Government_Initialization_Functions.c</file>
+			<file>Bank_Initialization_Functions.c</file>
+			<file>Central_Bank_Initialization_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
-<!-- 			<dataType>
-				<name>consumption_goods_offer</name>
-				<description>Used by household and mall to hold consumption goods offers</description>
+			<dataType>
+				<name>Enterprise_init</name>
+				<description>Used by government to initialize agents.</description>
 				<variables>
+					<!-- (enterprise_id, outstanding_shares, share_book_value) -->
 					<variable>
 						<type>int</type>
-						<name>id</name>
-						<description></description>
+						<name>enterprise_id</name>
+						<description>ID of agents.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>outstanding_shares</name>
+						<description>The number of outstanding shares.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>share_book_value</name>
+						<description>The book value of shares.</description>
 					</variable>
 				</variables>
-			</dataType> -->
+			</dataType>
 		</dataTypes>
 	</environment>
 	<agents>
@@ -47,7 +62,7 @@
 					<name>Firm_initialization</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
-					<nextState>Firm_Status</nextState>
+					<nextState>Firm_Info</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -58,13 +73,17 @@
 						</rhs>
 					</condition>
 					<inputs/>
-					<outputs/>
+					<outputs>
+						<output>
+							<messageName>init_firm_to_gov</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
 					<name>Idle</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
-					<nextState>Firm_Status</nextState>
+					<nextState>Firm_Info</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -94,7 +113,275 @@
 					<name>Household_initialization</name>
 					<description></description>
 					<currentState>Start_Household</currentState>
-					<nextState>Household_LaborMarket</nextState>
+					<nextState>Household_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>init_hh_to_gov</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>Household_Initialization</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Household_receive_initialization</name>
+					<description></description>
+					<currentState>Household_Initialization</currentState>
+					<nextState>Household_Info</nextState>
+					<inputs>
+						<input>
+							<messageName>gov_to_hh_init_shares</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+							<op>EQ</op>
+								<rhs>
+									<value>m.hh_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Government</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+				<variable>
+					<type>int_array</type>
+					<name>HH_list</name>
+					<description>The list of all households.</description>
+				</variable>
+				<variable>
+					<type>Enterprise_init_array</type>
+					<name>Banks_list</name>
+					<description>The list of all banks.</description>
+				</variable>
+				<variable>
+					<type>Enterprise_init_array</type>
+					<name>PCFirms_list</name>
+					<description>The list of all physical capital producers.</description>
+				</variable>
+				<variable>
+					<type>Enterprise_init_array</type>
+					<name>Firms_list</name>
+					<description>The list of all firms.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Government_initialization</name>
+					<description></description>
+					<currentState>Start_Government</currentState>
+					<nextState>Government_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs>
+						<input>
+							<messageName>init_firm_to_gov</messageName>
+						</input>
+						<input>
+							<messageName>init_pcfirm_to_gov</messageName>
+						</input>
+						<input>
+							<messageName>init_hh_to_gov</messageName>
+						</input>
+						<input>
+							<messageName>init_bank_to_gov</messageName>
+						</input>
+					</inputs>
+					<outputs>
+						<output>
+							<messageName>gov_to_hh_init_shares</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_Government</currentState>
+					<nextState>Government_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>outstanding_shares</name>
+					<description>The total number of shares.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Bank_initialization</name>
+					<description></description>
+					<currentState>Start_Bank</currentState>
+					<nextState>Bank_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>init_bank_to_gov</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_Bank</currentState>
+					<nextState>Bank_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>PCFirm</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>outstanding_shares</name>
+					<description>The total number of shares.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>PCFirm_initialization</name>
+					<description></description>
+					<currentState>Start_PCFirm</currentState>
+					<nextState>PCFirm_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>init_pcfirm_to_gov</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_PCFirm</currentState>
+					<nextState>PCFirm_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Central_Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>CB_initialization</name>
+					<description></description>
+					<currentState>Start_Central_Bank</currentState>
+					<nextState>CB_Info</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -110,8 +397,8 @@
 				<function>
 					<name>Idle</name>
 					<description></description>
-					<currentState>Start_Household</currentState>
-					<nextState>Household_LaborMarket</nextState>
+					<currentState>Start_Central_Bank</currentState>
+					<nextState>CB_Info</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -127,4 +414,96 @@
 			</functions>
 		</xagent>
 	</agents>
+	<messages>
+		<message>
+			<name>init_firm_to_gov</name>
+			<description>Message added by firm to initialize.</description>
+			<variables>
+			<!-- (firm_id, outstanding_shares) -->
+				<variable>
+					<type>int</type>
+					<name>firm_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>outstanding_shares</name>
+					<description>The number of outstanding shares.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>init_hh_to_gov</name>
+			<description>Message added by firm to initialize.</description>
+			<variables>
+			<!-- (hh_id) -->
+				<variable>
+					<type>int</type>
+					<name>hh_id</name>
+					<description>ID of agents.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>init_bank_to_gov</name>
+			<description>Message added by banks to initialize.</description>
+			<variables>
+			<!-- (bank_id, outstanding_shares) -->
+				<variable>
+					<type>int</type>
+					<name>bank_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>outstanding_shares</name>
+					<description>The number of outstanding shares.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>init_pcfirm_to_gov</name>
+			<description>Message added by pcfirms to initialize.</description>
+			<variables>
+			<!-- (pcfirm_id, outstanding_shares) -->
+				<variable>
+					<type>int</type>
+					<name>pcfirm_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>outstanding_shares</name>
+					<description>The number of outstanding shares.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>gov_to_hh_init_shares</name>
+			<description>Message added by pcfirms to initialize.</description>
+			<variables>
+			<!-- (hh_id, enterprise_id, shares, share_book_value) -->
+				<variable>
+					<type>int</type>
+					<name>hh_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>enterprise_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>shares</name>
+					<description>The number of shares.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>share_book_value</name>
+					<description>The book value of shares.</description>
+				</variable>
+			</variables>
+		</message>
+	</messages>
 </xmodel>

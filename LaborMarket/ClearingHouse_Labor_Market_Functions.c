@@ -39,7 +39,7 @@ int LMC_collect_vacancies_and_job_applications()
 	init_Vacancy_array(&vacancy_list_sorted);
 	
 	int i = 0;
-	while(VACANCY_LIST.size >= 0)
+	while(VACANCY_LIST.size > 0)
 	{
 		i = random_int(0,(VACANCY_LIST.size-1));
 		
@@ -92,7 +92,7 @@ int LMC_match_labor_demand_and_supply()
 	int i = 0;
 	int j = 0;
 	int k = 0;
-	while(JOB_APPLICATION_LIST.size >= 0)
+	while(JOB_APPLICATION_LIST.size > 0)
 	{
 		i = random_int(0,(JOB_APPLICATION_LIST.size-1));
 		

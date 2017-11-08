@@ -352,8 +352,9 @@ int Household_require_transfers()
  
 * \brief: Household receive dividends.
 
-*\ dividend_payment message structure: 	<!-- (stockholder_id, dividend) -->
-*\ message filter: a.id == m.stockholder_id
+*\ dividend_payment message structure: 	<!-- (firm_id, dividend) -->
+
+*\ Asset data structure: <!-- (asset_id, number_of_assets, book_value) -->
  
 * \timing: Daily
  * \condition: 
@@ -366,8 +367,15 @@ int Household_receive_dividends()
 {
 	START_DIVIDEND_PAYMENT_MESSAGE_LOOP
 	
-		PAYMENT_ACCOUNT += dividend_payment_message->dividend;
-		
+		for(int i = 0; i < ASSETS_LIST.size; i++)
+		{
+			if(ASSETS_LIST.array[i].asset_id == dividend_payment_message->firm_id)
+			{
+				PAYMENT_ACCOUNT += dividend_payment_message->dividend*ASSETS_LIST.array[i].number_of_assets;
+				break;
+			}
+		}
+	
     FINISH_DIVIDEND_PAYMENT_MESSAGE_LOOP
 	
     return 0;

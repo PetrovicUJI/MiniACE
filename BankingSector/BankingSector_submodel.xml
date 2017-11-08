@@ -285,7 +285,7 @@
 				<function>
 					<name>Bank_offer_loans</name>
 					<description></description>
-					<currentState>Start_Bank</currentState>
+					<currentState>Bank_CreditMarket</currentState>
 					<nextState>Bank_LoanAllowed</nextState>
 					<inputs/>
 					<outputs>

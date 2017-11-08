@@ -22,10 +22,9 @@
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
-			<dataType>
+<!-- 			<dataType>
 				<name>Stockholder</name>
 				<description>Used by agents to pay dividends to their stockholders.</description>
-				<!-- (stockholder_id, shares) -->
 				<variables>
 					<variable>
 						<type>int</type>
@@ -38,7 +37,7 @@
 						<description></description>
 					</variable>
 				</variables>
-			</dataType>
+			</dataType> -->
 		</dataTypes>
 	</environment>
 	<agents>
@@ -46,11 +45,11 @@
 			<name>Firm</name>
 			<description></description>
 			<memory>
-				<variable>
+<!-- 				<variable>
 					<type>Stockholder_array</type>
 					<name>stockholders_list</name>
 					<description>A vector of stockholders.</description>
-				</variable>
+				</variable> -->
 				<variable>
 					<type>double</type>
 					<name>operating_cash_flow</name>
@@ -125,6 +124,11 @@
 					<type>double</type>
 					<name>dividend_payment</name>
 					<description>Earnings before tax.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>outstanding_shares</name>
+					<description>The total number of shares.</description>
 				</variable>
 				<variable>
 					<type>double</type>
@@ -292,10 +296,10 @@
 			<name>dividend_payment</name>
 			<description>Message added by an agent to pay dividends.</description>
 			<variables>
-			<!-- (stockholder_id, dividend) -->
+			<!-- (firm_id, dividend) -->
 				<variable>
 					<type>int</type>
-					<name>stockholder_id</name>
+					<name>firm_id</name>
 					<description></description>
 				</variable>
 				<variable>

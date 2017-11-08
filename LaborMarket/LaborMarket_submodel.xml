@@ -97,6 +97,28 @@
 					</variable>
 				</variables>
 			</dataType>
+			<dataType>
+				<name>Asset</name>
+				<description>An asset hold by hausehold.</description>
+				<variables>
+				<!-- (asset_id, number_of_assets, book_value) -->
+					<variable>
+						<type>int</type>
+						<name>asset_id</name>
+						<description>ID of assets.</description>
+					</variable>
+					<variable>
+						<type>int</type>
+						<name>number_of_assets</name>
+						<description>Number of assets hold by a household.</description>
+					</variable>
+					<variable>
+						<type>double</type>
+						<name>book_value</name>
+						<description>Book value of assets hold by a household.</description>
+					</variable>
+				</variables>
+			</dataType>
 		</dataTypes>
 	</environment>
 	<agents>
@@ -321,6 +343,11 @@
 			<name>Household</name>
 			<description></description>
 			<memory>
+				<variable>
+					<type>Asset_array</type>
+					<name>assets_list</name>
+					<description>A vector of assets hold by households.</description>
+				</variable>
 				<variable>
 					<type>double</type>
 					<name>wage</name>
@@ -693,15 +720,6 @@
 					<inputs>
 						<input>
 							<messageName>dividend_payment</messageName>
-							<filter>
-								<lhs>
-									<value>a.id</value>
-								</lhs>
-								<op>EQ</op>
-								<rhs>
-									<value>m.stockholder_id</value>
-								</rhs>
-							</filter>
 						</input>
 					</inputs>
 					<outputs/>

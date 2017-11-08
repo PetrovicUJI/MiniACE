@@ -125,7 +125,7 @@
 				<function>
 					<name>PCFirm_receive_physical_capital_orders</name>
 					<description></description>
-					<currentState>Start_PCFirm</currentState>
+					<currentState>PCFirm_CapitalGoodMarket</currentState>
 					<nextState>End_PCFirm</nextState>
 					<inputs>
 						<input>
