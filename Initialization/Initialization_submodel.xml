@@ -13,12 +13,13 @@
 			</variable> -->
 		</constants>
 		<functionFiles>
-			<file>Firm_Initialization_Functions.c</file>
-			<file>PCFirm_Initialization_Functions.c</file>
-			<file>Household_Initialization_Functions.c</file>
-			<file>Government_Initialization_Functions.c</file>
-			<file>Bank_Initialization_Functions.c</file>
-			<file>Central_Bank_Initialization_Functions.c</file>
+			<file>Firm_initialization_functions.c</file>
+			<file>PCFirm_initialization_functions.c</file>
+			<file>Household_initialization_functions.c</file>
+			<file>Government_initialization_functions.c</file>
+			<file>Bank_initialization_functions.c</file>
+			<file>Central_Bank_initialization_functions.c</file>
+			<file>Final_Goods_Market_initialization_functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
@@ -62,7 +63,7 @@
 					<name>Firm_initialization</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
-					<nextState>Firm_Info</nextState>
+					<nextState>Firm_Initialization</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -76,6 +77,46 @@
 					<outputs>
 						<output>
 							<messageName>init_firm_to_gov</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Firm_receive_initialization</name>
+					<description></description>
+					<currentState>Firm_Initialization</currentState>
+					<nextState>Firm_Info</nextState>
+					<inputs>
+						<input>
+							<messageName>gov_init_labor</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.employer_id</value>
+								</rhs>
+							</filter>
+						</input>
+						<input>
+							<messageName>gov_init_balance_sheets</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.agent_id</value>
+								</rhs>
+							</filter>
+						</input>
+						<input>
+							<messageName>pcfirm_price_info</messageName>
+						</input>
+					</inputs>
+					<outputs>
+						<output>
+							<messageName>final_goods_init_shipping</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -159,9 +200,33 @@
 								<lhs>
 									<value>a.id</value>
 								</lhs>
-							<op>EQ</op>
+								<op>EQ</op>
 								<rhs>
 									<value>m.hh_id</value>
+								</rhs>
+							</filter>
+						</input>
+						<input>
+							<messageName>gov_init_labor</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.hh_id</value>
+								</rhs>
+							</filter>
+						</input>
+						<input>
+							<messageName>gov_init_balance_sheets</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.agent_id</value>
 								</rhs>
 							</filter>
 						</input>
@@ -228,10 +293,19 @@
 						<input>
 							<messageName>init_bank_to_gov</messageName>
 						</input>
+						<input>
+							<messageName>pcfirm_price_info</messageName>
+						</input>
 					</inputs>
 					<outputs>
 						<output>
 							<messageName>gov_to_hh_init_shares</messageName>
+						</output>
+						<output>
+							<messageName>gov_init_labor</messageName>
+						</output>
+						<output>
+							<messageName>gov_init_balance_sheets</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -274,7 +348,7 @@
 					<name>Bank_initialization</name>
 					<description></description>
 					<currentState>Start_Bank</currentState>
-					<nextState>Bank_Info</nextState>
+					<nextState>Bank_Initialization</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -290,6 +364,27 @@
 							<messageName>init_bank_to_gov</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>Bank_receive_initialization</name>
+					<description></description>
+					<currentState>Bank_Initialization</currentState>
+					<nextState>Bank_Info</nextState>
+					<inputs>
+						<input>
+							<messageName>gov_init_balance_sheets</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.agent_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
+					<outputs/>
 				</function>
 				<function>
 					<name>Idle</name>
@@ -345,6 +440,9 @@
 						<output>
 							<messageName>init_pcfirm_to_gov</messageName>
 						</output>
+						<output>
+							<messageName>pcfirm_price_info</messageName>
+						</output>
 					</outputs>
 				</function>
 				<function>
@@ -399,6 +497,57 @@
 					<description></description>
 					<currentState>Start_Central_Bank</currentState>
 					<nextState>CB_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Final_Goods_Market</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>FGM_initialization</name>
+					<description></description>
+					<currentState>Start_Final_Goods_Market</currentState>
+					<nextState>FGM_Collection</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>1</value>
+						</rhs>
+					</condition>
+					<inputs>
+						<input>
+							<messageName>final_goods_init_shipping</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Start_Final_Goods_Market</currentState>
+					<nextState>FGM_Collection</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -479,6 +628,28 @@
 			</variables>
 		</message>
 		<message>
+			<name>pcfirm_price_info</name>
+			<description>Message added by pcfirms to comunicate physical capital price.</description>
+			<variables>
+			<!-- (pcfirm_id, pc_price, technology) -->
+				<variable>
+					<type>int</type>
+					<name>pcfirm_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>pc_price</name>
+					<description>Physical capital price.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>technology</name>
+					<description>Technology of physical capital.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
 			<name>gov_to_hh_init_shares</name>
 			<description>Message added by pcfirms to initialize.</description>
 			<variables>
@@ -505,5 +676,87 @@
 				</variable>
 			</variables>
 		</message>
+		<message>
+			<name>gov_init_labor</name>
+			<description>Message added by governemnt to initialize labor.</description>
+			<variables>
+			<!-- (hh_id, employer_id, activation_day) -->
+				<variable>
+					<type>int</type>
+					<name>hh_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>employer_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>activation_day</name>
+					<description>Firm activation_day.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>gov_init_balance_sheets</name>
+			<description>Message added by governemnt to initialize balance_sheets.</description>
+			<variables>
+			<!-- (agent_id, current_assets, non_current_assets, payment_account, current_liabilities, non_current_liabilities) -->
+				<variable>
+					<type>int</type>
+					<name>agent_id</name>
+					<description>ID of agents.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_assets</name>
+					<description></description>
+				</variable>
+					<variable>
+					<type>double</type>
+					<name>non_current_assets</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>current_liabilities</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>non_current_liabilities</name>
+					<description></description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>final_goods_init_shipping</name>
+			<description>Message added by a producer to send final products to the market in the initialization phase.</description>
+			<variables>
+			<!-- (seller_id, quantity, price) -->
+				<variable>
+					<type>int</type>
+					<name>seller_id</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>quantity</name>
+					<description>The stock of the final good.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price</name>
+					<description>The price of the final good.</description>
+				</variable>
+			</variables>
+		</message>
+		
 	</messages>
 </xmodel>

@@ -14,12 +14,16 @@
  
  *\ init_pcfirm_to_gov message structure: <!-- (pcfirm_id, outstanding_shares) -->
  
+ *\ pcfirm_price_info message structure: <!-- (pcfirm_id, pc_price, technology) -->
+ 
 * \authors: Marko Petrovic
 * \history: 08.11.2017-Marko: First implementation.
 */
 int PCFirm_initialization()
 {
 	add_init_pcfirm_to_gov_message(ID, OUTSTANDING_SHARES);
+	
+	add_pcfirm_price_info_message(ID, PRICE, TECHNOLOGY);
 	
 	INITIALIZATION = 0;
 

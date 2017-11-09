@@ -121,7 +121,7 @@
 				<function>
 					<name>Final_goods_market_receive_products_and_orders</name>
 					<description></description>
-					<currentState>Start_Final_Goods_Market</currentState>
+					<currentState>FGM_Collection</currentState>
 					<nextState>FGM_Delivery</nextState>
 					<inputs>
 						<input>
