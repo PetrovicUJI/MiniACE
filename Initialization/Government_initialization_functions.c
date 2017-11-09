@@ -17,6 +17,8 @@
 
 *\ init_pcfirm_to_gov message structure: <!-- (pcfirm_id, outstanding_shares) -->
 
+ *\ init_cb_to_gov_message structure: 	<!-- (cb_id) -->
+
 
 *\ 	gov_to_hh_init_shares message structure <!-- (hh_id, enterprise_id, shares, share_book_value) -->
  
@@ -66,7 +68,15 @@ int Government_initialization()
 	
     FINISH_PCFIRM_PRICE_INFO_MESSAGE_LOOP
 	
+	int cb_id;
 	
+	START_INIT_CB_TO_GOV_MESSAGE_LOOP
+	
+		cb_id = init_cb_to_gov_message->cb_id;
+	
+    FINISH_INIT_CB_TO_GOV_MESSAGE_LOOP
+	
+
 	// initialize firm balance sheet
 	
 	double total_production = hh_list.size; // given prices and wages equal to 1.
@@ -84,6 +94,7 @@ int Government_initialization()
 	double bank_deposits = hh_list.size; // each household is endowed with 1 unit of money.
 	double bank_equity = bank_deposits/2;
 	double bank_payment_account = bank_deposits + bank_equity;
+	double bank_cb_debt = 0.0;
 	
 	
 	// asign shares to households
@@ -285,6 +296,25 @@ int Government_initialization()
 		FINISH_INIT_BANK_TO_GOV_MESSAGE_LOOP
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	CB_DEBT = (hh_list.size*12)/2;
+	
+	PAYMENT_ACCOUNT = hh_list.size;
+	
+	CURRENT_ASSETS = 0;
+	NON_CURRENT_ASSETS = 0;
+
+	
+	TOTAL_ASSETS = CURRENT_ASSETS + NON_CURRENT_ASSETS + PAYMENT_ACCOUNT;
+	TOTAL_LIABILITIES = CB_DEBT;
+	EQUITY = TOTAL_ASSETS - TOTAL_LIABILITIES;
+	
+	double cb_payment_account = bank_payment_account + PAYMENT_ACCOUNT;
+	double fiat_money = CB_DEBT + bank_cb_debt;
+	double cb_deposits = cb_payment_account;
+	
+	add_gov_init_balance_sheets_message(cb_id, bank_cb_debt, CB_DEBT, cb_payment_account, cb_deposits, fiat_money);
+	
 	
 	
 	free_int_array(&hh_list);

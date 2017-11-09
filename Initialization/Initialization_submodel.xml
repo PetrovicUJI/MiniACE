@@ -244,26 +244,6 @@
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
 				</variable>
-				<variable>
-					<type>int_array</type>
-					<name>HH_list</name>
-					<description>The list of all households.</description>
-				</variable>
-				<variable>
-					<type>Enterprise_init_array</type>
-					<name>Banks_list</name>
-					<description>The list of all banks.</description>
-				</variable>
-				<variable>
-					<type>Enterprise_init_array</type>
-					<name>PCFirms_list</name>
-					<description>The list of all physical capital producers.</description>
-				</variable>
-				<variable>
-					<type>Enterprise_init_array</type>
-					<name>Firms_list</name>
-					<description>The list of all firms.</description>
-				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -295,6 +275,9 @@
 						</input>
 						<input>
 							<messageName>pcfirm_price_info</messageName>
+						</input>
+						<input>
+							<messageName>init_cb_to_gov</messageName>
 						</input>
 					</inputs>
 					<outputs>
@@ -479,7 +462,7 @@
 					<name>CB_initialization</name>
 					<description></description>
 					<currentState>Start_Central_Bank</currentState>
-					<nextState>CB_Info</nextState>
+					<nextState>CB_Initialization</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -490,6 +473,31 @@
 						</rhs>
 					</condition>
 					<inputs/>
+					<outputs>
+						<output>
+							<messageName>init_cb_to_gov</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>CB_receive_initialization</name>
+					<description></description>
+					<currentState>CB_Initialization</currentState>
+					<nextState>CB_Info</nextState>
+					<inputs>
+						<input>
+							<messageName>gov_init_balance_sheets</messageName>
+							<filter>
+								<lhs>
+									<value>a.id</value>
+								</lhs>
+								<op>EQ</op>
+								<rhs>
+									<value>m.agent_id</value>
+								</rhs>
+							</filter>
+						</input>
+					</inputs>
 					<outputs/>
 				</function>
 				<function>
@@ -607,6 +615,18 @@
 					<type>int</type>
 					<name>outstanding_shares</name>
 					<description>The number of outstanding shares.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>init_cb_to_gov</name>
+			<description>Message added by the central banks to initialize.</description>
+			<variables>
+			<!-- (cb_id) -->
+				<variable>
+					<type>int</type>
+					<name>cb_id</name>
+					<description>ID of agents.</description>
 				</variable>
 			</variables>
 		</message>

@@ -125,10 +125,8 @@ int Household_accept_job()
 		RESERVATION_WAGE = job_offer_list.array[0].wage;
 		
 		DAY_OF_MONTH_TO_ACT = DAY%20;
-		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY-1)%20;
+		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY_OF_MONTH_TO_ACT+19)%MONTH;
 		
-		if(DAY_OF_MONTH_TO_ACT == 0) DAY_OF_MONTH_TO_ACT = 20;
-		if(DAY_OF_MONTH_TO_RECEIVE_INCOME == 0) DAY_OF_MONTH_TO_RECEIVE_INCOME = 20;
 		
 		add_job_acceptance_message(EMPLOYER_ID, ID, WAGE);
 	}
@@ -237,10 +235,7 @@ int Household_accept_job_2()
 		RESERVATION_WAGE = job_offer_list.array[0].wage;
 		
 		DAY_OF_MONTH_TO_ACT = DAY%20;
-		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY-1)%20;
-		
-		if(DAY_OF_MONTH_TO_ACT == 0) DAY_OF_MONTH_TO_ACT = 20;
-		if(DAY_OF_MONTH_TO_RECEIVE_INCOME == 0) DAY_OF_MONTH_TO_RECEIVE_INCOME = 20;
+		DAY_OF_MONTH_TO_RECEIVE_INCOME = (DAY_OF_MONTH_TO_ACT+19)%MONTH;
 		
 		add_job_acceptance_2_message(EMPLOYER_ID, ID, WAGE);
 	}
@@ -277,6 +272,8 @@ int Household_require_unemployment_benefits()
 	add_unemployment_benefit_message(GOV_ID, amount);
 	
 	PAYMENT_ACCOUNT += amount;
+	
+	INCOME = amount;
 	
 	DAYS_OF_UNEMPLOYMENT = 0;
 
@@ -320,6 +317,8 @@ int Household_receive_wage()
 	START_WAGE_PAYMENT_MESSAGE_LOOP
 	
 		PAYMENT_ACCOUNT += wage_payment_message->wage;
+		
+		INCOME = wage_payment_message->wage;
 		
     FINISH_WAGE_PAYMENT_MESSAGE_LOOP
 	
@@ -372,6 +371,7 @@ int Household_receive_dividends()
 			if(ASSETS_LIST.array[i].asset_id == dividend_payment_message->firm_id)
 			{
 				PAYMENT_ACCOUNT += dividend_payment_message->dividend*ASSETS_LIST.array[i].number_of_assets;
+				DIVIDEND_INCOME += dividend_payment_message->dividend*ASSETS_LIST.array[i].number_of_assets;
 				break;
 			}
 		}

@@ -6,11 +6,16 @@
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
-			<type>int</type>
-			<name>max_number_of_job_applications</name>
-			<description></description>
-			</variable> -->
+			<variable>
+				<type>double</type>
+				<name>carrol_index</name>
+				<description>Adjustment parametar in the monthly consumption budget decision.</description>
+			</variable>
+			<variable>
+				<type>double</type>
+				<name>wealth_to_income_ratio_target</name>
+				<description>The target value of the wealth to income ratio.</description>
+			</variable>
 		</constants>
 		<functionFiles>
 		   <file>Firm_FinalGoods_Market_Functions.c</file>
@@ -211,6 +216,11 @@
 			<memory>
 				<variable>
 					<type>double</type>
+					<name>monthly_consumption_budget</name>
+					<description>Households' weekly consumption budget.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>weekly_budget</name>
 					<description>Households' weekly consumption budget.</description>
 				</variable>
@@ -228,6 +238,11 @@
 					<type>double</type>
 					<name>weekly_consumption_costs</name>
 					<description>Households' weekly consumption costs.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>week_counter</name>
+					<description>Week counter.</description>
 				</variable>
 			</memory>
 			<functions>

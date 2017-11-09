@@ -17,7 +17,19 @@
 */
 int Household_plan_consumption_budget()
 {
+	TOTAL_INCOME = INCOME + DIVIDEND_INCOME + PUBLIC_TRANSFERS;
 	
+	TOTAL_ASSETS = CURRENT_ASSETS + NON_CURRENT_ASSETS + PAYMENT_ACCOUNT;
+	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
+	WEALTH = TOTAL_ASSETS - TOTAL_LIABILITIES;
+	
+	MONTHLY_CONSUMPTION_BUDGET = TOTAL_INCOME + CARROL_INDEX*(WEALTH - WEALTH_TO_INCOME_RATIO_TARGET*TOTAL_INCOME);
+	
+	MONTHLY_CONSUMPTION_BUDGET = max(MONTHLY_CONSUMPTION_BUDGET,0.5*TOTAL_INCOME); 
+	
+	WEEK_COUNTER = 1;
+
+	DIVIDEND_INCOME = 0;
 
     return 0;
 }
@@ -36,6 +48,11 @@ int Household_plan_consumption_budget()
 */
 int Household_purchase_final_goods()
 {
+	if(WEEK_COUNTER > 4)
+	printf("\n ERROR in function Household_purchase_final_goods: WEEK_COUNTER = %2.5f\n ", WEEK_COUNTER);
+	
+	WEEKLY_BUDGET = MONTHLY_CONSUMPTION_BUDGET/(5-WEEK_COUNTER);
+	
 	add_final_goods_order_message(ID, WEEKLY_BUDGET);
 
     return 0;
@@ -56,19 +73,23 @@ int Household_purchase_final_goods()
 */
 int Household_receive_final_goods()
 {
-	REMAINING_WEEKLY_BUDGET = WEEKLY_BUDGET;
 	WEEKLY_CONSUMPTION_QUANTITY = 0.0;
 	WEEKLY_CONSUMPTION_COSTS = 0.0;
 
 	START_FINAL_GOODS_DELIVERY_TO_BUYERS_MESSAGE_LOOP
 	
+		// REMAINING_WEEKLY_BUDGET is redundand and should be removed!!!
 		REMAINING_WEEKLY_BUDGET = final_goods_delivery_to_buyers_message->remaining_budget;
 		WEEKLY_CONSUMPTION_QUANTITY = final_goods_delivery_to_buyers_message->purchased_quantity;
 		WEEKLY_CONSUMPTION_COSTS = final_goods_delivery_to_buyers_message->costs;
 
     FINISH_FINAL_GOODS_DELIVERY_TO_BUYERS_MESSAGE_LOOP
 	
+	MONTHLY_CONSUMPTION_BUDGET -= WEEKLY_CONSUMPTION_COSTS;
+	
 	PAYMENT_ACCOUNT -= WEEKLY_CONSUMPTION_COSTS;
+	
+	WEEK_COUNTER++;
 
     return 0;
 }

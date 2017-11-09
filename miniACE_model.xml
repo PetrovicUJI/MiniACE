@@ -253,7 +253,7 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>equity</name>
+					<name>wealth</name>
 					<description>Agents' net worth.</description>
 				</variable>
 			</memory>
@@ -426,16 +426,6 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>current_liabilities</name>
-					<description>Agents' short-term debt.</description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>non_current_liabilities</name>
-					<description>Agents' long-term debt.</description>
-				</variable>
-				<variable>
-					<type>double</type>
 					<name>equity</name>
 					<description>Agents' net worth.</description>
 				</variable>
@@ -492,12 +482,7 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>current_liabilities</name>
-					<description>Agents' short-term debt.</description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>non_current_liabilities</name>
+					<name>cb_debt</name>
 					<description>Agents' long-term debt.</description>
 				</variable>
 				<variable>
@@ -535,12 +520,12 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>current_assets</name>
+					<name>fiat_money_banks</name>
 					<description>Agents' short-term asstes.</description>
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>non_current_assets</name>
+					<name>gov_debt</name>
 					<description>Agents' long-term asstes.</description>
 				</variable>
 					<!-- liabilities -->

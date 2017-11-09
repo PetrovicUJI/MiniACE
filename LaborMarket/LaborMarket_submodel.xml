@@ -383,6 +383,21 @@
 					<name>days_of_unemployment</name>
 					<description>Households count days of being unemployed.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>dividend_income</name>
+					<description>Monthly dividend income.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>income</name>
+					<description>Monthly income - salaries or unemployment banafit.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>total_income</name>
+					<description>Total monthly income.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
