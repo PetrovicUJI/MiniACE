@@ -40,6 +40,31 @@
 					<name>tax_income</name>
 					<description>Montlhly government tax income.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_gdp</name>
+					<description>Montlhly government tax income.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_level</name>
+					<description>Price level in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>inflation</name>
+					<description>Current inflation.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>mean_wage</name>
+					<description>Average wage in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unemployment_rate</name>
+					<description>Unemployment rate in the economy.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
@@ -73,7 +98,7 @@
 					<name>Government_collect_tax</name>
 					<description></description>
 					<currentState>GOV_TaxIncome</currentState>
-					<nextState>End_Government</nextState>
+					<nextState>GOV_CBAccountUpdate</nextState>
 					<inputs>
 						<input>
 							<messageName>tax_payments</messageName>

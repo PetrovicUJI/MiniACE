@@ -27,3 +27,32 @@ int PCFirm_send_info()
 
     return 0;
 }
+
+/* \fn: int PCFirm_send_statistics()
+ 
+* \brief: PCFirm send statistics.
+ 
+ 
+* \timing: Monthly, the last day of the month.
+
+ * \condition:
+
+ 
+ *\ pcfirm_send_statistics_message structure: <!-- (pcfirm_id, monthly_investments, physical_capital_price, real_monthly_investments) -->
+ 
+* \authors: Marko Petrovic
+* \history: 10.11.2017-Marko: First implementation.
+*/
+int PCFirm_send_statistics()
+{
+	double real_monthly_investments = 0.0;
+	
+	if(PRICE > 0)
+	real_monthly_investments = MONTHLY_REVENUE/PRICE;
+
+	add_pcfirm_send_statistics_message(ID, MONTHLY_REVENUE, PRICE, real_monthly_investments);
+	
+	MONTHLY_REVENUE = 0.0;
+
+	return 0;
+}

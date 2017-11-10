@@ -36,3 +36,27 @@ int Household_info()
 
     return 0;
 }
+
+/* \fn: int Household_send_statistics()
+ 
+* \brief: Household send statistics.
+ 
+ 
+* \timing: Monthly, the last day of the month.
+
+ * \condition:
+
+ 
+ *\ hh_send_statistics_message structure: <!-- (hh_id, employer_id, wage) -->
+ 
+* \authors: Marko Petrovic
+* \history: 10.11.2017-Marko: First implementation.
+*/
+int Household_send_statistics()
+{
+
+	add_hh_send_statistics_message(ID, EMPLOYER_ID, INCOME);
+	
+
+	return 0;
+}

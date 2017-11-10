@@ -267,7 +267,7 @@
 					<name>Firm_compute_balance_sheet</name>
 					<description></description>
 					<currentState>Firm_BalanceSheet</currentState>
-					<nextState>End_Firm</nextState>
+					<nextState>Firm_Statistics</nextState>
 					<inputs/>
 					<outputs/>
 				</function>
@@ -380,6 +380,5 @@
 				</variable>
 			</variables>
 		</message>
-		
 	</messages>
 </xmodel>

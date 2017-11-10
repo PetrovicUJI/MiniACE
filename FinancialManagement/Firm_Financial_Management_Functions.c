@@ -432,13 +432,13 @@ int Firm_compute_sale_statistics()
  
 * \brief: Firm send payments to bank.
  
- 
- *\ bank_account_update_message structure: 
- <!-- (bank_id, payment_account, delta_loan, delta_value_at_risk) -->
- 
+
 * \timing: Monthly on the last activation day.
  * \condition:
  
+  *\ bank_account_update_message structure: 
+ <!-- (bank_id, payment_account, delta_loan, delta_value_at_risk) -->
+ a.id==m.bank_id
 
 * \authors: Marko Petrovic
 * \history: 27.10.2017-Marko: First implementation.

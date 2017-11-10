@@ -394,9 +394,14 @@
 					<description>Monthly income - salaries or unemployment banafit.</description>
 				</variable>
 				<variable>
-					<type>int</type>
+					<type>double</type>
 					<name>total_income</name>
 					<description>Total monthly income.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>transfer_income</name>
+					<description>Monthly transfer income.</description>
 				</variable>
 			</memory>
 			<functions>
@@ -589,10 +594,10 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Household_require_unemployment_benefits</name>
+					<name>Household_require_transfers</name>
 					<description></description>
 					<currentState>Household_EndLaborMarket</currentState>
-					<nextState>Household_NewBudgetPlanning</nextState>
+					<nextState>Household_EndLaborMarketBenefits</nextState>
 					<condition>
 						<not>
 							<lhs>
@@ -604,6 +609,18 @@
 							</rhs>
 						</not>
 					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>public_transfers</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Household_require_unemployment_benefits</name>
+					<description></description>
+					<currentState>Household_EndLaborMarketBenefits</currentState>
+					<nextState>Household_NewBudgetPlanning</nextState>
 					<inputs/>
 					<outputs>
 						<output>

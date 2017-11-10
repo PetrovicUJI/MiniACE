@@ -154,7 +154,7 @@
 					<name>Final_goods_market_update_sellers</name>
 					<description></description>
 					<currentState>FGM_Accounting</currentState>
-					<nextState>End_Final_Goods_Market</nextState>
+					<nextState>FGM_Statistics</nextState>
 					<inputs/>
 					<outputs>
 						<output>
@@ -258,7 +258,7 @@
 					<name>Household_plan_consumption_budget</name>
 					<description></description>
 					<currentState>Household_BudgetPlanning</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_BankAccountUpdate</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -272,7 +272,7 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Household_BudgetPlanning</currentState>
-					<nextState>End_Household</nextState>
+					<nextState>Household_BankAccountUpdate</nextState>
 					<condition>
 						<not>
 							<time>

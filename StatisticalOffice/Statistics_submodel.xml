@@ -20,6 +20,7 @@
 			<file>Bank_statistics_functions.c</file>
 			<file>Central_Bank_statistics_functions.c</file>
 			<file>Statistical_Office_functions.c</file>
+			<file>FinalGoods_Market_statistics_functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
@@ -87,6 +88,40 @@
 					<inputs/>
 					<outputs/>
 				</function>
+				<function>
+					<name>Firm_send_statistics</name>
+					<description></description>
+					<currentState>Firm_Statistics</currentState>
+					<nextState>End_Firm</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>firm_send_statistics</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_Statistics</currentState>
+					<nextState>End_Firm</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
 			</functions>
 		</xagent>
 		<xagent>
@@ -111,6 +146,40 @@
 							<messageName>enterprise_to_hh_info</messageName>
 						</input>
 					</inputs>
+				</function>
+				<function>
+					<name>Household_send_statistics</name>
+					<description></description>
+					<currentState>Household_Statistics</currentState>
+					<nextState>End_Household</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>hh_send_statistics</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Household_Statistics</currentState>
+					<nextState>End_Household</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>
@@ -159,6 +228,40 @@
 					<inputs/>
 					<outputs/>
 				</function>
+				<function>
+					<name>Government_receive_statistics</name>
+					<description></description>
+					<currentState>GOV_Statistics</currentState>
+					<nextState>End_Government</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs>
+						<input>
+							<messageName>stat_office_send_statistics</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>GOV_Statistics</currentState>
+					<nextState>End_Government</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
 			</functions>
 		</xagent>
 		<xagent>
@@ -176,7 +279,7 @@
 					<name>Bank_send_info</name>
 					<description></description>
 					<currentState>Bank_Info</currentState>
-					<nextState>Bank_CreditMarket</nextState>
+					<nextState>Bank_FinancialPayments</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -205,6 +308,18 @@
 					</condition>
 					<inputs/>
 					<outputs/>
+				</function>
+				<function>
+					<name>Bank_send_statistics</name>
+					<description></description>
+					<currentState>Bank_Statistics</currentState>
+					<nextState>End_Bank</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>bank_send_statistics</messageName>
+						</output>
+					</outputs>
 				</function>
 			</functions>
 		</xagent>
@@ -253,6 +368,65 @@
 					<inputs/>
 					<outputs/>
 				</function>
+				<function>
+					<name>PCFirm_send_statistics</name>
+					<description></description>
+					<currentState>PCFirm_Statistics</currentState>
+					<nextState>End_PCFirm</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>pcfirm_send_statistics</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Final_Goods_Market</name>
+			<description></description>
+			<memory>
+<!-- 				<variable>
+					<type>int</type>
+					<name>initialization</name>
+					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
+				</variable> -->
+			</memory>
+			<functions>
+				<function>
+					<name>Final_goods_market_send_statistics</name>
+					<description></description>
+					<currentState>FGM_Statistics</currentState>
+					<nextState>End_Final_Goods_Market</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>fgm_send_statistics</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>FGM_Statistics</currentState>
+					<nextState>End_Final_Goods_Market</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
 			</functions>
 		</xagent>
 		<xagent>
@@ -270,7 +444,7 @@
 					<name>Central_Bank_send_info</name>
 					<description></description>
 					<currentState>CB_Info</currentState>
-					<nextState>End_Central_Bank</nextState>
+					<nextState>CB_AccountUpdate</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -284,12 +458,46 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>CB_Info</currentState>
-					<nextState>End_Central_Bank</nextState>
+					<nextState>CB_AccountUpdate</nextState>
 					<condition>
 						<not>
 							<time>
 								<period>monthly</period>
 								<phase>1</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>CB_receive_statistics</name>
+					<description></description>
+					<currentState>CB_Statistics</currentState>
+					<nextState>End_Central_Bank</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs>
+						<input>
+							<messageName>stat_office_send_statistics</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>CB_Statistics</currentState>
+					<nextState>End_Central_Bank</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
 							</time>
 						</not>
 					</condition>
@@ -302,18 +510,68 @@
 			<name>Statistical_Office</name>
 			<description></description>
 			<memory>
-<!-- 				<variable>
-					<type>int</type>
-					<name>initialization</name>
-					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
+				<variable>
+					<type>double</type>
+					<name>price_level</name>
+					<description>Weighted averaged monthly price level.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_growth</name>
+					<description>Weighted averaged monthly price level.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>aggregate_monthly_turnover</name>
+					<description>Agregate monthly turnover.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>aggregate_monthly_sold_quantity</name>
+					<description>Agregate monthly turnover.</description>
+				</variable>
+				<variable>
+					<type>double_array</type>
+					<name>price_level_list</name>
+					<description>A vector of price levels.</description>
+				</variable>
+				<variable>
+					<type>double_array</type>
+					<name>average_price_level_list</name>
+					<description>A vector of average price levels.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>average_wage</name>
+					<description>Average wage in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unemployment_rate</name>
+					<description>Unemployment rate in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>aggregate_value_at_risk</name>
+					<description>Aggregate value at risk in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>nominal_monthly_gdp</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>real_monthly_gdp</name>
+					<description></description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>Statistical_Office_send_info</name>
 					<description></description>
 					<currentState>Start_Statistical_Office</currentState>
-					<nextState>End_Statistical_Office</nextState>
+					<nextState>SO_DataCollection</nextState>
 					<condition>
 						<time>
 							<period>monthly</period>
@@ -327,12 +585,70 @@
 					<name>Idle</name>
 					<description></description>
 					<currentState>Start_Statistical_Office</currentState>
-					<nextState>End_Statistical_Office</nextState>
+					<nextState>SO_DataCollection</nextState>
 					<condition>
 						<not>
 							<time>
 								<period>monthly</period>
 								<phase>1</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Statistical_Office_receive_data</name>
+					<description></description>
+					<currentState>SO_DataCollection</currentState>
+					<nextState>SO_DataPublication</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<outputs/>
+					<inputs>
+						<input>
+							<messageName>fgm_send_statistics</messageName>
+						</input>
+						<input>
+							<messageName>hh_send_statistics</messageName>
+						</input>
+						<input>
+							<messageName>firm_send_statistics</messageName>
+						</input>
+						<input>
+							<messageName>bank_send_statistics</messageName>
+						</input>
+						<input>
+							<messageName>pcfirm_send_statistics</messageName>
+						</input>
+					</inputs>
+				</function>
+				<function>
+					<name>Statistical_Office_send_data</name>
+					<description></description>
+					<currentState>SO_DataPublication</currentState>
+					<nextState>End_Statistical_Office</nextState>
+					<outputs>
+						<output>
+							<messageName>stat_office_send_statistics</messageName>
+						</output>
+					</outputs>
+					<inputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>SO_DataCollection</currentState>
+					<nextState>End_Statistical_Office</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
 							</time>
 						</not>
 					</condition>
@@ -357,6 +673,163 @@
 					<type>double</type>
 					<name>share_book_value</name>
 					<description>The value of shares.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>fgm_send_statistics</name>
+			<description>Message added by final goods market to send data to the statistical office.</description>
+			<variables>
+			<!-- (sold_quantity, price_level, market_turnover) -->
+				<variable>
+					<type>double</type>
+					<name>sold_quantity</name>
+					<description>Sold quantity at the market.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_level</name>
+					<description>Weighted average price level.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>market_turnover</name>
+					<description>Market turnover.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>hh_send_statistics</name>
+			<description>Message added by households to send data to the statistical office.</description>
+			<variables>
+			<!-- (hh_id, employer_id, wage) -->
+				<variable>
+					<type>int</type>
+					<name>hh_id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>employer_id</name>
+					<description>Employer ID.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>wage</name>
+					<description>Monthly wage.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>firm_send_statistics</name>
+			<description>Message added by firm to send data to the statistical office.</description>
+			<variables>
+			<!-- (firm_id, status, physical_capital_stock, inventories, production) -->
+				<variable>
+					<type>int</type>
+					<name>firm_id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>int</type>
+					<name>status</name>
+					<description>Firm status. 1 if active and 0 otherwise.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>physical_capital_stock</name>
+					<description>The stock of physical capital.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>inventories</name>
+					<description>The stock of inventories.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>production</name>
+					<description>Monthly firm production.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>bank_send_statistics</name>
+			<description>Message added by bank to send data to the statistical office.</description>
+			<variables>
+			<!-- (bank_id, value_at_risk) -->
+				<variable>
+					<type>int</type>
+					<name>bank_id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>value_at_risk</name>
+					<description>Agregate value at risk.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>pcfirm_send_statistics</name>
+			<description>Message added by pcfirm to send data to the statistical office.</description>
+			<variables>
+			<!-- (pcfirm_id, monthly_investments, physical_capital_price, real_monthly_investments) -->
+				<variable>
+					<type>int</type>
+					<name>pcfirm_id</name>
+					<description>Agent ID.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_investments</name>
+					<description>Nominal monthly investments.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>physical_capital_price</name>
+					<description>The price of physical capital.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>real_monthly_investments</name>
+					<description>Real monthly investments.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>stat_office_send_statistics</name>
+			<description>Message added by the statistical office to send data to the government and the CB.</description>
+			<variables>
+			<!-- (monthly_gdp, price_level, inflation, value_at_risk, mean_wage, unemployment_rate) -->
+				<variable>
+					<type>double</type>
+					<name>monthly_gdp</name>
+					<description>Nominal monthly GDP.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>price_level</name>
+					<description>The price level.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>inflation</name>
+					<description>Yearly inflation in the current month.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>value_at_risk</name>
+					<description>Aggregate value at risk.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>mean_wage</name>
+					<description>Average wage in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unemployment_rate</name>
+					<description>Unemployment rate in the economy.</description>
 				</variable>
 			</variables>
 		</message>

@@ -3,6 +3,64 @@
 
 #include "../Bank_agent_header.h"
 
+
+/* \fn: int Bank_pay_tax_and_dividends()
+ 
+* \brief: Bank pay tax and dividends.
+ 
+ 
+* \timing: The last day of the month.
+ * \condition:
+
+*\ dividend_payment message structure: <!-- (firm_id, dividend) -->
+
+*\ tax_payments_message structure:
+<!-- (gov_id, tax_payment) -->
+ 
+* \authors: Marko Petrovic
+* \history: 10.11.2017-Marko: First implementation.
+*/
+int Bank_pay_tax_and_dividends()
+{
+	if(OUTSTANDING_SHARES == 0)
+	printf("\n ERROR in function  Bank_pay_tax_and_dividends: OUTSTANDING_SHARES = %2.5f\n ", OUTSTANDING_SHARES);
+	
+	if(DIVIDEND_PAYMENT > 0)
+	{
+		double dividend = 0.0;
+
+		dividend = (DIVIDEND_PAYMENT/OUTSTANDING_SHARES);
+		
+		add_dividend_payment_message(ID, dividend);
+
+		PAYMENT_ACCOUNT -= DIVIDEND_PAYMENT;
+		EQUITY -= DIVIDEND_PAYMENT;
+	}
+	
+	if(CAPITAL_TAX_PAYMENT > 0)
+	{
+		add_tax_payments_message(GOV_ID, CAPITAL_TAX_PAYMENT);
+		
+		PAYMENT_ACCOUNT -= CAPITAL_TAX_PAYMENT;
+		EQUITY -= CAPITAL_TAX_PAYMENT;
+	}
+	
+	MONTHLY_PROFIT = 0.0;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* \fn: int Bank_offer_loans()
  
 * \brief: Banks offer loans.
@@ -78,6 +136,8 @@ int Bank_receive_loan_repayments()
 		VALUE_AT_RISK -= loan_repayment_message->loan_instalment_value_at_risk;
 		
 		EQUITY += loan_repayment_message->interest_payments;
+		PAYMENT_ACCOUNT += loan_repayment_message->interest_payments;
+		MONTHLY_PROFIT += loan_repayment_message->interest_payments;
 		
     FINISH_LOAN_REPAYMENT_MESSAGE_LOOP
 	
@@ -115,6 +175,39 @@ int Bank_receive_account_update()
 		
     FINISH_BANK_ACCOUNT_UPDATE_MESSAGE_LOOP
 	
+
+    return 0;
+}
+
+/* \fn: int Bank_determine_dividends()
+ 
+* \brief: Bank determine dividends.
+ 
+ 
+* \timing: The last day of the month.
+ * \condition:
+
+
+ 
+* \authors: Marko Petrovic
+* \history: 10.11.2017-Marko: First implementation.
+*/
+int Bank_determine_dividends()
+{
+	DIVIDEND_PAYMENT = 0.0;
+	
+	if(MONTHLY_PROFIT == 0)
+	return 0;
+
+	if(MONTHLY_PROFIT < 0)
+	{
+		printf("\n ERROR in function Bank_determine_dividends: MONTHLY_PROFIT = %2.5f\n ", MONTHLY_PROFIT);
+		return 0;
+	}
+
+	DIVIDEND_PAYMENT = 0.5*MONTHLY_PROFIT;
+	
+	CAPITAL_TAX_PAYMENT = (MONTHLY_PROFIT-DIVIDEND_PAYMENT)*CAPITAL_TAX_RATE;
 
     return 0;
 }

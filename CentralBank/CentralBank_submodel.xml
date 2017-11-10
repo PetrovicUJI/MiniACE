@@ -1,0 +1,181 @@
+<!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
+<xmodel version="1" >
+	<name>Central_Bank</name>
+	<version>Version 1.1, 10/11/2017</version>
+	<description>Authors: Marko Petrovic</description>
+	<models/>
+	<environment>
+		<constants>
+			<!-- <variable>
+			<type>double</type>
+			<name>rawmat2output_innovation</name>
+			<description></description>
+			</variable> -->
+		</constants>
+		<functionFiles>
+			<file>CentralBank_functions.c</file>
+			<file>Government_CB_functions.c</file>
+			<file>Bank_CB_functions.c</file>
+		</functionFiles>
+		<timeUnits/>
+		<dataTypes>
+<!-- 			<dataType>
+				<name>consumption_goods_offer</name>
+				<description>Used by household and mall to hold consumption goods offers</description>
+				<variables>
+					<variable>
+						<type>int</type>
+						<name>id</name>
+						<description></description>
+					</variable>
+				</variables>
+			</dataType> -->
+		</dataTypes>
+	</environment>
+	<agents>
+		<xagent>
+			<name>Central_Bank</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>double</type>
+					<name>inflation</name>
+					<description>Yearly inflation in the current month.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>value_at_risk</name>
+					<description>Aggregate value at risk.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>unemployment_rate</name>
+					<description>Unemployment rate in the economy.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>CB_receive_account_update</name>
+					<description></description>
+					<currentState>CB_AccountUpdate</currentState>
+					<nextState>CB_Statistics</nextState>
+					<inputs>
+						<input>
+							<messageName>gov_to_cb_account_update</messageName>
+						</input>
+						<input>
+							<messageName>bank_to_cb_account_update</messageName>
+						</input>
+					</inputs>
+					<outputs/>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Government</name>
+			<description></description>
+			<memory>
+				<variable>
+					<type>double</type>
+					<name>interest_rate_on_cb_debt</name>
+					<description>Interest rate on central bank debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_interest_payments</name>
+					<description>Mothly interest payments.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>yearly_interest_payments</name>
+					<description>Yearly interest payments.</description>
+				</variable>
+			</memory>
+			<functions>
+				<function>
+					<name>Government_send_payments_to_CB</name>
+					<description></description>
+					<currentState>GOV_CBAccountUpdate</currentState>
+					<nextState>GOV_Statistics</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>gov_to_cb_account_update</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
+			<name>Bank</name>
+			<description></description>
+			<memory>
+			<!-- 	<variable>
+					<type>double</type>
+					<name>tax_income</name>
+					<description>Montlhly government tax income.</description>
+				</variable> -->
+			</memory>
+			<functions>
+				<function>
+					<name>Bank_send_payments_to_CB</name>
+					<description></description>
+					<currentState>Bank_CBAccountUpdate</currentState>
+					<nextState>Bank_FinancialManagement</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>bank_to_cb_account_update</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+	</agents>
+	<messages>
+		<message>
+			<name>gov_to_cb_account_update</name>
+			<description>Message added by an agent to update cb account.</description>
+			<variables>
+			<!-- (payment_account, delta_loan, interest) -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>delta_loan</name>
+					<description>If it is positive, agent is borroving from the bank, otherwise agent is repaying its short term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>interest</name>
+					<description>Interest payment on cb debt.</description>
+				</variable>
+			</variables>
+		</message>
+		<message>
+			<name>bank_to_cb_account_update</name>
+			<description>Message added by an agent to update cb account.</description>
+			<variables>
+			<!-- (payment_account, delta_loan, interest) -->
+				<variable>
+					<type>double</type>
+					<name>payment_account</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>delta_loan</name>
+					<description>If it is positive, agent is borroving from the bank, otherwise agent is repaying its short term debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>interest</name>
+					<description>Interest payment on cb debt.</description>
+				</variable>
+			</variables>
+		</message>
+	</messages>
+</xmodel>

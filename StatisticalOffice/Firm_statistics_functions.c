@@ -6,7 +6,7 @@
 
 /* \fn: int Firm_send_info()
  
-* \brief: Firm send info to households.
+* \brief: Firm send info to Firms.
  
  *\ enterprise_to_hh_info message structure: 	<!-- (enterprise_id, share_book_value) -->
  
@@ -33,4 +33,28 @@ int Firm_send_info()
 
 
     return 0;
+}
+
+/* \fn: int Firm_send_statistics()
+ 
+* \brief: Firm send statistics.
+ 
+ 
+* \timing: Monthly, the last day of the month.
+
+ * \condition:
+
+ 
+ *\ firm_send_statistics_message structure: <!-- (firm_id, status, physical_capital_stock, inventories, production) -->
+ 
+* \authors: Marko Petrovic
+* \history: 10.11.2017-Marko: First implementation.
+*/
+int Firm_send_statistics()
+{
+
+	add_firm_send_statistics_message(ID, ACTIVE, PHYSICAL_CAPITAL, INVENTORIES, PRODUCTION);
+	
+
+	return 0;
 }

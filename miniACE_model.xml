@@ -40,6 +40,10 @@
 			<file>StatisticalOffice/Statistics_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
+		<model>
+			<file>CentralBank/CentralBank_submodel.xml</file>
+			<enabled>true</enabled>
+		</model>
 	</models>
 	<environment>
 		<constants>

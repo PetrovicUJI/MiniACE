@@ -120,13 +120,18 @@
 					<name>technology</name>
 					<description>The current technology level of physical capitel.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_revenue</name>
+					<description>Monthly Profit.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>PCFirm_receive_physical_capital_orders</name>
 					<description></description>
 					<currentState>PCFirm_CapitalGoodMarket</currentState>
-					<nextState>End_PCFirm</nextState>
+					<nextState>PCFirm_DividendPayments</nextState>
 					<inputs>
 						<input>
 							<messageName>physical_capital_order</messageName>
@@ -137,6 +142,40 @@
 							<messageName>physical_capital_delivery</messageName>
 						</output>
 					</outputs>
+				</function>
+				<function>
+					<name>PCFirm_pay_dividends</name>
+					<description></description>
+					<currentState>PCFirm_DividendPayments</currentState>
+					<nextState>PCFirm_Statistics</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>dividend_payment</messageName>
+						</output>
+					</outputs>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>PCFirm_DividendPayments</currentState>
+					<nextState>End_PCFirm</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
 				</function>
 			</functions>
 		</xagent>

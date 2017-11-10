@@ -340,9 +340,26 @@ int Household_receive_wage()
 */
 int Household_require_transfers()
 {
-	add_public_transfers_message(GOV_ID, PUBLIC_TRANSFERS);
+	if(DAYS_OF_UNEMPLOYMENT > 0)
+	{
+		double amount = 0.0;
+		amount = (PUBLIC_TRANSFERS/20)*DAYS_OF_UNEMPLOYMENT;
+		
+		add_public_transfers_message(GOV_ID, amount);
+		
+		PAYMENT_ACCOUNT += amount;
+		
+		TRANSFER_INCOME = amount;
+		
+	}
+	else
+	{
+		add_public_transfers_message(GOV_ID, PUBLIC_TRANSFERS);
 	
-	PAYMENT_ACCOUNT += PUBLIC_TRANSFERS;
+		PAYMENT_ACCOUNT += PUBLIC_TRANSFERS;
+		
+		TRANSFER_INCOME = PUBLIC_TRANSFERS;
+	}
 
     return 0;
 }

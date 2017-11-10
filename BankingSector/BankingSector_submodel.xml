@@ -14,12 +14,9 @@
 		</constants>
 		<functionFiles>
 		   <file>Firm_Banking_Sector_Functions.c</file>
-		</functionFiles>
-		<functionFiles>
 		   <file>Credit_ClearingHouse_Banking_Sector_Functions.c</file>
-		</functionFiles>
-		<functionFiles>
 		   <file>Bank_Banking_Sector_Functions.c</file>
+		   <file>Household_Banking_Sector_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
 		<dataTypes>
@@ -202,6 +199,31 @@
 			</functions>
 		</xagent>
 		<xagent>
+			<name>Household</name>
+			<description></description>
+			<memory>
+				<!-- <variable>
+					<type>Loan_array</type>
+					<name>loans</name>
+					<description>A vector of laons taken by a firm.</description>
+				</variable> -->
+			</memory>
+			<functions>
+				<function>
+					<name>Household_send_payments_to_bank</name>
+					<description></description>
+					<currentState>Household_BankAccountUpdate</currentState>
+					<nextState>Household_Statistics</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>bank_account_update</messageName>
+						</output>
+					</outputs>
+				</function>
+			</functions>
+		</xagent>
+		<xagent>
 			<name>Credit_ClearingHouse</name>
 			<description>Market clearing mechanism.</description>
 			<memory>
@@ -276,12 +298,52 @@
 					<description>Risky weighted assets.</description>
 				</variable>
 				<variable>
-					<type>int</type>
+					<type>double</type>
 					<name>alpha</name>
 					<description>Capital requirement regulation set by the central bank.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>monthly_profit</name>
+					<description>Monthly bank net profit.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>interest_rate_on_cb_debt</name>
+					<description>Interest rate on central bank debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>dividend_payment</name>
+					<description>The amount of profit to be payed to shareholders.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_payment</name>
+					<description>Capital tax payment.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_rate</name>
+					<description>Tax rate on net profit.</description>
+				</variable>
 			</memory>
 			<functions>
+			<function>
+					<name>Bank_pay_tax_and_dividends</name>
+					<description></description>
+					<currentState>Bank_FinancialPayments</currentState>
+					<nextState>Bank_CreditMarket</nextState>
+					<inputs/>
+					<outputs>
+						<output>
+							<messageName>dividend_payment</messageName>
+						</output>
+						<output>
+							<messageName>tax_payments</messageName>
+						</output>
+					</outputs>
+				</function>
 				<function>
 					<name>Bank_offer_loans</name>
 					<description></description>
@@ -340,7 +402,7 @@
 					<name>Bank_receive_account_update</name>
 					<description></description>
 					<currentState>Bank_AccountUpdate</currentState>
-					<nextState>End_Bank</nextState>
+					<nextState>Bank_CBAccountUpdate</nextState>
 					<inputs>
 						<input>
 							<messageName>bank_account_update</messageName>
@@ -355,6 +417,36 @@
 							</filter>
 						</input>
 					</inputs>
+					<outputs/>
+				</function>
+				<function>
+					<name>Bank_determine_dividends</name>
+					<description></description>
+					<currentState>Bank_FinancialManagement</currentState>
+					<nextState>Bank_Statistics</nextState>
+					<condition>
+						<time>
+							<period>monthly</period>
+							<phase>0</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Bank_FinancialManagement</currentState>
+					<nextState>End_Bank</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>monthly</period>
+								<phase>0</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
 					<outputs/>
 				</function>
 			</functions>
