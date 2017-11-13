@@ -5,6 +5,29 @@
 
 
 
+/* \fn: int PCFirm_set_price()
+ 
+* \brief: PCFirm set price.
+ 
+ 
+* \timing: Monthly on the first activation day.
+ * \condition:
+ 
+
+
+* \authors: Marko Petrovic
+* \history: 27.10.2017-Marko: First implementation.
+*/
+int PCFirm_set_price()
+{
+	PRICE = CB_TRUST*PRICE*(1+INFLATION_TARGET) + (1-CB_TRUST)*PRICE*(1+INFLATION);
+	
+	PRICE = max(PRICE, 1000);
+
+    return 0;
+}
+
+
 /* \fn: int PCFirm_receive_physical_capital_order()
  
 * \brief: Physical capital producer receive physical capital orders.

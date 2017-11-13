@@ -1,5 +1,5 @@
 <!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
-<xmodel version="1" >
+<xmodel version="2" >
 	<name>Banking_Sector</name>
 	<version>Version 1.1, 10/10/2017</version>
 	<description>Authors: Marko Petrovic</description>
@@ -98,7 +98,7 @@
 				<name>Loan_offer</name>
 				<description>Used by clearing house to store loan offers.</description>
 				<variables>
-				<!-- (agent_id, equity, value_at_risk, alpha) -->
+				<!-- (agent_id, equity, value_at_risk) -->
 					<variable>
 						<type>int</type>
 						<name>agent_id</name>
@@ -112,11 +112,6 @@
 					<variable>
 						<type>double</type>
 						<name>value_at_risk</name>
-						<description></description>
-					</variable>
-					<variable>
-						<type>double</type>
-						<name>alpha</name>
 						<description></description>
 					</variable>
 				</variables>
@@ -252,12 +247,17 @@
 					<name>cb_interest_rate</name>
 					<description>The interest rate set by the central bank.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>alpha</name>
+					<description>The capital requirement CB regulation parameter.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
 					<name>CCH_collect_orders</name>
 					<description></description>
-					<currentState>Start_CreditClearingHouse</currentState>
+					<currentState>CCH_Credit_Market</currentState>
 					<nextState>CCH_LaonsAllocation</nextState>
 					<inputs>
 						<input>
@@ -299,11 +299,6 @@
 				</variable>
 				<variable>
 					<type>double</type>
-					<name>alpha</name>
-					<description>Capital requirement regulation set by the central bank.</description>
-				</variable>
-				<variable>
-					<type>double</type>
 					<name>monthly_profit</name>
 					<description>Monthly bank net profit.</description>
 				</variable>
@@ -311,6 +306,11 @@
 					<type>double</type>
 					<name>interest_rate_on_cb_debt</name>
 					<description>Interest rate on central bank debt.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>alpha</name>
+					<description>Capital requirement parameter.</description>
 				</variable>
 				<variable>
 					<type>double</type>
@@ -484,7 +484,7 @@
 			<name>loan_offer</name>
 			<description>Message added by agents to supply credit. It contains the financial info of lenders.</description>
 			<variables>
-			<!-- (agent_id, equity, value_at_risk, alpha) -->
+			<!-- (agent_id, equity, value_at_risk) -->
 				<variable>
 					<type>int</type>
 					<name>agent_id</name>
@@ -498,11 +498,6 @@
 				<variable>
 					<type>double</type>
 					<name>value_at_risk</name>
-					<description></description>
-				</variable>
-				<variable>
-					<type>double</type>
-					<name>alpha</name>
 					<description></description>
 				</variable>
 			</variables>

@@ -1,0 +1,11 @@
+<xagent>
+<name>Firm</name>
+<id></id>
+<region_id></region_id>
+<gov_id></gov_id>
+<day_of_month_to_act></day_of_month_to_act>
+<last_day_of_month_to_act></last_day_of_month_to_act>
+<bank_id></bank_id>
+<active></active>
+<sold_quantities_vector></sold_quantities_vector>
+</xagent>

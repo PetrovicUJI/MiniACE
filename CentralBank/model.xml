@@ -1,14 +1,14 @@
 <!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
-<xmodel version="1" >
+<xmodel version="2" >
 	<name>Central_Bank</name>
-	<version>Version 1.1, 10/11/2017</version>
+	<version>Version 2.1, 10/11/2017</version>
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
 		<constants>
-			<!-- <variable>
+<!-- 			<variable>
 			<type>double</type>
-			<name>rawmat2output_innovation</name>
+			<name>inflation_target</name>
 			<description></description>
 			</variable> -->
 		</constants>
@@ -44,6 +44,11 @@
 				</variable>
 				<variable>
 					<type>double</type>
+					<name>inflation_target</name>
+					<description></description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>value_at_risk</name>
 					<description>Aggregate value at risk.</description>
 				</variable>
@@ -52,8 +57,48 @@
 					<name>unemployment_rate</name>
 					<description>Unemployment rate in the economy.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>cb_interest_rate</name>
+					<description>Central Bank policy rate in the economy.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>alpha_capital_requirement</name>
+					<description>The capital requirement set by the CB.</description>
+				</variable>
 			</memory>
 			<functions>
+				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>CB_PolicySetting</currentState>
+					<nextState>CB_Info</nextState>
+					<condition>
+						<not>
+							<time>
+								<period>quarterly</period>
+								<phase>1</phase>
+							</time>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
+					<name>Central_Bank_set_policy</name>
+					<description></description>
+					<currentState>CB_PolicySetting</currentState>
+					<nextState>CB_Info</nextState>
+					<condition>
+						<time>
+							<period>quarterly</period>
+							<phase>1</phase>
+						</time>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
 				<function>
 					<name>CB_receive_account_update</name>
 					<description></description>

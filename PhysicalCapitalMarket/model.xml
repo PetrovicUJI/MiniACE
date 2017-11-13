@@ -1,7 +1,7 @@
 <!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
-<xmodel version="1" >
+<xmodel version="2" >
 	<name>PhysicalCapital_Market</name>
-	<version>Version 1.1, 23/10/2017</version>
+	<version>Version 2.1, 23/10/2017</version>
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
@@ -117,6 +117,16 @@
 				</variable>
 				<variable>
 					<type>double</type>
+					<name>cb_trust</name>
+					<description>The trust in the central bank.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>inflation_target</name>
+					<description>Inflation target set by the central bank.</description>
+				</variable>
+				<variable>
+					<type>double</type>
 					<name>technology</name>
 					<description>The current technology level of physical capitel.</description>
 				</variable>
@@ -127,6 +137,14 @@
 				</variable>
 			</memory>
 			<functions>
+				<function>
+					<name>PCFirm_set_price</name>
+					<description></description>
+					<currentState>PCFirm_PriceSetting</currentState>
+					<nextState>PCFirm_Info</nextState>
+					<inputs/>
+					<outputs/>
+				</function>
 				<function>
 					<name>PCFirm_receive_physical_capital_orders</name>
 					<description></description>

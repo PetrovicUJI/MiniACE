@@ -1,7 +1,7 @@
 <!DOCTYPE xmodel SYSTEM "http://miniace.cs.bilgi.edu.tr/XMML.dtd">
-<xmodel version="1" >
+<xmodel version="2" >
 	<name>FinalGoods_Market</name>
-	<version>Version 1.1, 24/10/2017</version>
+	<version>Version 2.1, 24/10/2017</version>
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
@@ -244,18 +244,42 @@
 					<name>week_counter</name>
 					<description>Week counter.</description>
 				</variable>
+				<variable>
+					<type>double</type>
+					<name>income_tax_payment</name>
+					<description>income tax payment.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>income_tax_rate</name>
+					<description>income tax rate.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_payment</name>
+					<description>Capital tax payment.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>capital_tax_rate</name>
+					<description>Capital tax rate.</description>
+				</variable>
 			</memory>
 			<functions>
 				<function>
-					<name>Household_plan_consumption_budget</name>
+					<name>Household_pay_tax_and_plan_consumption_budget</name>
 					<description></description>
 					<currentState>Household_NewBudgetPlanning</currentState>
 					<nextState>Household_FinalGoodsPurchase</nextState>
 					<inputs/>
-					<outputs/>
+					<outputs>
+						<output>
+							<messageName>tax_payments</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
-					<name>Household_plan_consumption_budget</name>
+					<name>Household_pay_tax_and_plan_consumption_budget</name>
 					<description></description>
 					<currentState>Household_BudgetPlanning</currentState>
 					<nextState>Household_BankAccountUpdate</nextState>
@@ -266,7 +290,11 @@
 						</time>
 					</condition>
 					<inputs/>
-					<outputs/>
+					<outputs>
+						<output>
+							<messageName>tax_payments</messageName>
+						</output>
+					</outputs>
 				</function>
 				<function>
 					<name>Idle</name>

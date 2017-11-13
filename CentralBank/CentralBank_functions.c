@@ -4,6 +4,27 @@
 #include "../Central_Bank_agent_header.h"
 
 
+
+/* \fn: int Central_Bank_set_policy()
+ 
+* \brief: Central_Bank set policy.
+ 
+ * \timing: Quarterly, first day 
+ 
+* \authors: Marko Petrovic
+* \history: 13.11.2017-Marko: First implementation.
+*/
+int Central_Bank_set_policy()
+{
+	INFLATION_TARGET = 0.02;
+	
+	ALPHA_CAPITAL_REQUIREMENT = 10;
+	CB_INTEREST_RATE = 0.02 + INFLATION + 0.2*(INFLATION - INFLATION_TARGET);
+
+    return 0;
+}
+
+
 /* \fn: int CB_receive_account_update()
  
 * \brief: Central Bank receive account update.

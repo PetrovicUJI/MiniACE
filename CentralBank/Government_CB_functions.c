@@ -63,6 +63,8 @@ int Government_send_payments_to_CB()
 			add_gov_to_cb_account_update_message(PAYMENT_ACCOUNT, delta_loan, interest);
 		}
 	}
+	
+	TOTAL_LIABILITIES = CB_DEBT;
 
     return 0;
 }

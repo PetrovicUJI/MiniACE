@@ -35,6 +35,64 @@ int Firm_send_info()
     return 0;
 }
 
+
+
+/* \fn: int Firm_receive_info()
+ 
+* \brief: Firm receive info from Gov, CB and PCFIRMS.
+ 
+ *\ cb_send_info_message structure: 
+<!-- (price_level, inflation, cb_interest_rate, alpha_capital_requirement, inflation_target) -->
+
+
+ *\ gov_send_info_message structure: 
+ <!-- (mean_wage, vat_rate, income_tax_rate, capital_tax_rate, 
+		unemployment_benefits_rate, public_transfers_rate) -->
+
+		
+ *\ pcfirm_send_info_message structure: <!-- (pcfirm_id, physical_capital_price) -->
+ 
+
+* \authors: Marko Petrovic
+* \history: 13.11.2017-Marko: First implementation.
+*/
+int Firm_receive_info()
+{
+	
+	START_CB_SEND_INFO_MESSAGE_LOOP
+		
+		PRICE_LEVEL = cb_send_info_message->price_level;
+		INFLATION_TARGET = cb_send_info_message->inflation_target;
+
+	FINISH_CB_SEND_INFO_MESSAGE_LOOP
+	
+	START_GOV_SEND_INFO_MESSAGE_LOOP
+	
+			AVERAGE_WAGE_LEVEL = gov_send_info_message->mean_wage;
+			
+			CAPITAL_TAX_RATE = gov_send_info_message->capital_tax_rate;
+			VAT_RATE = gov_send_info_message->vat_rate;
+	
+	FINISH_GOV_SEND_INFO_MESSAGE_LOOP
+	
+	
+	START_PCFIRM_SEND_INFO_MESSAGE_LOOP
+		
+		PHYSICAL_CAPITAL_PRICE = pcfirm_send_info_message->physical_capital_price;
+
+	FINISH_PCFIRM_SEND_INFO_MESSAGE_LOOP
+	
+
+    return 0;
+}
+
+
+
+
+
+
+
+
 /* \fn: int Firm_send_statistics()
  
 * \brief: Firm send statistics.

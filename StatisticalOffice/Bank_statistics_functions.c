@@ -4,17 +4,31 @@
 #include "../Bank_agent_header.h"
 
 
-/* \fn: int Bank_send_info()
+/* \fn: int Bank_receive_and_send_info()
  
-* \brief: Bank send info to households.
+* \brief: Bank receive and send info to households.
  
-  *\ enterprise_to_hh_info message structure: 	<!-- (enterprise_id, share_book_value) -->
+ *\ enterprise_to_hh_info message structure: 	<!-- (enterprise_id, share_book_value) -->
+ 
+ *\ cb_send_info_message structure: 
+<!-- (price_level, inflation, cb_interest_rate, alpha_capital_requirement, inflation_target) -->
+ 
  
 * \authors: Marko Petrovic
 * \history: 08.11.2017-Marko: First implementation.
 */
-int Bank_send_info()
+int Bank_receive_and_send_info()
 {
+	
+	START_CB_SEND_INFO_MESSAGE_LOOP
+		
+		INTEREST_RATE_ON_CB_DEBT = cb_send_info_message->cb_interest_rate;
+		ALPHA = cb_send_info_message->alpha_capital_requirement;
+
+	FINISH_CB_SEND_INFO_MESSAGE_LOOP
+	
+	
+	
 	double share_book_value = 0.0;
 	
 	if(OUTSTANDING_SHARES <= 0)

@@ -27,7 +27,6 @@ int CCH_collect_orders()
 	double total_debt = 0.0;
 	double loan_amount = 0.0;
 	double value_at_risk = 0.0;
-	double alpha = 0.0;
 	
 
 	//loan_request_message(agent_id, equity, total_debt, loan_amount)
@@ -42,15 +41,14 @@ int CCH_collect_orders()
 		
     FINISH_LOAN_REQUEST_MESSAGE_LOOP
 	
-	//loan_offer_message(agent_id, equity, value_at_risk, alpha)
+	//loan_offer_message(agent_id, equity, value_at_risk)
 	START_LOAN_OFFER_MESSAGE_LOOP
 
 		agent_id = loan_offer_message->agent_id;
 		equity = loan_offer_message->equity;
 		value_at_risk = loan_offer_message->value_at_risk;
-		alpha = loan_offer_message->alpha;
 		
-		add_Loan_offer(&LOAN_OFFERS_LIST, agent_id, equity, value_at_risk, alpha);
+		add_Loan_offer(&LOAN_OFFERS_LIST, agent_id, equity, value_at_risk);
 		
     FINISH_LOAN_OFFER_MESSAGE_LOOP
 
@@ -87,7 +85,6 @@ int CCH_allocate_loans()
 	
 	double creditor_id = 0.0;
 	double value_at_risk = 0.0;
-	double alpha = 0.0;
 	double lender_equity = 0.0;
 	
 	double credit_allowed = 0.0;
@@ -113,9 +110,8 @@ int CCH_allocate_loans()
 		creditor_id = LOAN_OFFERS_LIST.array[0].agent_id;
 		value_at_risk = LOAN_OFFERS_LIST.array[0].value_at_risk;
 		lender_equity = LOAN_OFFERS_LIST.array[0].equity;
-		alpha = LOAN_OFFERS_LIST.array[0].alpha;
 		
-		if((value_at_risk + weighted_loan_requested) <= alpha*lender_equity)
+		if((value_at_risk + weighted_loan_requested) <= ALPHA*lender_equity)
 		{
 			credit_allowed = loan_requested;
 			if (credit_allowed<0)
@@ -145,7 +141,7 @@ int CCH_allocate_loans()
 		}
 		else 
 		{
-			credit_allowed = max(0,(alpha*lender_equity - value_at_risk)/bankruptcy_prob);  
+			credit_allowed = max(0,(ALPHA*lender_equity - value_at_risk)/bankruptcy_prob);  
 			if (credit_allowed<0)
 			printf("\n ERROR in function bank_decide_credit_condition: credit_allowed = %2.5f\n ", credit_allowed);
 		

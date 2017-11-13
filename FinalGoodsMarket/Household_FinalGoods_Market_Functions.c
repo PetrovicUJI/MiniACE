@@ -3,10 +3,12 @@
 
 #include "../Household_agent_header.h"
 
-/* \fn: int Household_plan_consumption_budget()
+/* \fn: int Household_pay_tax_and_plan_consumption_budget()
  
-* \brief: Household_plan_consumption_budget.
+* \brief: Household pay tax and plan consumption budget.
  
+ *\ tax_payments_message structure:
+<!-- (gov_id, tax_payment) -->
  
 * \timing: 
  * \condition:
@@ -15,21 +17,34 @@
 * \authors: Marko Petrovic
 * \history: 25.10.2017-Marko: First implementation.
 */
-int Household_plan_consumption_budget()
+int Household_pay_tax_and_plan_consumption_budget()
 {
+	double total_tax_payments = 0.0;
+	
+	CAPITAL_TAX_PAYMENT = DIVIDEND_INCOME*CAPITAL_TAX_RATE;
+	INCOME_TAX_PAYMENT = INCOME*INCOME_TAX_RATE;
+	
+	total_tax_payments = INCOME_TAX_PAYMENT + CAPITAL_TAX_PAYMENT;
+	
+	add_tax_payments_message(GOV_ID, total_tax_payments);
+	
+	PAYMENT_ACCOUNT -= total_tax_payments;
+	
 	TOTAL_INCOME = INCOME + DIVIDEND_INCOME + PUBLIC_TRANSFERS;
+	
+	TOTAL_NET_INCOME = TOTAL_INCOME - total_tax_payments;
 	
 	TOTAL_ASSETS = CURRENT_ASSETS + NON_CURRENT_ASSETS + PAYMENT_ACCOUNT;
 	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
 	WEALTH = TOTAL_ASSETS - TOTAL_LIABILITIES;
 	
-	MONTHLY_CONSUMPTION_BUDGET = TOTAL_INCOME + CARROL_INDEX*(WEALTH - WEALTH_TO_INCOME_RATIO_TARGET*TOTAL_INCOME);
+	MONTHLY_CONSUMPTION_BUDGET = TOTAL_NET_INCOME + CARROL_INDEX*(WEALTH - WEALTH_TO_INCOME_RATIO_TARGET*TOTAL_NET_INCOME);
 	
-	MONTHLY_CONSUMPTION_BUDGET = max(MONTHLY_CONSUMPTION_BUDGET,0.5*TOTAL_INCOME); 
+	MONTHLY_CONSUMPTION_BUDGET = max(MONTHLY_CONSUMPTION_BUDGET,0.5*TOTAL_NET_INCOME); 
 	
 	WEEK_COUNTER = 1;
 
-	DIVIDEND_INCOME = 0;
+	DIVIDEND_INCOME = 0.0;
 
     return 0;
 }

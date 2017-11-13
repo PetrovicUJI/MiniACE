@@ -33,7 +33,6 @@ int Bank_pay_tax_and_dividends()
 		
 		add_dividend_payment_message(ID, dividend);
 
-		PAYMENT_ACCOUNT -= DIVIDEND_PAYMENT;
 		EQUITY -= DIVIDEND_PAYMENT;
 	}
 	
@@ -41,7 +40,6 @@ int Bank_pay_tax_and_dividends()
 	{
 		add_tax_payments_message(GOV_ID, CAPITAL_TAX_PAYMENT);
 		
-		PAYMENT_ACCOUNT -= CAPITAL_TAX_PAYMENT;
 		EQUITY -= CAPITAL_TAX_PAYMENT;
 	}
 	
@@ -49,15 +47,6 @@ int Bank_pay_tax_and_dividends()
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -69,7 +58,7 @@ int Bank_pay_tax_and_dividends()
 * \timing: Monthly on the firm activation day.
  * \condition:
 
- *\ loan offer message structure: (agent_id, equity, value_at_risk, alpha)
+ *\ loan offer message structure: (agent_id, equity, value_at_risk)
  
 * \authors: Marko Petrovic
 * \history: 11.10.2017-Marko: First implementation.
@@ -78,7 +67,7 @@ int Bank_offer_loans()
 {
 	if (VALUE_AT_RISK <= ALPHA*EQUITY)
 	{
-		add_loan_offer_message(ID, EQUITY, VALUE_AT_RISK, ALPHA);	
+		add_loan_offer_message(ID, EQUITY, VALUE_AT_RISK);	
 	}
 
     return 0;
@@ -103,7 +92,8 @@ int Bank_give_loans()
 {
 	START_NEW_LOAN_GIVEN_MESSAGE_LOOP
 		NON_CURRENT_ASSETS += new_loan_given_message->credit_allowed;
-		DEPOSITS += new_loan_given_message->credit_allowed;
+		//it is not necessary since bank update all deposits later 
+		//DEPOSITS += new_loan_given_message->credit_allowed;
 		VALUE_AT_RISK += new_loan_given_message->loan_value_at_risk;
     FINISH_NEW_LOAN_GIVEN_MESSAGE_LOOP
 	
@@ -136,7 +126,6 @@ int Bank_receive_loan_repayments()
 		VALUE_AT_RISK -= loan_repayment_message->loan_instalment_value_at_risk;
 		
 		EQUITY += loan_repayment_message->interest_payments;
-		PAYMENT_ACCOUNT += loan_repayment_message->interest_payments;
 		MONTHLY_PROFIT += loan_repayment_message->interest_payments;
 		
     FINISH_LOAN_REPAYMENT_MESSAGE_LOOP
@@ -174,6 +163,8 @@ int Bank_receive_account_update()
 		DEPOSITS += bank_account_update_message->payment_account;
 		
     FINISH_BANK_ACCOUNT_UPDATE_MESSAGE_LOOP
+	
+	PAYMENT_ACCOUNT = DEPOSITS + CB_DEBT + EQUITY - NON_CURRENT_ASSETS - CURRENT_ASSETS;
 	
 
     return 0;
