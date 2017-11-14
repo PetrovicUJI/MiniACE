@@ -5,43 +5,43 @@
 	<description>Authors: Marko Petrovic</description>
 	<models>
 		<model>
-			<file>Firm/model.xml</file>
+			<file>Firm/Firm_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>Initialization/model.xml</file>
+			<file>Initialization/Initialization_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>LaborMarket/model.xml</file>
+			<file>LaborMarket/LaborMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>FinancialManagement/model.xml</file>
+			<file>FinancialManagement/FinancialManagement_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>BankingSector/model.xml</file>
+			<file>BankingSector/BankingSector_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>PhysicalCapitalMarket/model.xml</file>
+			<file>PhysicalCapitalMarket/PhysicalCapitalMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>FinalGoodsMarket/model.xml</file>
+			<file>FinalGoodsMarket/FinalGoodsMarket_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>Government/model.xml</file>
+			<file>Government/Government_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>StatisticalOffice/model.xml</file>
+			<file>StatisticalOffice/Statistics_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 		<model>
-			<file>CentralBank/model.xml</file>
+			<file>CentralBank/CentralBank_submodel.xml</file>
 			<enabled>true</enabled>
 		</model>
 	</models>

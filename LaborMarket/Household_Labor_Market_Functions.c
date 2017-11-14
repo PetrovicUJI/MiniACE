@@ -354,11 +354,15 @@ int Household_require_transfers()
 	}
 	else
 	{
-		add_public_transfers_message(GOV_ID, PUBLIC_TRANSFERS);
+		// This condition is because the same function can be executed at two different places: at the activation day and at the day of receiving the income.
+		if (DAY%20 != DAY_OF_MONTH_TO_ACT)
+		{
+			add_public_transfers_message(GOV_ID, PUBLIC_TRANSFERS);
 	
-		PAYMENT_ACCOUNT += PUBLIC_TRANSFERS;
-		
-		TRANSFER_INCOME = PUBLIC_TRANSFERS;
+			PAYMENT_ACCOUNT += PUBLIC_TRANSFERS;
+			
+			TRANSFER_INCOME = PUBLIC_TRANSFERS;
+		}
 	}
 
     return 0;
