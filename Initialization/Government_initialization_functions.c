@@ -144,9 +144,14 @@ int Government_initialization()
 			firm_list.array[i].outstanding_shares--;
 			
 			if(firm_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_initialization(&firm_list, i);	
+			{
+				remove_Enterprise_initialization(&firm_list, i);
+			}
+			else
+			{
+				i++;
+			}
 
-			i++;
 			j++;
 		}
 		
@@ -165,9 +170,14 @@ int Government_initialization()
 			pcfirm_list.array[i].outstanding_shares--;
 			
 			if(pcfirm_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_initialization(&pcfirm_list, i);	
+			{
+				remove_Enterprise_initialization(&pcfirm_list, i);	
+			}
+			else
+			{
+				i++;
+			}
 
-			i++;
 			j++;
 		}
 		
@@ -186,9 +196,14 @@ int Government_initialization()
 			bank_list.array[i].outstanding_shares--;
 			
 			if(bank_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_initialization(&bank_list, i);	
-
-			i++;
+			{
+				remove_Enterprise_initialization(&bank_list, i);
+			}
+			else
+			{
+				i++;
+			}
+				
 			j++;
 		}
 	///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -9,3 +9,97 @@
  0.000000
  1 1 0.000000 0.000000 0.000000 0.000000
  0.000000
+ 1 1 0.000000 0.000000 0.000000 0.000000
+ 0.000000
+ 1 1 0.000000 0.000000 0.000000 0.000000
+ 0.000000
+ 1 1 0.000000 0.000000 0.000000 0.000000
+ 0.000000
+ 1 1 0.000000 0.000000 0.000000 0.000000
+ 0.000000
+ 241 1 nan nan nan nan
+ 0.000000
+ 481 1 nan nan nan nan
+ 0.000000
+ 721 1 nan nan nan nan
+ 0.000000
+ 961 1 nan nan nan nan
+ 0.000000
+ 1201 1 nan nan nan nan
+ 0.000000
+ 1441 1 nan nan nan nan
+ 0.000000
+ 1681 1 nan nan nan nan
+ 0.000000
+ 1921 1 nan nan nan nan
+ 0.000000
+ 2161 1 nan nan nan nan
+ 0.000000
+ 2401 1 nan nan nan nan
+ 0.000000
+ 2641 1 nan nan nan nan
+ 0.000000
+ 2881 1 nan nan nan nan
+ 0.000000
+ 3121 1 nan nan nan nan
+ 0.000000
+ 3361 1 nan nan nan nan
+ 0.000000
+ 3601 1 nan nan nan nan
+ 0.000000
+ 3841 1 nan nan nan nan
+ 0.000000
+ 4081 1 nan nan nan nan
+ 0.000000
+ 4321 1 nan nan nan nan
+ 0.000000
+ 4561 1 nan nan nan nan
+ 0.000000
+ 4801 1 nan nan nan nan
+ 0.000000
+ 5041 1 nan nan nan nan
+ 0.000000
+ 5281 1 nan nan nan nan
+ 0.000000
+ 5521 1 nan nan nan nan
+ 0.000000
+ 5761 1 nan nan nan nan
+ 0.000000
+ 6001 1 nan nan nan nan
+ 0.000000
+ 6241 1 nan nan nan nan
+ 0.000000
+ 6481 1 nan nan nan nan
+ 0.000000
+ 6721 1 nan nan nan nan
+ 0.000000
+ 6961 1 nan nan nan nan
+ 0.000000
+ 7201 1 nan nan nan nan
+ 0.000000
+ 7441 1 nan nan nan nan
+ 0.000000
+ 7681 1 nan nan nan nan
+ 0.000000
+ 7921 1 nan nan nan nan
+ 0.000000
+ 8161 1 nan nan nan nan
+ 0.000000
+ 8401 1 nan nan nan nan
+ 0.000000
+ 8641 1 nan nan nan nan
+ 0.000000
+ 8881 1 nan nan nan nan
+ 0.000000
+ 9121 1 nan nan nan nan
+ 0.000000
+ 9361 1 nan nan nan nan
+ 0.000000
+ 9601 1 nan nan nan nan
+ 0.000000
+ 9841 1 nan nan nan nan
+ 0.000000
+ 241 1 nan nan nan nan
+ 0.000000
+ 481 1 nan nan nan nan
+ 0.000000
