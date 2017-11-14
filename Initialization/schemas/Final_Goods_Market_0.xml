@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<states xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<xagent>
+		<name>Final_Goods_Market</name>
+		<id>6</id>
+		<region_id>1</region_id>
+		<gov_id>1</gov_id>
+		<final_goods_list>{}</final_goods_list>
+		<final_goods_orders_list>{}</final_goods_orders_list>
+		<daily_sold_quantity>0</daily_sold_quantity>
+		<daily_market_turnover>0</daily_market_turnover>
+		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<monthly_market_turnover>0</monthly_market_turnover>
+		<initialization>1</initialization>
+	</xagent>
+</states>

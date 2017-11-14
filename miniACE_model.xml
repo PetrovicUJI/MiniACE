@@ -447,9 +447,9 @@
 					<description>Agent ID.</description>
 				</variable>
 				<variable>
-					<type>int_array</type>
-					<name>list_of_regions</name>
-					<description>List of regions that are associated to the government.</description>
+					<type>int</type>
+					<name>region_id</name>
+					<description>Region ID.</description>
 				</variable>
 				<variable>
 					<type>int</type>

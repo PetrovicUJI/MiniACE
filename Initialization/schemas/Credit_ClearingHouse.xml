@@ -1,0 +1,20 @@
+<states>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<loan_requests_list></loan_requests_list>
+		<loan_offers_list></loan_offers_list>
+		<cb_interest_rate></cb_interest_rate>
+		<alpha></alpha>
+	</xagent>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<loan_requests_list></loan_requests_list>
+		<loan_offers_list></loan_offers_list>
+		<cb_interest_rate></cb_interest_rate>
+		<alpha></alpha>
+	</xagent>
+</states>

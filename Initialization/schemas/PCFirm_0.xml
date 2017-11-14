@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<states xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<xagent>
+		<name>PCFirm</name>
+		<id>4</id>
+		<region_id>1</region_id>
+		<gov_id>1</gov_id>
+		<day_of_month_to_act>0</day_of_month_to_act>
+		<bank_id>3</bank_id>
+		<total_assets>0</total_assets>
+		<payment_account>0</payment_account>
+		<current_assets>0</current_assets>
+		<non_current_assets>0</non_current_assets>
+		<total_liabilities>0</total_liabilities>
+		<current_liabilities>0</current_liabilities>
+		<non_current_liabilities>0</non_current_liabilities>
+		<equity>0</equity>
+		<initialization>1</initialization>
+		<outstanding_shares>100</outstanding_shares>
+		<price>3</price>
+		<cb_trust>0.5</cb_trust>
+		<inflation_target>0</inflation_target>
+		<technology>1</technology>
+		<monthly_revenue>0</monthly_revenue>
+		<inflation>0</inflation>
+	</xagent>
+</states>

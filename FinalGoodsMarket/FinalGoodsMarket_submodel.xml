@@ -240,7 +240,7 @@
 					<description>Households' weekly consumption costs.</description>
 				</variable>
 				<variable>
-					<type>double</type>
+					<type>int</type>
 					<name>week_counter</name>
 					<description>Week counter.</description>
 				</variable>

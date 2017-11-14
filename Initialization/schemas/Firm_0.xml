@@ -59,7 +59,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -125,7 +125,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -191,7 +191,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -257,7 +257,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -323,7 +323,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -389,7 +389,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -455,7 +455,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -521,7 +521,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -587,7 +587,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -653,7 +653,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -719,7 +719,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -785,7 +785,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -851,7 +851,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -917,7 +917,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -983,7 +983,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -1049,7 +1049,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -1115,7 +1115,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
@@ -1181,7 +1181,7 @@
 		<inflation_target>0</inflation_target>
 		<average_demand_level>0</average_demand_level>
 		<average_wage_level>0</average_wage_level>
-		<initialization>0</initialization>
+		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>

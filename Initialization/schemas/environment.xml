@@ -1,0 +1,33 @@
+<states>
+	<itno>0</itno>
+	<environment>
+		<total_regions></total_regions>
+		<loan_repayment_period_months></loan_repayment_period_months>
+		<carrol_index></carrol_index>
+		<wealth_to_income_ratio_target></wealth_to_income_ratio_target>
+		<short_term_loan_repayment_target></short_term_loan_repayment_target>
+		<profit_accumulation_rate></profit_accumulation_rate>
+		<physical_capital_duration></physical_capital_duration>
+		<target_profit_rate></target_profit_rate>
+		<profit_rate_weights></profit_rate_weights>
+		<target_capacity_utilization></target_capacity_utilization>
+		<capacity_utilization_weights></capacity_utilization_weights>
+		<bankruptcy_period></bankruptcy_period>
+		<max_number_of_job_applications></max_number_of_job_applications>
+	</environment>
+		<environment>
+		<total_regions></total_regions>
+		<loan_repayment_period_months></loan_repayment_period_months>
+		<carrol_index></carrol_index>
+		<wealth_to_income_ratio_target></wealth_to_income_ratio_target>
+		<short_term_loan_repayment_target></short_term_loan_repayment_target>
+		<profit_accumulation_rate></profit_accumulation_rate>
+		<physical_capital_duration></physical_capital_duration>
+		<target_profit_rate></target_profit_rate>
+		<profit_rate_weights></profit_rate_weights>
+		<target_capacity_utilization></target_capacity_utilization>
+		<capacity_utilization_weights></capacity_utilization_weights>
+		<bankruptcy_period></bankruptcy_period>
+		<max_number_of_job_applications></max_number_of_job_applications>
+	</environment>
+</states>

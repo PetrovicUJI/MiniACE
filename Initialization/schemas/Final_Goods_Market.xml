@@ -1,0 +1,28 @@
+<states>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<gov_id></gov_id>
+		<final_goods_list></final_goods_list>
+		<final_goods_orders_list></final_goods_orders_list>
+		<daily_sold_quantity></daily_sold_quantity>
+		<daily_market_turnover></daily_market_turnover>
+		<monthly_sold_quantity></monthly_sold_quantity>
+		<monthly_market_turnover></monthly_market_turnover>
+		<initialization></initialization>
+	</xagent>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<gov_id></gov_id>
+		<final_goods_list></final_goods_list>
+		<final_goods_orders_list></final_goods_orders_list>
+		<daily_sold_quantity></daily_sold_quantity>
+		<daily_market_turnover></daily_market_turnover>
+		<monthly_sold_quantity></monthly_sold_quantity>
+		<monthly_market_turnover></monthly_market_turnover>
+		<initialization></initialization>
+	</xagent>
+</states>

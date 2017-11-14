@@ -1,0 +1,18 @@
+<states>
+	<itno>0</itno>
+	<environment>
+		<total_regions>1</total_regions>
+		<loan_repayment_period_months>24</loan_repayment_period_months>
+		<carrol_index>0.2</carrol_index>
+		<wealth_to_income_ratio_target>6</wealth_to_income_ratio_target>
+		<short_term_loan_repayment_target>0.2</short_term_loan_repayment_target>
+		<profit_accumulation_rate>0.2</profit_accumulation_rate>
+		<physical_capital_duration>24</physical_capital_duration>
+		<target_profit_rate>0.05</target_profit_rate>
+		<profit_rate_weights>0.01</profit_rate_weights>
+		<target_capacity_utilization>0.8</target_capacity_utilization>
+		<capacity_utilization_weights>0.02</capacity_utilization_weights>
+		<bankruptcy_period>120</bankruptcy_period>
+		<max_number_of_job_applications>3</max_number_of_job_applications>
+	</environment>
+</states>
