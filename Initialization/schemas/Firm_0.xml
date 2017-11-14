@@ -2,72 +2,6 @@
 <states xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<xagent>
 		<name>Firm</name>
-		<id>10</id>
-		<region_id>1</region_id>
-		<gov_id>1</gov_id>
-		<day_of_month_to_act>0</day_of_month_to_act>
-		<last_day_of_month_to_act>0</last_day_of_month_to_act>
-		<bank_id>3</bank_id>
-		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
-		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
-		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
-		<sold_quantities_vector>{}</sold_quantities_vector>
-		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
-		<mark_up>0.1</mark_up>
-		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
-		<initialization>1</initialization>
-		<employees>{}</employees>
-		<labor_requirement>0</labor_requirement>
-		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
-	</xagent>
-	<xagent>
-		<name>Firm</name>
 		<id>11</id>
 		<region_id>1</region_id>
 		<gov_id>1</gov_id>
@@ -75,62 +9,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -141,62 +75,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -207,62 +141,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -273,62 +207,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -339,62 +273,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -405,62 +339,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -471,62 +405,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -537,62 +471,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -603,62 +537,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -669,62 +603,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -735,62 +669,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -801,62 +735,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -867,62 +801,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -933,62 +867,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -999,62 +933,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -1065,62 +999,62 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 	<xagent>
 		<name>Firm</name>
@@ -1131,61 +1065,259 @@
 		<last_day_of_month_to_act>0</last_day_of_month_to_act>
 		<bank_id>3</bank_id>
 		<active>1</active>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<current_liabilities>0</current_liabilities>
-		<non_current_liabilities>0</non_current_liabilities>
-		<equity>0</equity>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
 		<loans>{}</loans>
-		<operating_cash_flow>0</operating_cash_flow>
-		<external_financial_needs>0</external_financial_needs>
-		<vat_rate>0</vat_rate>
-		<capital_tax_rate>0</capital_tax_rate>
-		<monthly_revenue>0</monthly_revenue>
-		<price_level>1</price_level>
-		<monthly_wage_payment>0</monthly_wage_payment>
-		<total_loan_interest_payment>0</total_loan_interest_payment>
-		<total_loan_instalment_payment>0</total_loan_instalment_payment>
-		<short_term_borrowing_interest_payment>0</short_term_borrowing_interest_payment>
-		<total_financial_payment>0</total_financial_payment>
-		<monthly_interest_rate_on_short_term_borrowing>0</monthly_interest_rate_on_short_term_borrowing>
-		<vat_payment>0</vat_payment>
-		<ebt>0</ebt>
-		<dividend_payment>0</dividend_payment>
-		<outstanding_shares>100</outstanding_shares>
-		<net_earnings>0</net_earnings>
-		<capital_tax_payment>0</capital_tax_payment>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
 		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
-		<expected_demand>0</expected_demand>
-		<production_plan>0</production_plan>
-		<investment_plan>0</investment_plan>
-		<productivity>1</productivity>
-		<capacity_utilization>0</capacity_utilization>
-		<capital_labor_ratio>6</capital_labor_ratio>
-		<physical_capital>0</physical_capital>
-		<inventories>0</inventories>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
 		<sold_quantities_vector>{}</sold_quantities_vector>
 		<physical_capital_stock>{}</physical_capital_stock>
-		<physical_capital_price>0</physical_capital_price>
-		<price>1</price>
-		<price_last_month>1</price_last_month>
-		<production>0</production>
-		<physical_capital_depreciation_cost>0</physical_capital_depreciation_cost>
-		<unit_costs>0</unit_costs>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
 		<mark_up>0.1</mark_up>
 		<cb_trust>0.5</cb_trust>
-		<inflation_target>0</inflation_target>
-		<average_demand_level>0</average_demand_level>
-		<average_wage_level>0</average_wage_level>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
 		<initialization>1</initialization>
 		<employees>{}</employees>
 		<labor_requirement>0</labor_requirement>
 		<delta_labor_requirement>0</delta_labor_requirement>
-		<average_wage>1</average_wage>
-		<wage_offer>1</wage_offer>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
+	</xagent>
+	<xagent>
+		<name>Firm</name>
+		<id>28</id>
+		<region_id>1</region_id>
+		<gov_id>1</gov_id>
+		<day_of_month_to_act>0</day_of_month_to_act>
+		<last_day_of_month_to_act>0</last_day_of_month_to_act>
+		<bank_id>3</bank_id>
+		<active>1</active>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
+		<loans>{}</loans>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
+		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
+		<sold_quantities_vector>{}</sold_quantities_vector>
+		<physical_capital_stock>{}</physical_capital_stock>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
+		<mark_up>0.1</mark_up>
+		<cb_trust>0.5</cb_trust>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
+		<initialization>1</initialization>
+		<employees>{}</employees>
+		<labor_requirement>0</labor_requirement>
+		<delta_labor_requirement>0</delta_labor_requirement>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
+	</xagent>
+	<xagent>
+		<name>Firm</name>
+		<id>29</id>
+		<region_id>1</region_id>
+		<gov_id>1</gov_id>
+		<day_of_month_to_act>0</day_of_month_to_act>
+		<last_day_of_month_to_act>0</last_day_of_month_to_act>
+		<bank_id>3</bank_id>
+		<active>1</active>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
+		<loans>{}</loans>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
+		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
+		<sold_quantities_vector>{}</sold_quantities_vector>
+		<physical_capital_stock>{}</physical_capital_stock>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
+		<mark_up>0.1</mark_up>
+		<cb_trust>0.5</cb_trust>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
+		<initialization>1</initialization>
+		<employees>{}</employees>
+		<labor_requirement>0</labor_requirement>
+		<delta_labor_requirement>0</delta_labor_requirement>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
+	</xagent>
+	<xagent>
+		<name>Firm</name>
+		<id>30</id>
+		<region_id>1</region_id>
+		<gov_id>1</gov_id>
+		<day_of_month_to_act>0</day_of_month_to_act>
+		<last_day_of_month_to_act>0</last_day_of_month_to_act>
+		<bank_id>3</bank_id>
+		<active>1</active>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<current_liabilities>0.0</current_liabilities>
+		<non_current_liabilities>0.0</non_current_liabilities>
+		<equity>0.0</equity>
+		<loans>{}</loans>
+		<operating_cash_flow>0.0</operating_cash_flow>
+		<external_financial_needs>0.0</external_financial_needs>
+		<vat_rate>0.0</vat_rate>
+		<capital_tax_rate>0.0</capital_tax_rate>
+		<monthly_revenue>0.0</monthly_revenue>
+		<price_level>1.0</price_level>
+		<monthly_wage_payment>0.0</monthly_wage_payment>
+		<total_loan_interest_payment>0.0</total_loan_interest_payment>
+		<total_loan_instalment_payment>0.0</total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment>0.0</short_term_borrowing_interest_payment>
+		<total_financial_payment>0.0</total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing>0.0</monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment>0.0</vat_payment>
+		<ebt>0.0</ebt>
+		<dividend_payment>0.0</dividend_payment>
+		<outstanding_shares>100.0</outstanding_shares>
+		<net_earnings>0.0</net_earnings>
+		<capital_tax_payment>0.0</capital_tax_payment>
+		<remaining_days_of_bankruptcy>0</remaining_days_of_bankruptcy>
+		<expected_demand>0.0</expected_demand>
+		<production_plan>0.0</production_plan>
+		<investment_plan>0.0</investment_plan>
+		<productivity>1.0</productivity>
+		<capacity_utilization>0.0</capacity_utilization>
+		<capital_labor_ratio>6.0</capital_labor_ratio>
+		<physical_capital>0.0</physical_capital>
+		<inventories>0.0</inventories>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
+		<sold_quantities_vector>{}</sold_quantities_vector>
+		<physical_capital_stock>{}</physical_capital_stock>
+		<physical_capital_price>3.0</physical_capital_price>
+		<price>1.0</price>
+		<price_last_month>1.0</price_last_month>
+		<production>0.0</production>
+		<physical_capital_depreciation_cost>0.0</physical_capital_depreciation_cost>
+		<unit_costs>0.0</unit_costs>
+		<mark_up>0.1</mark_up>
+		<cb_trust>0.5</cb_trust>
+		<inflation_target>0.0</inflation_target>
+		<average_demand_level>0.0</average_demand_level>
+		<average_wage_level>0.0</average_wage_level>
+		<initialization>1</initialization>
+		<employees>{}</employees>
+		<labor_requirement>0</labor_requirement>
+		<delta_labor_requirement>0</delta_labor_requirement>
+		<average_wage>1.0</average_wage>
+		<wage_offer>1.0</wage_offer>
 	</xagent>
 </states>

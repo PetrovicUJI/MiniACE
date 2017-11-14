@@ -4,21 +4,21 @@
 		<name>Central_Bank</name>
 		<id>2</id>
 		<gov_id>1</gov_id>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<fiat_money_banks>0</fiat_money_banks>
-		<gov_debt>0</gov_debt>
-		<total_liabilities>0</total_liabilities>
-		<fiat_money>0</fiat_money>
-		<deposits>0</deposits>
-		<equity>0</equity>
-		<inflation>0</inflation>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<fiat_money_banks>0.0</fiat_money_banks>
+		<gov_debt>0.0</gov_debt>
+		<total_liabilities>0.0</total_liabilities>
+		<fiat_money>0.0</fiat_money>
+		<deposits>0.0</deposits>
+		<equity>0.0</equity>
+		<inflation>0.0</inflation>
 		<inflation_target>0.02</inflation_target>
-		<value_at_risk>0</value_at_risk>
-		<unemployment_rate>0</unemployment_rate>
+		<value_at_risk>0.0</value_at_risk>
+		<unemployment_rate>0.0</unemployment_rate>
 		<cb_interest_rate>0.02</cb_interest_rate>
-		<alpha_capital_requirement>10</alpha_capital_requirement>
+		<alpha_capital_requirement>10.0</alpha_capital_requirement>
 		<initialization>1</initialization>
-		<price_level>1</price_level>
+		<price_level>1.0</price_level>
 	</xagent>
 </states>

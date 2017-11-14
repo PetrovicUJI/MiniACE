@@ -9,21 +9,21 @@
  
 * \brief: Government set initialization to zero.
 
-*\ init_hh_to_gov message structure: <!-- (hh_id) -->
+*\ hh_to_gov_ini_message structure: <!-- (hh_id) -->
  
-*\ init_firm_to_gov message structure: <!-- (firm_id, outstanding_shares) -->
+*\ firm_to_gov_ini_message structure: <!-- (firm_id, outstanding_shares) -->
  
-*\ init_bank_to_gov message structure: <!-- (bank_id, outstanding_shares) -->
+*\ bank_to_gov_ini_message structure: <!-- (bank_id, outstanding_shares) -->
 
-*\ init_pcfirm_to_gov message structure: <!-- (pcfirm_id, outstanding_shares) -->
+*\ pcfirm_to_gov_ini_message structure: <!-- (pcfirm_id, outstanding_shares) -->
 
- *\ init_cb_to_gov_message structure: 	<!-- (cb_id) -->
+ *\ cb_to_gov_ini_message structure: 	<!-- (cb_id) -->
 
 
 *\ 	gov_to_hh_init_shares message structure <!-- (hh_id, enterprise_id, shares, share_book_value) -->
  
  
- *\ Enterprise_init data type structure <!-- (enterprise_id, outstanding_shares, share_book_value) -->
+ *\ Enterprise_initialization data type structure <!-- (enterprise_id, outstanding_shares, share_book_value) -->
  
  *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day) -->
  filters: households: a.id == m.hh_id;    firms:  a.id == m.employer_id
@@ -42,23 +42,23 @@
 */
 int Government_initialization()
 {	
-	Enterprise_init_array firm_list;
-	init_Enterprise_init_array(&firm_list);
+	Enterprise_initialization_array firm_list;
+	init_Enterprise_initialization_array(&firm_list);
 	
-	Enterprise_init_array pcfirm_list;
-	init_Enterprise_init_array(&pcfirm_list);
+	Enterprise_initialization_array pcfirm_list;
+	init_Enterprise_initialization_array(&pcfirm_list);
 	
-	Enterprise_init_array bank_list;
-	init_Enterprise_init_array(&bank_list);
+	Enterprise_initialization_array bank_list;
+	init_Enterprise_initialization_array(&bank_list);
 	
 	int_array hh_list;
 	init_int_array(&hh_list);
 	
-	START_INIT_HH_TO_GOV_MESSAGE_LOOP
+	START_HH_TO_GOV_INI_MESSAGE_LOOP
 	
-		add_int(&hh_list, init_hh_to_gov_message->hh_id);
+		add_int(&hh_list, hh_to_gov_ini_message->hh_id);
 	
-    FINISH_INIT_HH_TO_GOV_MESSAGE_LOOP
+    FINISH_HH_TO_GOV_INI_MESSAGE_LOOP
 	
 	double physical_capital_price = 0.0;
 	
@@ -70,11 +70,11 @@ int Government_initialization()
 	
 	int cb_id;
 	
-	START_INIT_CB_TO_GOV_MESSAGE_LOOP
+	START_CB_TO_GOV_INI_MESSAGE_LOOP
 	
-		cb_id = init_cb_to_gov_message->cb_id;
+		cb_id = cb_to_gov_ini_message->cb_id;
 	
-    FINISH_INIT_CB_TO_GOV_MESSAGE_LOOP
+    FINISH_CB_TO_GOV_INI_MESSAGE_LOOP
 	
 
 	// initialize firm balance sheet
@@ -100,39 +100,39 @@ int Government_initialization()
 	// asign shares to households
 	///////////////////////////////////////////////////////////
 	
-		START_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+		START_FIRM_TO_GOV_INI_MESSAGE_LOOP
 			
-			add_Enterprise_init(&firm_list,
-			init_firm_to_gov_message->firm_id,
-			init_firm_to_gov_message->outstanding_shares,
-			firm_equity/init_firm_to_gov_message->outstanding_shares);
+			add_Enterprise_initialization(&firm_list,
+			firm_to_gov_ini_message->firm_id,
+			firm_to_gov_ini_message->outstanding_shares,
+			firm_equity/firm_to_gov_ini_message->outstanding_shares);
 		
-		FINISH_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+		FINISH_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
-		START_INIT_PCFIRM_TO_GOV_MESSAGE_LOOP
+		START_PCFIRM_TO_GOV_INI_MESSAGE_LOOP
 			
-			add_Enterprise_init(&pcfirm_list,
-			init_pcfirm_to_gov_message->pcfirm_id,
-			init_pcfirm_to_gov_message->outstanding_shares, 0);
+			add_Enterprise_initialization(&pcfirm_list,
+			pcfirm_to_gov_ini_message->pcfirm_id,
+			pcfirm_to_gov_ini_message->outstanding_shares, 0);
 			
 		
-		FINISH_INIT_PCFIRM_TO_GOV_MESSAGE_LOOP
+		FINISH_PCFIRM_TO_GOV_INI_MESSAGE_LOOP
 		
-		START_INIT_BANK_TO_GOV_MESSAGE_LOOP
+		START_BANK_TO_GOV_INI_MESSAGE_LOOP
 			
-			add_Enterprise_init(&bank_list,
-			init_bank_to_gov_message->bank_id,
-			init_bank_to_gov_message->outstanding_shares,
-			bank_equity/init_bank_to_gov_message->outstanding_shares);
+			add_Enterprise_initialization(&bank_list,
+			bank_to_gov_ini_message->bank_id,
+			bank_to_gov_ini_message->outstanding_shares,
+			bank_equity/bank_to_gov_ini_message->outstanding_shares);
 		
-		FINISH_INIT_BANK_TO_GOV_MESSAGE_LOOP
+		FINISH_BANK_TO_GOV_INI_MESSAGE_LOOP
 		
 
 		int i = 0;
 		int j = 0;
 		while(firm_list.size > 0)
 		{
-			if(i == firm_list.size)
+			if(i >= firm_list.size)
 			i = 0;
 		
 			if(j == hh_list.size)
@@ -144,7 +144,7 @@ int Government_initialization()
 			firm_list.array[i].outstanding_shares--;
 			
 			if(firm_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_init(&firm_list, i);	
+			remove_Enterprise_initialization(&firm_list, i);	
 
 			i++;
 			j++;
@@ -153,7 +153,7 @@ int Government_initialization()
 		i = 0;
 		while(pcfirm_list.size > 0)
 		{
-			if(i == pcfirm_list.size)
+			if(i >= pcfirm_list.size)
 			i = 0;
 		
 			if(j == hh_list.size)
@@ -165,7 +165,7 @@ int Government_initialization()
 			pcfirm_list.array[i].outstanding_shares--;
 			
 			if(pcfirm_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_init(&pcfirm_list, i);	
+			remove_Enterprise_initialization(&pcfirm_list, i);	
 
 			i++;
 			j++;
@@ -174,7 +174,7 @@ int Government_initialization()
 		i = 0;
 		while(bank_list.size > 0)
 		{
-			if(i == bank_list.size)
+			if(i >= bank_list.size)
 			i = 0;
 		
 			if(j == hh_list.size)
@@ -186,7 +186,7 @@ int Government_initialization()
 			bank_list.array[i].outstanding_shares--;
 			
 			if(bank_list.array[i].outstanding_shares == 0)
-			remove_Enterprise_init(&bank_list, i);	
+			remove_Enterprise_initialization(&bank_list, i);	
 
 			i++;
 			j++;
@@ -194,16 +194,16 @@ int Government_initialization()
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	reset_Enterprise_init_array(&firm_list);
+	reset_Enterprise_initialization_array(&firm_list);
 		
-	START_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+	START_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
-		add_Enterprise_init(&firm_list,
-		init_firm_to_gov_message->firm_id,
-		init_firm_to_gov_message->outstanding_shares,
-		firm_equity/init_firm_to_gov_message->outstanding_shares);
+		add_Enterprise_initialization(&firm_list,
+		firm_to_gov_ini_message->firm_id,
+		firm_to_gov_ini_message->outstanding_shares,
+		firm_equity/firm_to_gov_ini_message->outstanding_shares);
 	
-	FINISH_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+	FINISH_FIRM_TO_GOV_INI_MESSAGE_LOOP
 
 
 	/*The government assigns a day of month to act for each firm*/
@@ -274,26 +274,26 @@ int Government_initialization()
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
-		START_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+		START_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
-			add_gov_init_balance_sheets_message(init_firm_to_gov_message->firm_id,
+			add_gov_init_balance_sheets_message(firm_to_gov_ini_message->firm_id,
 			firm_inventories, firm_capital, 0, 0, 0);
 			
-		FINISH_INIT_FIRM_TO_GOV_MESSAGE_LOOP
+		FINISH_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
-		START_INIT_HH_TO_GOV_MESSAGE_LOOP
+		START_HH_TO_GOV_INI_MESSAGE_LOOP
 	
-			add_gov_init_balance_sheets_message(init_hh_to_gov_message->hh_id,
+			add_gov_init_balance_sheets_message(hh_to_gov_ini_message->hh_id,
 			0, 0, 1, 0, 0);
 	
-		FINISH_INIT_HH_TO_GOV_MESSAGE_LOOP
+		FINISH_HH_TO_GOV_INI_MESSAGE_LOOP
 		
-		START_INIT_BANK_TO_GOV_MESSAGE_LOOP
+		START_BANK_TO_GOV_INI_MESSAGE_LOOP
 			
-			add_gov_init_balance_sheets_message(init_bank_to_gov_message->bank_id,
+			add_gov_init_balance_sheets_message(bank_to_gov_ini_message->bank_id,
 			0, 0, bank_payment_account, bank_deposits, 0);
 			
-		FINISH_INIT_BANK_TO_GOV_MESSAGE_LOOP
+		FINISH_BANK_TO_GOV_INI_MESSAGE_LOOP
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -318,9 +318,9 @@ int Government_initialization()
 	
 	
 	free_int_array(&hh_list);
-	free_Enterprise_init_array(&firm_list);
-	free_Enterprise_init_array(&pcfirm_list);
-	free_Enterprise_init_array(&bank_list);
+	free_Enterprise_initialization_array(&firm_list);
+	free_Enterprise_initialization_array(&pcfirm_list);
+	free_Enterprise_initialization_array(&bank_list);
 	
 	INITIALIZATION = 0;
 

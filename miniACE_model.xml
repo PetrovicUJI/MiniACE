@@ -55,7 +55,6 @@
 		</constants>
 		<functionFiles>
 			<file>my_library_functions.c</file>
-			<file>agents_basic_functions.c</file>
 		</functionFiles>
 		<timeUnits>
 			<timeUnit>

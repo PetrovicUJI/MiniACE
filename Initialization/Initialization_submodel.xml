@@ -24,7 +24,7 @@
 		<timeUnits/>
 		<dataTypes>
 			<dataType>
-				<name>Enterprise_init</name>
+				<name>Enterprise_initialization</name>
 				<description>Used by government to initialize agents.</description>
 				<variables>
 					<!-- (enterprise_id, outstanding_shares, share_book_value) -->
@@ -76,7 +76,7 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>init_firm_to_gov</messageName>
+							<messageName>firm_to_gov_ini</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -85,6 +85,7 @@
 					<description></description>
 					<currentState>Firm_Initialization</currentState>
 					<nextState>Firm_Info</nextState>
+					<!-- <nextState>End_Firm</nextState> -->
 					<inputs>
 						<input>
 							<messageName>gov_init_labor</messageName>
@@ -154,7 +155,7 @@
 					<name>Household_initialization</name>
 					<description></description>
 					<currentState>Start_Household</currentState>
-					<nextState>Household_Info</nextState>
+					<nextState>Household_Initialization</nextState>
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -167,32 +168,16 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>init_hh_to_gov</messageName>
+							<messageName>hh_to_gov_ini</messageName>
 						</output>
 					</outputs>
-				</function>
-				<function>
-					<name>Household_idle</name>
-					<description></description>
-					<currentState>Start_Household</currentState>
-					<nextState>Household_Initialization</nextState>
-					<condition>
-						<lhs>
-							<value>a.initialization</value>
-						</lhs>
-						<op>EQ</op>
-						<rhs>
-							<value>0</value>
-						</rhs>
-					</condition>
-					<inputs/>
-					<outputs/>
 				</function>
 				<function>
 					<name>Household_receive_initialization</name>
 					<description></description>
 					<currentState>Household_Initialization</currentState>
 					<nextState>Household_Info</nextState>
+					<!-- <nextState>End_Household</nextState> -->
 					<inputs>
 						<input>
 							<messageName>gov_to_hh_init_shares</messageName>
@@ -233,6 +218,23 @@
 					</inputs>
 					<outputs/>
 				</function>
+				<function>
+					<name>Household_idle</name>
+					<description></description>
+					<currentState>Start_Household</currentState>
+					<nextState>Household_Info</nextState>
+					<condition>
+						<lhs>
+							<value>a.initialization</value>
+						</lhs>
+						<op>EQ</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
 			</functions>
 		</xagent>
 		<xagent>
@@ -251,6 +253,7 @@
 					<description></description>
 					<currentState>Start_Government</currentState>
 					<nextState>Government_PolicySetting</nextState>
+					<!-- <nextState>End_Government</nextState> -->
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -262,22 +265,22 @@
 					</condition>
 					<inputs>
 						<input>
-							<messageName>init_firm_to_gov</messageName>
+							<messageName>firm_to_gov_ini</messageName>
 						</input>
 						<input>
-							<messageName>init_pcfirm_to_gov</messageName>
+							<messageName>pcfirm_to_gov_ini</messageName>
 						</input>
 						<input>
-							<messageName>init_hh_to_gov</messageName>
+							<messageName>hh_to_gov_ini</messageName>
 						</input>
 						<input>
-							<messageName>init_bank_to_gov</messageName>
+							<messageName>bank_to_gov_ini</messageName>
 						</input>
 						<input>
 							<messageName>pcfirm_price_info</messageName>
 						</input>
 						<input>
-							<messageName>init_cb_to_gov</messageName>
+							<messageName>cb_to_gov_ini</messageName>
 						</input>
 					</inputs>
 					<outputs>
@@ -344,7 +347,7 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>init_bank_to_gov</messageName>
+							<messageName>bank_to_gov_ini</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -353,6 +356,7 @@
 					<description></description>
 					<currentState>Bank_Initialization</currentState>
 					<nextState>Bank_Info</nextState>
+					<!-- <nextState>End_Bank</nextState> -->
 					<inputs>
 						<input>
 							<messageName>gov_init_balance_sheets</messageName>
@@ -409,6 +413,7 @@
 					<description></description>
 					<currentState>Start_PCFirm</currentState>
 					<nextState>PCFirm_PolicyInfo</nextState>
+					<!-- <nextState>End_PCFirm</nextState> -->
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -421,7 +426,7 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>init_pcfirm_to_gov</messageName>
+							<messageName>pcfirm_to_gov_ini</messageName>
 						</output>
 						<output>
 							<messageName>pcfirm_price_info</messageName>
@@ -475,7 +480,7 @@
 					<inputs/>
 					<outputs>
 						<output>
-							<messageName>init_cb_to_gov</messageName>
+							<messageName>cb_to_gov_ini</messageName>
 						</output>
 					</outputs>
 				</function>
@@ -484,6 +489,7 @@
 					<description></description>
 					<currentState>CB_Initialization</currentState>
 					<nextState>CB_PolicySetting</nextState>
+					<!-- <nextState>End_Central_Bank</nextState> -->
 					<inputs>
 						<input>
 							<messageName>gov_init_balance_sheets</messageName>
@@ -535,6 +541,7 @@
 					<description></description>
 					<currentState>Start_Final_Goods_Market</currentState>
 					<nextState>FGM_Collection</nextState>
+					<!-- <nextState>End_Final_Goods_Market</nextState> -->
 					<condition>
 						<lhs>
 							<value>a.initialization</value>
@@ -573,7 +580,7 @@
 	</agents>
 	<messages>
 		<message>
-			<name>init_firm_to_gov</name>
+			<name>firm_to_gov_ini</name>
 			<description>Message added by firm to initialize.</description>
 			<variables>
 			<!-- (firm_id, outstanding_shares) -->
@@ -590,7 +597,7 @@
 			</variables>
 		</message>
 		<message>
-			<name>init_hh_to_gov</name>
+			<name>hh_to_gov_ini</name>
 			<description>Message added by firm to initialize.</description>
 			<variables>
 			<!-- (hh_id) -->
@@ -602,7 +609,7 @@
 			</variables>
 		</message>
 		<message>
-			<name>init_bank_to_gov</name>
+			<name>bank_to_gov_ini</name>
 			<description>Message added by banks to initialize.</description>
 			<variables>
 			<!-- (bank_id, outstanding_shares) -->
@@ -619,7 +626,7 @@
 			</variables>
 		</message>
 		<message>
-			<name>init_cb_to_gov</name>
+			<name>cb_to_gov_ini</name>
 			<description>Message added by the central banks to initialize.</description>
 			<variables>
 			<!-- (cb_id) -->
@@ -631,7 +638,7 @@
 			</variables>
 		</message>
 		<message>
-			<name>init_pcfirm_to_gov</name>
+			<name>pcfirm_to_gov_ini</name>
 			<description>Message added by pcfirms to initialize.</description>
 			<variables>
 			<!-- (pcfirm_id, outstanding_shares) -->

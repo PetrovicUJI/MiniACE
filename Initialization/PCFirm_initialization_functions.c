@@ -12,7 +12,7 @@
 * \timing: First iteration only when initialization is needed.
  * \condition: if INITIALIZATION == 1
  
- *\ init_pcfirm_to_gov message structure: <!-- (pcfirm_id, outstanding_shares) -->
+ *\ pcfirm_to_gov_ini message structure: <!-- (pcfirm_id, outstanding_shares) -->
  
  *\ pcfirm_price_info message structure: <!-- (pcfirm_id, pc_price, technology) -->
  
@@ -21,7 +21,7 @@
 */
 int PCFirm_initialization()
 {
-	add_init_pcfirm_to_gov_message(ID, OUTSTANDING_SHARES);
+	add_pcfirm_to_gov_ini_message(ID, OUTSTANDING_SHARES);
 	
 	add_pcfirm_price_info_message(ID, PRICE, TECHNOLOGY);
 	

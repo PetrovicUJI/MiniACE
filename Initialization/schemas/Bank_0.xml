@@ -6,22 +6,22 @@
 		<region_id>1</region_id>
 		<gov_id>1</gov_id>
 		<day_of_month_to_act>0</day_of_month_to_act>
-		<total_assets>0</total_assets>
-		<payment_account>0</payment_account>
-		<current_assets>0</current_assets>
-		<non_current_assets>0</non_current_assets>
-		<total_liabilities>0</total_liabilities>
-		<deposits>0</deposits>
-		<cb_debt>0</cb_debt>
-		<equity>0</equity>
-		<value_at_risk>0</value_at_risk>
-		<monthly_profit>0</monthly_profit>
-		<interest_rate_on_cb_debt>0</interest_rate_on_cb_debt>
-		<alpha>0</alpha>
-		<dividend_payment>0</dividend_payment>
-		<capital_tax_payment>0</capital_tax_payment>
-		<capital_tax_rate>0</capital_tax_rate>
+		<total_assets>0.0</total_assets>
+		<payment_account>0.0</payment_account>
+		<current_assets>0.0</current_assets>
+		<non_current_assets>0.0</non_current_assets>
+		<total_liabilities>0.0</total_liabilities>
+		<deposits>0.0</deposits>
+		<cb_debt>0.0</cb_debt>
+		<equity>0.0</equity>
+		<value_at_risk>0.0</value_at_risk>
+		<monthly_profit>0.0</monthly_profit>
+		<interest_rate_on_cb_debt>0.0</interest_rate_on_cb_debt>
+		<alpha>0.0</alpha>
+		<dividend_payment>0.0</dividend_payment>
+		<capital_tax_payment>0.0</capital_tax_payment>
+		<capital_tax_rate>0.0</capital_tax_rate>
 		<initialization>1</initialization>
-		<outstanding_shares>100</outstanding_shares>
+		<outstanding_shares>100.0</outstanding_shares>
 	</xagent>
 </states>

@@ -9,7 +9,7 @@
  
 * \brief: CB send ID.
  
- *\ init_cb_to_gov_message structure: 	<!-- (cb_id) -->
+ *\ cb_to_gov_ini_message structure: 	<!-- (cb_id) -->
  
 * \timing: First iteration only when initialization is needed.
  * \condition: if INITIALIZATION == 1
@@ -20,7 +20,7 @@
 int CB_initialization()
 {
 	
-	add_init_cb_to_gov_message(ID);
+	add_cb_to_gov_ini_message(ID);
 	
 
     return 0;

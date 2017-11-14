@@ -13,14 +13,14 @@
 * \timing: First iteration only when initialization is needed.
  * \condition: if INITIALIZATION == 1
  
-   *\ init_hh_to_gov message structure: <!-- (hh_id) -->
+   *\ hh_to_gov_ini_message structure: <!-- (hh_id) -->
  
 * \authors: Marko Petrovic
 * \history: 25.10.2017-Marko: First implementation.
 */
 int Household_initialization()
 {
-	add_init_hh_to_gov_message(ID);
+	add_hh_to_gov_ini_message(ID);
 
     return 0;
 }

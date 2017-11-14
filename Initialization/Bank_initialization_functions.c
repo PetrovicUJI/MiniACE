@@ -13,14 +13,14 @@
 * \timing: First iteration only when initialization is needed.
  * \condition: if INITIALIZATION == 1
  
-  *\ init_bank_to_gov message structure: <!-- (bank_id, outstanding_shares) -->
+  *\ bank_to_gov_ini message structure: <!-- (bank_id, outstanding_shares) -->
  
 * \authors: Marko Petrovic
 * \history: 08.11.2017-Marko: First implementation.
 */
 int Bank_initialization()
 {
-	add_init_bank_to_gov_message(ID, OUTSTANDING_SHARES);
+	add_bank_to_gov_ini_message(ID, OUTSTANDING_SHARES);
 
     return 0;
 }

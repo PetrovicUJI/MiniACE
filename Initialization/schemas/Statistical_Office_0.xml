@@ -6,16 +6,16 @@
 		<region_id>1</region_id>
 		<gov_id>1</gov_id>
 		<day_of_month_to_act>0</day_of_month_to_act>
-		<price_level>1</price_level>
-		<price_growth>1</price_growth>
-		<aggregate_monthly_turnover>0</aggregate_monthly_turnover>
-		<aggregate_monthly_sold_quantity>0</aggregate_monthly_sold_quantity>
+		<price_level>1.0</price_level>
+		<price_growth>1.0</price_growth>
+		<aggregate_monthly_turnover>1.0</aggregate_monthly_turnover>
+		<aggregate_monthly_sold_quantity>0.0</aggregate_monthly_sold_quantity>
 		<price_level_list>{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0}</price_level_list>
 		<average_price_level_list>{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0}</average_price_level_list>
-		<average_wage>1</average_wage>
-		<unemployment_rate>0</unemployment_rate>
-		<aggregate_value_at_risk>0</aggregate_value_at_risk>
-		<nominal_monthly_gdp>0</nominal_monthly_gdp>
-		<real_monthly_gdp>0</real_monthly_gdp>
+		<average_wage>1.0</average_wage>
+		<unemployment_rate>0.0</unemployment_rate>
+		<aggregate_value_at_risk>0.0</aggregate_value_at_risk>
+		<nominal_monthly_gdp>0.0</nominal_monthly_gdp>
+		<real_monthly_gdp>0.0</real_monthly_gdp>
 	</xagent>
 </states>

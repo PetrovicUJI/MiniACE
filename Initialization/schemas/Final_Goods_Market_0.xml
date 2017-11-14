@@ -7,10 +7,10 @@
 		<gov_id>1</gov_id>
 		<final_goods_list>{}</final_goods_list>
 		<final_goods_orders_list>{}</final_goods_orders_list>
-		<daily_sold_quantity>0</daily_sold_quantity>
-		<daily_market_turnover>0</daily_market_turnover>
-		<monthly_sold_quantity>0</monthly_sold_quantity>
-		<monthly_market_turnover>0</monthly_market_turnover>
+		<daily_sold_quantity>0.0</daily_sold_quantity>
+		<daily_market_turnover>0.0</daily_market_turnover>
+		<monthly_sold_quantity>0.0</monthly_sold_quantity>
+		<monthly_market_turnover>0.0</monthly_market_turnover>
 		<initialization>1</initialization>
 	</xagent>
 </states>
