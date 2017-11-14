@@ -34,7 +34,7 @@
 						<description>ID of agents.</description>
 					</variable>
 					<variable>
-						<type>int</type>
+						<type>double</type>
 						<name>outstanding_shares</name>
 						<description>The number of outstanding shares.</description>
 					</variable>
@@ -583,7 +583,7 @@
 					<description>ID of agents.</description>
 				</variable>
 				<variable>
-					<type>int</type>
+					<type>double</type>
 					<name>outstanding_shares</name>
 					<description>The number of outstanding shares.</description>
 				</variable>
@@ -612,7 +612,7 @@
 					<description>ID of agents.</description>
 				</variable>
 				<variable>
-					<type>int</type>
+					<type>double</type>
 					<name>outstanding_shares</name>
 					<description>The number of outstanding shares.</description>
 				</variable>
@@ -641,7 +641,7 @@
 					<description>ID of agents.</description>
 				</variable>
 				<variable>
-					<type>int</type>
+					<type>double</type>
 					<name>outstanding_shares</name>
 					<description>The number of outstanding shares.</description>
 				</variable>

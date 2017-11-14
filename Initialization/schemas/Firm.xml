@@ -1,693 +1,134 @@
 <states>
-<xagent>
-<name></name>
-<id></id>
-<region_id></region_id>
-<gov_id></gov_id>
-<day_of_month_to_act></day_of_month_to_act>
-<last_day_of_month_to_act></last_day_of_month_to_act>
-<bank_id></bank_id>
-<active></active>
-<total_assets></total_assets>
-<payment_account></payment_account>
-<current_assets></current_assets>
-<non_current_assets></non_current_assets>
-<total_liabilities></total_liabilities>
-<current_liabilities></current_liabilities>
-<non_current_liabilities></non_current_liabilities>
-<equity></equity>
-<loans></loans>
-<operating_cash_flow></operating_cash_flow>
-<external_financial_needs></external_financial_needs>
-<vat_rate></vat_rate>
-<capital_tax_rate></capital_tax_rate>
-<monthly_revenue></monthly_revenue>
-<price_level></price_level>
-<monthly_wage_payment></monthly_wage_payment>
-<total_loan_interest_payment></total_loan_interest_payment>
-<total_loan_instalment_payment></total_loan_instalment_payment>
-<short_term_borrowing_interest_payment></short_term_borrowing_interest_payment>
-<total_financial_payment></total_financial_payment>
-<monthly_interest_rate_on_short_term_borrowing></monthly_interest_rate_on_short_term_borrowing>
-<vat_payment></vat_payment>
-<ebt></ebt>
-<dividend_payment></dividend_payment>
-<outstanding_shares></outstanding_shares>
-<net_earnings></net_earnings>
-<capital_tax_payment></capital_tax_payment>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-<></>
-</xagent>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<gov_id></gov_id>
+		<day_of_month_to_act></day_of_month_to_act>
+		<last_day_of_month_to_act></last_day_of_month_to_act>
+		<bank_id></bank_id>
+		<active></active>
+		<total_assets></total_assets>
+		<payment_account></payment_account>
+		<current_assets></current_assets>
+		<non_current_assets></non_current_assets>
+		<total_liabilities></total_liabilities>
+		<current_liabilities></current_liabilities>
+		<non_current_liabilities></non_current_liabilities>
+		<equity></equity>
+		<loans></loans>
+		<operating_cash_flow></operating_cash_flow>
+		<external_financial_needs></external_financial_needs>
+		<vat_rate></vat_rate>
+		<capital_tax_rate></capital_tax_rate>
+		<monthly_revenue></monthly_revenue>
+		<price_level></price_level>
+		<monthly_wage_payment></monthly_wage_payment>
+		<total_loan_interest_payment></total_loan_interest_payment>
+		<total_loan_instalment_payment></total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment></short_term_borrowing_interest_payment>
+		<total_financial_payment></total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing></monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment></vat_payment>
+		<ebt></ebt>
+		<dividend_payment></dividend_payment>
+		<outstanding_shares></outstanding_shares>
+		<net_earnings></net_earnings>
+		<capital_tax_payment></capital_tax_payment>
+		<remaining_days_of_bankruptcy></remaining_days_of_bankruptcy>
+		<expected_demand></expected_demand>
+		<production_plan></production_plan>
+		<investment_plan></investment_plan>
+		<productivity></productivity>
+		<capacity_utilization></capacity_utilization>
+		<capital_labor_ratio></capital_labor_ratio>
+		<physical_capital></physical_capital>
+		<inventories></inventories>
+		<monthly_sold_quantity></monthly_sold_quantity>
+		<sold_quantities_vector></sold_quantities_vector>
+		<physical_capital_stock></physical_capital_stock>
+		<physical_capital_price></physical_capital_price>
+		<price></price>
+		<price_last_month></price_last_month>
+		<production></production>
+		<physical_capital_depreciation_cost></physical_capital_depreciation_cost>
+		<unit_costs></unit_costs>
+		<mark_up></mark_up>
+		<cb_trust></cb_trust>
+		<inflation_target></inflation_target>
+		<average_demand_level></average_demand_level>
+		<average_wage_level></average_wage_level>
+		<initialization></initialization>
+		<employees></employees>
+		<labor_requirement></labor_requirement>
+		<delta_labor_requirement></delta_labor_requirement>
+		<average_wage></average_wage>
+		<wage_offer></wage_offer>
+	</xagent>
+	<xagent>
+		<name></name>
+		<id></id>
+		<region_id></region_id>
+		<gov_id></gov_id>
+		<day_of_month_to_act></day_of_month_to_act>
+		<last_day_of_month_to_act></last_day_of_month_to_act>
+		<bank_id></bank_id>
+		<active></active>
+		<total_assets></total_assets>
+		<payment_account></payment_account>
+		<current_assets></current_assets>
+		<non_current_assets></non_current_assets>
+		<total_liabilities></total_liabilities>
+		<current_liabilities></current_liabilities>
+		<non_current_liabilities></non_current_liabilities>
+		<equity></equity>
+		<loans></loans>
+		<operating_cash_flow></operating_cash_flow>
+		<external_financial_needs></external_financial_needs>
+		<vat_rate></vat_rate>
+		<capital_tax_rate></capital_tax_rate>
+		<monthly_revenue></monthly_revenue>
+		<price_level></price_level>
+		<monthly_wage_payment></monthly_wage_payment>
+		<total_loan_interest_payment></total_loan_interest_payment>
+		<total_loan_instalment_payment></total_loan_instalment_payment>
+		<short_term_borrowing_interest_payment></short_term_borrowing_interest_payment>
+		<total_financial_payment></total_financial_payment>
+		<monthly_interest_rate_on_short_term_borrowing></monthly_interest_rate_on_short_term_borrowing>
+		<vat_payment></vat_payment>
+		<ebt></ebt>
+		<dividend_payment></dividend_payment>
+		<outstanding_shares></outstanding_shares>
+		<net_earnings></net_earnings>
+		<capital_tax_payment></capital_tax_payment>
+		<remaining_days_of_bankruptcy></remaining_days_of_bankruptcy>
+		<expected_demand></expected_demand>
+		<production_plan></production_plan>
+		<investment_plan></investment_plan>
+		<productivity></productivity>
+		<capacity_utilization></capacity_utilization>
+		<capital_labor_ratio></capital_labor_ratio>
+		<physical_capital></physical_capital>
+		<inventories></inventories>
+		<monthly_sold_quantity></monthly_sold_quantity>
+		<sold_quantities_vector></sold_quantities_vector>
+		<physical_capital_stock></physical_capital_stock>
+		<physical_capital_price></physical_capital_price>
+		<price></price>
+		<price_last_month></price_last_month>
+		<production></production>
+		<physical_capital_depreciation_cost></physical_capital_depreciation_cost>
+		<unit_costs></unit_costs>
+		<mark_up></mark_up>
+		<cb_trust></cb_trust>
+		<inflation_target></inflation_target>
+		<average_demand_level></average_demand_level>
+		<average_wage_level></average_wage_level>
+		<initialization></initialization>
+		<employees></employees>
+		<labor_requirement></labor_requirement>
+		<delta_labor_requirement></delta_labor_requirement>
+		<average_wage></average_wage>
+		<wage_offer></wage_offer>
+	</xagent>
 </states>

@@ -59,7 +59,8 @@ int Firm_calculate_physical_capital_needs()
 int Firm_reset_to_enter_the_market()
 {
 	PRICE = PRICE_LEVEL;
-	WAGE = AVERAGE_WAGE_LEVEL;
+	AVERAGE_WAGE = AVERAGE_WAGE_LEVEL;
+	WAGE_OFFER = AVERAGE_WAGE_LEVEL;
 	PRODUCTION = 0.0;
 	
 	if(INVENTORIES > 0)
@@ -358,7 +359,7 @@ int Firm_adjust_investment_plan()
 		expected_interest_payments += LOANS.array[i].instalment*LOANS.array[i].monthly_interest;
 	}
 	
-	expected_labor_costs = LABOR_REQUIREMENT*WAGE;
+	expected_labor_costs = LABOR_REQUIREMENT*AVERAGE_WAGE;
 	
 	int denum = 20;
 	int num = denum + 1;

@@ -27,7 +27,7 @@ int Firm_plan_financing()
 
 	expected_investment_costs = INVESTMENT_PLAN*PHYSICAL_CAPITAL_PRICE;
 	
-	expected_labor_costs = LABOR_REQUIREMENT*WAGE;
+	expected_labor_costs = LABOR_REQUIREMENT*AVERAGE_WAGE;
 	
 	for(int i = 0; i < LOANS.size; i++)
 	{
@@ -94,13 +94,31 @@ int Firm_account_and_pay_salaries()
 {
 	MONTHLY_WAGE_PAYMENT = 0.0;
 	
+	AVERAGE_WAGE = 0.0;
+	
 	for(int i = 0; i < EMPLOYEES.size; i++)
 	{
 		add_wage_payment_message(EMPLOYEES.array[i].id, EMPLOYEES.array[i].wage);
 		
 		MONTHLY_WAGE_PAYMENT += EMPLOYEES.array[i].wage;
+		
+		AVERAGE_WAGE += EMPLOYEES.array[i].wage;
+		
+		if(i == (EMPLOYEES.size-1)) 
+		WAGE_OFFER = EMPLOYEES.array[i].wage;
 	}
 	
+	if(EMPLOYEES.size > 0)
+	{
+		AVERAGE_WAGE = AVERAGE_WAGE/EMPLOYEES.size;
+	}
+	else
+	{
+		AVERAGE_WAGE = AVERAGE_WAGE_LEVEL;
+		WAGE_OFFER = AVERAGE_WAGE_LEVEL;
+	}
+	
+
 	PAYMENT_ACCOUNT -= MONTHLY_WAGE_PAYMENT;
 	
 
