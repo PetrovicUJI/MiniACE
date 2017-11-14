@@ -70,7 +70,7 @@
 			</memory>
 			<functions>
 				<function>
-					<name>Idle</name>
+					<name>CB_idle</name>
 					<description></description>
 					<currentState>CB_PolicySetting</currentState>
 					<nextState>CB_Info</nextState>

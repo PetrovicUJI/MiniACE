@@ -4,6 +4,15 @@
 #include "../Final_Goods_Market_agent_header.h"
 #include "FinalGoods_Market_AUX_Headers.h"
 
+
+int FGM_idle()
+{
+
+    return 0;
+}
+
+
+
 /* \fn: int Final_goods_market_receive_products()
  
 * \brief: Final goods market receive products.

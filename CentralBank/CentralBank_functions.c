@@ -3,7 +3,11 @@
 
 #include "../Central_Bank_agent_header.h"
 
+int CB_idle()
+{
 
+    return 0;
+}
 
 /* \fn: int Central_Bank_set_policy()
  

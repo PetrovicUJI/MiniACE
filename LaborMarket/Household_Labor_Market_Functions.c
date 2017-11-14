@@ -5,6 +5,15 @@
 #include "Household_Labor_Market_AUX_Headers.h"
 
 
+
+int Household_idle()
+{
+
+    return 0;
+}
+
+
+
 /* \fn: int Household_get_fired()
  
 * \brief: Households read firing message.

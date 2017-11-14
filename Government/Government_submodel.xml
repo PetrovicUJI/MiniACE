@@ -153,7 +153,7 @@
 			</memory>
 			<functions>
 				<function>
-					<name>Idle</name>
+					<name>Government_idle</name>
 					<description></description>
 					<currentState>Government_PolicySetting</currentState>
 					<nextState>Government_Info</nextState>

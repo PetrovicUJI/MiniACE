@@ -4,6 +4,13 @@
 #include "../PCFirm_agent_header.h"
 
 
+int PCFirm_idle()
+{
+
+    return 0;
+}
+
+
 
 /* \fn: int PCFirm_set_price()
  

@@ -121,7 +121,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Firm_idle</name>
 					<description></description>
 					<currentState>Start_Firm</currentState>
 					<nextState>Firm_Info</nextState>
@@ -172,7 +172,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Household_idle</name>
 					<description></description>
 					<currentState>Start_Household</currentState>
 					<nextState>Household_Initialization</nextState>
@@ -293,7 +293,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Government_idle</name>
 					<description></description>
 					<currentState>Start_Government</currentState>
 					<nextState>Government_PolicySetting</nextState>
@@ -370,7 +370,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Bank_idle</name>
 					<description></description>
 					<currentState>Start_Bank</currentState>
 					<nextState>Bank_Info</nextState>
@@ -429,7 +429,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>PCFirm_idle</name>
 					<description></description>
 					<currentState>Start_PCFirm</currentState>
 					<nextState>PCFirm_PolicyInfo</nextState>
@@ -501,7 +501,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>CB_idle</name>
 					<description></description>
 					<currentState>Start_Central_Bank</currentState>
 					<nextState>CB_PolicySetting</nextState>
@@ -552,7 +552,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>FGM_idle</name>
 					<description></description>
 					<currentState>Start_Final_Goods_Market</currentState>
 					<nextState>FGM_Collection</nextState>

@@ -173,7 +173,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Firm_idle</name>
 					<description></description>
 					<currentState>Firm_LoanRequest</currentState>
 					<nextState>Firm_LaborDemand</nextState>
@@ -434,7 +434,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Idle</name>
+					<name>Bank_idle</name>
 					<description></description>
 					<currentState>Bank_FinancialManagement</currentState>
 					<nextState>End_Bank</nextState>

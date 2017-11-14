@@ -4,6 +4,11 @@
 #include "../Government_agent_header.h"
 
 
+int Government_idle()
+{
+
+    return 0;
+}
 
 
 /* \fn: int Government_set_policy()

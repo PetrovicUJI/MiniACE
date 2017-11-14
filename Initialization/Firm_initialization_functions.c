@@ -3,7 +3,7 @@
 
 #include "../Firm_agent_header.h"
 
-int Idle()
+int Firm_idle()
 {
 
     return 0;

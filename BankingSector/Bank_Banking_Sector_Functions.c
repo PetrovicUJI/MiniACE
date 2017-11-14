@@ -4,6 +4,14 @@
 #include "../Bank_agent_header.h"
 
 
+int Bank_idle()
+{
+
+    return 0;
+}
+
+
+
 /* \fn: int Bank_pay_tax_and_dividends()
  
 * \brief: Bank pay tax and dividends.

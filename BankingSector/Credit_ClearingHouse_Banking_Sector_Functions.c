@@ -3,6 +3,15 @@
 
 #include "../Credit_ClearingHouse_agent_header.h"
 
+
+int CCH_idle()
+{
+
+    return 0;
+}
+
+
+
 /* \fn: int CCH_receive_loan_requests()
  
 * \brief: Credit clearing house receive loan requests.
