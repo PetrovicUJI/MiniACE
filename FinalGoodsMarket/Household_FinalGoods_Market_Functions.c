@@ -45,6 +45,19 @@ int Household_pay_tax_and_plan_consumption_budget()
 	WEEK_COUNTER = 1;
 
 	DIVIDEND_INCOME = 0.0;
+	
+	FILE *file1;
+	char *filename;
+
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Household_pay_tax_and_plan_consumption_budget.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"\n %d %d %f %f %f %f",DAY, ID, TOTAL_ASSETS, CURRENT_ASSETS, NON_CURRENT_ASSETS, PAYMENT_ACCOUNT);
+	fprintf(file1," %f %f %f %f",TOTAL_LIABILITIES, CURRENT_LIABILITIES, NON_CURRENT_LIABILITIES, WEALTH);
+	fprintf(file1," %f %f %f %f",MONTHLY_CONSUMPTION_BUDGET, TOTAL_NET_INCOME, CARROL_INDEX, WEALTH_TO_INCOME_RATIO_TARGET);
+	fclose(file1);
+	free(filename);
 
     return 0;
 }

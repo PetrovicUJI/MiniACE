@@ -22,7 +22,7 @@ int PCFirm_set_price()
 {
 	PRICE = CB_TRUST*PRICE*(1+INFLATION_TARGET) + (1-CB_TRUST)*PRICE*(1+INFLATION);
 	
-	PRICE = max(PRICE, 1000);
+	PRICE = min(PRICE, 1000);
 
     return 0;
 }

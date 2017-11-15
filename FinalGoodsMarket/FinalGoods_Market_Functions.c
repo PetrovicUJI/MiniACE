@@ -233,6 +233,19 @@ int Final_goods_market_update_sellers()
 		DAILY_SOLD_QUANTITY += FINAL_GOODS_LIST.array[i].sold_quantity;
 		DAILY_MARKET_TURNOVER += FINAL_GOODS_LIST.array[i].sold_quantity*FINAL_GOODS_LIST.array[i].price;
 		
+		
+		FILE *file1;
+		char *filename;
+
+		filename = malloc(120*sizeof(char));
+		filename[0]=0;
+		strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
+		file1 = fopen(filename,"a");
+		fprintf(file1,"\n %f %f",DAILY_SOLD_QUANTITY, DAILY_MARKET_TURNOVER);
+		fclose(file1);
+		free(filename);
+		
+		
 		FINAL_GOODS_LIST.array[i].sold_quantity = 0.0;
 	}
 	

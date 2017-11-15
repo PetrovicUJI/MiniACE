@@ -54,6 +54,13 @@ int Government_initialization()
 	int_array hh_list;
 	init_int_array(&hh_list);
 	
+	int number_of_firms = 0;
+	START_FIRM_TO_GOV_INI_MESSAGE_LOOP
+			
+			number_of_firms++;
+		
+	FINISH_FIRM_TO_GOV_INI_MESSAGE_LOOP
+	
 	START_HH_TO_GOV_INI_MESSAGE_LOOP
 	
 		add_int(&hh_list, hh_to_gov_ini_message->hh_id);
@@ -80,18 +87,27 @@ int Government_initialization()
 	// initialize firm balance sheet
 	
 	double total_production = hh_list.size; // given prices and wages equal to 1.
-	double firm_production = total_production/firm_list.size;
+	double firm_production = total_production/number_of_firms;
 	double firm_capital = firm_production; // given productivity = 1
 	double firm_inventories = 0.2*firm_production;
 	
 	double firm_equity = firm_capital*physical_capital_price+firm_inventories;
 	
+/* 	printf("\n Government_initialization: hh_list.size = %d\n ", hh_list.size);
+	printf("\n Government_initialization: number_of_firms = %d\n ", number_of_firms);
+	printf("\n Government_initialization: total_production = %2.5f\n ", total_production);
+	printf("\n Government_initialization: firm_production = %2.5f\n ", firm_production);
+	printf("\n Government_initialization: firm_capital = %2.5f\n ", firm_capital);
+	printf("\n Government_initialization: firm_inventories = %2.5f\n ", firm_inventories); */
 	
+
 	// firm payment_account, non_current_liabilities and current_liabilities are equal to ZERO!
 	
 	// initialize bank balance sheet
 	
-	double bank_deposits = hh_list.size; // each household is endowed with 1 unit of money.
+	double hh_endowment = 5.0;
+	
+	double bank_deposits = hh_list.size*hh_endowment; // each household is endowed with 1 unit of money.
 	double bank_equity = bank_deposits/2;
 	double bank_payment_account = bank_deposits + bank_equity;
 	double bank_cb_debt = 0.0;
@@ -299,7 +315,7 @@ int Government_initialization()
 		START_HH_TO_GOV_INI_MESSAGE_LOOP
 	
 			add_gov_init_balance_sheets_message(hh_to_gov_ini_message->hh_id,
-			0, 0, 1, 0, 0);
+			0, 0, hh_endowment, 0, 0);
 	
 		FINISH_HH_TO_GOV_INI_MESSAGE_LOOP
 		

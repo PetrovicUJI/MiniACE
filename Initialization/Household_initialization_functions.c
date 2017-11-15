@@ -105,15 +105,35 @@ int Household_receive_initialization()
 	NON_CURRENT_LIABILITIES = 0;
 	
 	CURRENT_ASSETS = 0;
+	double number_of_assets = 0.0;
 	for(int i = 0; i < ASSETS_LIST.size; i++)
 	{
 		CURRENT_ASSETS += ASSETS_LIST.array[i].number_of_assets*ASSETS_LIST.array[i].book_value;
+		number_of_assets += ASSETS_LIST.array[i].number_of_assets;
 	}
 	
 	TOTAL_ASSETS = CURRENT_ASSETS + NON_CURRENT_ASSETS + PAYMENT_ACCOUNT;
 	TOTAL_LIABILITIES = CURRENT_LIABILITIES + NON_CURRENT_LIABILITIES;
 	WEALTH = TOTAL_ASSETS - TOTAL_LIABILITIES;
 	
+	FILE *file1;
+	char *filename;
+
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Household_receive_initialization.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"\n %d %d %f %f %f %f",DAY, ID, TOTAL_ASSETS, CURRENT_ASSETS, NON_CURRENT_ASSETS, PAYMENT_ACCOUNT);
+	fprintf(file1," %f %f %f %f %f",TOTAL_LIABILITIES, CURRENT_LIABILITIES, NON_CURRENT_LIABILITIES, WEALTH, number_of_assets);
+	fclose(file1);
+	free(filename);
+	
+	// initialize consumption budget
+	
+	
+	MONTHLY_CONSUMPTION_BUDGET = PAYMENT_ACCOUNT; 
+	
+	WEEK_COUNTER = 1;
 
 	INITIALIZATION = 0;
     

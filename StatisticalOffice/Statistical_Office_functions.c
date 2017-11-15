@@ -4,23 +4,6 @@
 #include "../Statistical_Office_agent_header.h"
 
 
-/* \fn: int Statistical_Office_send_info()
- 
-* \brief: Statistical_Office send info.
- 
- 
- 
-* \authors: Marko Petrovic
-* \history: 08.11.2017-Marko: First implementation.
-*/
-int Statistical_Office_send_info()
-{
-
-
-    return 0;
-}
-
-
 /* \fn: int Statistical_Office_receive_data()
  
 * \brief: Statistical Office receive data.
@@ -193,9 +176,10 @@ int Statistical_Office_receive_data()
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	//NOMINAL_MONTHLY_GDP = AGGREGATE_MONTHLY_TURNOVER + monthly_investments;
+	//REAL_MONTHLY_GDP = AGGREGATE_MONTHLY_SOLD_QUANTITY + monthly_investments/PRICE_LEVEL;
 	NOMINAL_MONTHLY_GDP = AGGREGATE_MONTHLY_TURNOVER;
 	REAL_MONTHLY_GDP = AGGREGATE_MONTHLY_SOLD_QUANTITY;
-
 	
 	FILE *file1;
 	char *filename;
