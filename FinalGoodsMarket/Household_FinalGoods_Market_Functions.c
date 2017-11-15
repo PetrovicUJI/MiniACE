@@ -79,7 +79,9 @@ int Household_purchase_final_goods()
 	if(WEEK_COUNTER > 4)
 	printf("\n ERROR in function Household_purchase_final_goods: WEEK_COUNTER = %2.5f\n ", WEEK_COUNTER);
 	
-	WEEKLY_BUDGET = MONTHLY_CONSUMPTION_BUDGET/(5-WEEK_COUNTER);
+	//WEEKLY_BUDGET = MONTHLY_CONSUMPTION_BUDGET/(5-WEEK_COUNTER);
+	
+	WEEKLY_BUDGET = MONTHLY_CONSUMPTION_BUDGET;
 	
 	add_final_goods_order_message(ID, WEEKLY_BUDGET);
 

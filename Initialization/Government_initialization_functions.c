@@ -89,9 +89,10 @@ int Government_initialization()
 	double total_production = hh_list.size; // given prices and wages equal to 1.
 	double firm_production = total_production/number_of_firms;
 	double firm_capital = firm_production; // given productivity = 1
-	double firm_inventories = 0.2*firm_production;
+	double firm_inventories = firm_production;
+	double firm_endowment_payment_account = hh_list.size/number_of_firms;
 	
-	double firm_equity = firm_capital*physical_capital_price+firm_inventories;
+	double firm_equity = firm_capital*physical_capital_price+firm_inventories+firm_endowment_payment_account;
 	
 /* 	printf("\n Government_initialization: hh_list.size = %d\n ", hh_list.size);
 	printf("\n Government_initialization: number_of_firms = %d\n ", number_of_firms);
@@ -105,9 +106,9 @@ int Government_initialization()
 	
 	// initialize bank balance sheet
 	
-	double hh_endowment = 5.0;
+	double hh_endowment_payment_account = 5.0;
 	
-	double bank_deposits = hh_list.size*hh_endowment; // each household is endowed with 1 unit of money.
+	double bank_deposits = hh_list.size*hh_endowment_payment_account + firm_endowment_payment_account; // each household is endowed with 1 unit of money.
 	double bank_equity = bank_deposits/2;
 	double bank_payment_account = bank_deposits + bank_equity;
 	double bank_cb_debt = 0.0;
@@ -308,14 +309,14 @@ int Government_initialization()
 		START_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
 			add_gov_init_balance_sheets_message(firm_to_gov_ini_message->firm_id,
-			firm_inventories, firm_capital, 0, 0, 0);
+			firm_inventories, firm_capital, firm_endowment_payment_account, 0, 0);
 			
 		FINISH_FIRM_TO_GOV_INI_MESSAGE_LOOP
 		
 		START_HH_TO_GOV_INI_MESSAGE_LOOP
 	
 			add_gov_init_balance_sheets_message(hh_to_gov_ini_message->hh_id,
-			0, 0, hh_endowment, 0, 0);
+			0, 0, hh_endowment_payment_account, 0, 0);
 	
 		FINISH_HH_TO_GOV_INI_MESSAGE_LOOP
 		
