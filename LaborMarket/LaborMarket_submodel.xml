@@ -252,7 +252,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_StillDemandLabor</currentState>
 					<nextState>Firm_Production</nextState>
@@ -452,7 +452,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Household_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Household_LaborMarket</currentState>
 					<nextState>Household_FinalGoodsPurchase</nextState>
@@ -532,7 +532,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Household_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Household_StillUnemployed</currentState>
 					<nextState>Household_EndLaborMarket</nextState>
@@ -734,7 +734,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Household_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Household_Income</currentState>
 					<nextState>Household_CapitalIncome</nextState>

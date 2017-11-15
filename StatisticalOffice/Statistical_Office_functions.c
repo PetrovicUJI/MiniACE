@@ -3,12 +3,6 @@
 
 #include "../Statistical_Office_agent_header.h"
 
-int SO_idle()
-{
-
-    return 0;
-}
-
 
 /* \fn: int Statistical_Office_send_info()
  

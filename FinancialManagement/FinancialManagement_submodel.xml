@@ -159,7 +159,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_MonthlyAccounting</currentState>
 					<nextState>Firm_BankAccountUpdate</nextState>

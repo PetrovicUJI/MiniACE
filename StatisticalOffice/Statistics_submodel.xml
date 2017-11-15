@@ -74,7 +74,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_Info</currentState>
 					<nextState>Firm_PolicyInfo</nextState>
@@ -114,7 +114,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_PolicyInfo</currentState>
 					<nextState>Firm_Status</nextState>
@@ -148,7 +148,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_Statistics</currentState>
 					<nextState>End_Firm</nextState>
@@ -220,7 +220,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Household_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Household_Statistics</currentState>
 					<nextState>End_Household</nextState>
@@ -267,7 +267,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Government_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Government_Info</currentState>
 					<nextState>GOV_BenefitPayment</nextState>
@@ -301,7 +301,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Government_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>GOV_Statistics</currentState>
 					<nextState>End_Government</nextState>
@@ -353,7 +353,7 @@
 					</inputs>
 				</function>
 				<function>
-					<name>Bank_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Bank_Info</currentState>
 					<nextState>Bank_CreditMarket</nextState>
@@ -412,7 +412,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>CCH_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Start_CreditClearingHouse</currentState>
 					<nextState>CCH_Credit_Market</nextState>
@@ -474,7 +474,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>PCFirm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>PCFirm_PolicyInfo</currentState>
 					<nextState>PCFirm_CapitalGoodMarket</nextState>
@@ -533,7 +533,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>FGM_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>FGM_Statistics</currentState>
 					<nextState>End_Final_Goods_Market</nextState>
@@ -580,7 +580,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>CB_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>CB_Info</currentState>
 					<nextState>CB_AccountUpdate</nextState>
@@ -614,7 +614,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>CB_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>CB_Statistics</currentState>
 					<nextState>End_Central_Bank</nextState>
@@ -765,7 +765,7 @@
 					<inputs/>
 				</function>
 				<function>
-					<name>SO_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Start_Statistical_Office</currentState>
 					<nextState>End_Statistical_Office</nextState>

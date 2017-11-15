@@ -6,14 +6,6 @@
 
 
 
-int Household_idle()
-{
-
-    return 0;
-}
-
-
-
 /* \fn: int Household_get_fired()
  
 * \brief: Households read firing message.

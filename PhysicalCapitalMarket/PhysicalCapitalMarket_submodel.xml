@@ -86,7 +86,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_PhysicalCapitalMarket</currentState>
 					<nextState>Firm_DailyAccounting</nextState>
@@ -180,7 +180,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>PCFirm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>PCFirm_DividendPayments</currentState>
 					<nextState>End_PCFirm</nextState>

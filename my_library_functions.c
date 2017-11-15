@@ -70,3 +70,9 @@ double fast_gauss_distro()
     
     return r;
 }
+
+int Idle()
+{
+
+    return 0;
+}

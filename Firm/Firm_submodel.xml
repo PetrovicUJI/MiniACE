@@ -223,7 +223,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_BankruptcyCapacityUpdate</currentState>
 					<nextState>Firm_BankruptcyState</nextState>
@@ -253,7 +253,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_BankruptcyState</currentState>
 					<nextState>Firm_BankruptcyPriceSetting</nextState>
@@ -321,7 +321,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_BankruptcyPhysicalCapitalMarket</currentState>
 					<nextState>Firm_BankruptcyFinancialPayments</nextState>
@@ -394,7 +394,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_BankruptcyPriceSetting</currentState>
 					<nextState>Firm_BankruptcyDailyAccounting</nextState>
@@ -436,7 +436,7 @@
 					</outputs>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_FireSell</currentState>
 					<nextState>Firm_BankruptcyDailyAccounting</nextState>
@@ -497,7 +497,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_Status</currentState>
 					<nextState>Firm_ProductionActivity</nextState>
@@ -544,7 +544,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_ProductionActivity</currentState>
 					<nextState>Firm_DailyAccounting</nextState>
@@ -577,7 +577,7 @@
 					<outputs/>
 				</function>
 				<function>
-					<name>Firm_idle</name>
+					<name>Idle</name>
 					<description></description>
 					<currentState>Firm_InvestmentPlanAdjustment</currentState>
 					<nextState>Firm_LaborDemand</nextState>

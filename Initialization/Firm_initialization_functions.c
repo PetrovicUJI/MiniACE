@@ -3,12 +3,6 @@
 
 #include "../Firm_agent_header.h"
 
-int Firm_idle()
-{
-
-    return 0;
-}
-
 /* \fn: int Firm_initialization()
  
 * \brief: Firm send data to the government
