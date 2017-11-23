@@ -18,3 +18,5 @@ int random_int(int min,int max);
 /* A sample from a normally distribution with zero mean and standard deviation 1.0.
  */
 double fast_gauss_distro();
+
+int Idle();
