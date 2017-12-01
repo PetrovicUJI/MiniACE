@@ -5,20 +5,20 @@
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
-		<constants>
-			<!-- <variable>
+<!-- 		<constants>
+			<variable>
 			<type>double</type>
 			<name>rawmat2output_innovation</name>
 			<description></description>
-			</variable> -->
-		</constants>
+			</variable>
+		</constants> -->
 		<functionFiles>
 		   <file>PCFirm_PhysicalCapital_Market_Functions.c</file>
 		   <file>Firm_PhysicalCapital_Market_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
-		<dataTypes>
-<!-- 			<dataType>
+<!-- 		<dataTypes>
+			<dataType>
 				<name>consumption_goods_offer</name>
 				<description>Used by household and mall to hold consumption goods offers</description>
 				<variables>
@@ -28,20 +28,20 @@
 						<description></description>
 					</variable>
 				</variables>
-			</dataType> -->
-		</dataTypes>
+			</dataType>
+		</dataTypes> -->
 	</environment>
 	<agents>
 		<xagent>
 			<name>Firm</name>
 			<description></description>
-			<memory>
-				<!-- <variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Firm_send_physical_capital_order</name>

@@ -5,21 +5,21 @@
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
-		<constants>
-<!-- 			<variable>
+<!-- 		<constants>
+			<variable>
 			<type>double</type>
 			<name>inflation_target</name>
 			<description></description>
-			</variable> -->
-		</constants>
+			</variable>
+		</constants> -->
 		<functionFiles>
 			<file>CentralBank_functions.c</file>
 			<file>Government_CB_functions.c</file>
 			<file>Bank_CB_functions.c</file>
 		</functionFiles>
 		<timeUnits/>
-		<dataTypes>
-<!-- 			<dataType>
+<!-- 		<dataTypes>
+			<dataType>
 				<name>consumption_goods_offer</name>
 				<description>Used by household and mall to hold consumption goods offers</description>
 				<variables>
@@ -29,8 +29,8 @@
 						<description></description>
 					</variable>
 				</variables>
-			</dataType> -->
-		</dataTypes>
+			</dataType>
+		</dataTypes> -->
 	</environment>
 	<agents>
 		<xagent>
@@ -154,13 +154,13 @@
 		<xagent>
 			<name>Bank</name>
 			<description></description>
-			<memory>
-			<!-- 	<variable>
+<!-- 			<memory>
+				<variable>
 					<type>double</type>
 					<name>tax_income</name>
 					<description>Montlhly government tax income.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Bank_send_payments_to_CB</name>

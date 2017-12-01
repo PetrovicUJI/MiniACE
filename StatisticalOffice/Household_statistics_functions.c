@@ -23,7 +23,6 @@
 */
 int Household_receive_info()
 {
-	NON_CURRENT_ASSETS = 0.0;
 	
 	START_ENTERPRISE_TO_HH_INFO_MESSAGE_LOOP
 		
@@ -32,15 +31,19 @@ int Household_receive_info()
 			if(ASSETS_LIST.array[i].asset_id == enterprise_to_hh_info_message->enterprise_id)
 			{
 				ASSETS_LIST.array[i].book_value = enterprise_to_hh_info_message->share_book_value;
-				
-				NON_CURRENT_ASSETS += ASSETS_LIST.array[i].book_value*ASSETS_LIST.array[i].number_of_assets;
 				break;
 			}
 		}			
 	
     FINISH_ENTERPRISE_TO_HH_INFO_MESSAGE_LOOP
 	
+	CURRENT_ASSETS = 0.0;
+	for(int i = 0; i < ASSETS_LIST.size; i++)
+	{
+		CURRENT_ASSETS += ASSETS_LIST.array[i].book_value*ASSETS_LIST.array[i].number_of_assets;
+	}
 	
+
 	if(DAY%20 == 1)
 	{
 		START_GOV_SEND_INFO_MESSAGE_LOOP

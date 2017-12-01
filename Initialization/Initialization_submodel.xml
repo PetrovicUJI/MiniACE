@@ -5,13 +5,13 @@
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
-		<constants>
-			<!-- <variable>
+<!-- 		<constants>
+			<variable>
 			<type>double</type>
 			<name>rawmat2output_innovation</name>
 			<description></description>
-			</variable> -->
-		</constants>
+			</variable>
+		</constants> -->
 		<functionFiles>
 			<file>Firm_initialization_functions.c</file>
 			<file>PCFirm_initialization_functions.c</file>
@@ -707,7 +707,7 @@
 			<name>gov_init_labor</name>
 			<description>Message added by governemnt to initialize labor.</description>
 			<variables>
-			<!-- (hh_id, employer_id, activation_day) -->
+			<!-- (hh_id, employer_id, activation_day, wage) -->
 				<variable>
 					<type>int</type>
 					<name>hh_id</name>
@@ -722,6 +722,11 @@
 					<type>int</type>
 					<name>activation_day</name>
 					<description>Firm activation_day.</description>
+				</variable>
+				<variable>
+					<type>double</type>
+					<name>wage</name>
+					<description>Employee salary.</description>
 				</variable>
 			</variables>
 		</message>
@@ -784,6 +789,5 @@
 				</variable>
 			</variables>
 		</message>
-		
 	</messages>
 </xmodel>

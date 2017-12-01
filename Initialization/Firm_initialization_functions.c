@@ -31,7 +31,7 @@ int Firm_initialization()
 * \timing: First iteration only when initialization is needed.
 
 
-  *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day) -->
+  *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day, wage) -->
  filters: households: a.id == m.hh_id;    firms:  a.id == m.employer_id
 
 *\gov_init_balance_sheets message structure:
@@ -50,20 +50,27 @@ int Firm_initialization()
 * \history: 09.11.2017-Marko: First implementation.
 */
 int Firm_receive_initialization()
-{
-	PRICE = 1;
-	
+{	
 	reset_Employee_array(&EMPLOYEES);
 	
-	double wage = 1.0;
+	double average_wage = 0.0;
 	
 	START_GOV_INIT_LABOR_MESSAGE_LOOP
 	
-		add_Employee(&EMPLOYEES, gov_init_labor_message->hh_id, wage);
+		add_Employee(&EMPLOYEES, gov_init_labor_message->hh_id, gov_init_labor_message->wage);
+		
+		average_wage += gov_init_labor_message->wage;
 		
 		DAY_OF_MONTH_TO_ACT = gov_init_labor_message->activation_day;
 	
     FINISH_GOV_INIT_LABOR_MESSAGE_LOOP
+	
+	if(EMPLOYEES.size > 0)
+	average_wage = average_wage/EMPLOYEES.size;
+
+	WAGE_OFFER = average_wage;
+	AVERAGE_WAGE = average_wage;
+
 	
 	LAST_DAY_OF_MONTH_TO_ACT = (DAY_OF_MONTH_TO_ACT+19)%MONTH;
 

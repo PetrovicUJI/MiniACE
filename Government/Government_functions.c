@@ -43,7 +43,7 @@ int Government_set_policy()
 	strcpy(filename, "its/Government_set_policy.txt");      
 	file1 = fopen(filename,"a");
 	fprintf(file1,"\n %d %d %f %f %f %f",DAY, ID, YEARLY_GDP, YEARLY_INCOME, YEARLY_EXPENDITURE, BUDGET_BALANCE);
-	fprintf(file1,"\n %f",DEBT_TO_GDP_RATIO, TOTAL_LIABILITIES, MEAN_WAGE);
+	fprintf(file1," %f %f %f",DEBT_TO_GDP_RATIO, TOTAL_LIABILITIES, MEAN_WAGE);
 	fclose(file1);
 	free(filename);
 	

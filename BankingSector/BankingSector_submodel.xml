@@ -196,13 +196,13 @@
 		<xagent>
 			<name>Household</name>
 			<description></description>
-			<memory>
-				<!-- <variable>
+<!-- 			<memory>
+				<variable>
 					<type>Loan_array</type>
 					<name>loans</name>
 					<description>A vector of laons taken by a firm.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Household_send_payments_to_bank</name>

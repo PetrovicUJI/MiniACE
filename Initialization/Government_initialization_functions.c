@@ -25,7 +25,7 @@
  
  *\ Enterprise_initialization data type structure <!-- (enterprise_id, outstanding_shares, share_book_value) -->
  
- *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day) -->
+ *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day, wage) -->
  filters: households: a.id == m.hh_id;    firms:  a.id == m.employer_id
  
 *\gov_init_balance_sheets message structure:
@@ -41,7 +41,65 @@
 * \history: 25.10.2017-Marko: First implementation.
 */
 int Government_initialization()
-{	
+{
+		/////////////////////////////////////////////////////////
+	
+	// Make file to be printed
+	
+	FILE *file1;
+	char *filename;
+
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"%s %s","DAILY_SOLD_QUANTITY", "DAILY_MARKET_TURNOVER");
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Government_set_policy.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"%s %s %s %s %s %s","DAY", "ID", "YEARLY_GDP", "YEARLY_INCOME", "YEARLY_EXPENDITURE", "BUDGET_BALANCE");
+	fprintf(file1," %s %s %s","DEBT_TO_GDP_RATIO", "TOTAL_LIABILITIES", "MEAN_WAGE");
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Household_receive_initialization.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"%s %s %s %s %s %s","DAY", "ID", "TOTAL_ASSETS", "CURRENT_ASSETS", "NON_CURRENT_ASSETS", "PAYMENT_ACCOUNT");
+	fprintf(file1," %s %s %s %s %s","TOTAL_LIABILITIES", "CURRENT_LIABILITIES", "NON_CURRENT_LIABILITIES", "WEALTH", "number_of_assets");
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Household_pay_tax_and_plan_consumption_budget.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"%s %s %s %s %s %s","DAY", "ID", "TOTAL_ASSETS", "CURRENT_ASSETS", "NON_CURRENT_ASSETS", "PAYMENT_ACCOUNT");
+	fprintf(file1," %s %s %s %s","TOTAL_LIABILITIES", "CURRENT_LIABILITIES", "NON_CURRENT_LIABILITIES", "WEALTH");
+	fprintf(file1," %s %s %s %s","MONTHLY_CONSUMPTION_BUDGET", "TOTAL_NET_INCOME", "CARROL_INDEX", "WEALTH_TO_INCOME_RATIO_TARGET");
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Statistical_Office_end_of_the_month_statistics.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1," %s %s %s %s %s %s","DAY", "ID", "NOMINAL_MONTHLY_GDP", "REAL_MONTHLY_GDP", "PRICE_LEVEL", "PRICE_GROWTH");
+	fprintf(file1," %s %s %s","AVERAGE_WAGE", "UNEMPLOYMENT_RATE", "num_of_bankruptcies");
+	fprintf(file1," %s %s %s","agregate_capital_stock", "agregate_inventory_stock", "agregate_production");
+	fprintf(file1," %s %s %s %s","AGGREGATE_VALUE_AT_RISK", "monthly_investments", "physical_capital_price", "real_monthly_investments");
+	fclose(file1);
+	free(filename);
+	
+	/////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	Enterprise_initialization_array firm_list;
 	init_Enterprise_initialization_array(&firm_list);
 	
@@ -90,7 +148,7 @@ int Government_initialization()
 	double firm_production = total_production/number_of_firms;
 	double firm_capital = firm_production; // given productivity = 1
 	double firm_inventories = firm_production;
-	double firm_endowment_payment_account = hh_list.size/number_of_firms;
+	double firm_endowment_payment_account = MEAN_WAGE*hh_list.size/number_of_firms;
 	
 	double firm_equity = firm_capital*physical_capital_price+firm_inventories+firm_endowment_payment_account;
 	
@@ -106,7 +164,7 @@ int Government_initialization()
 	
 	// initialize bank balance sheet
 	
-	double hh_endowment_payment_account = 5.0;
+	double hh_endowment_payment_account = MEAN_WAGE;
 	
 	double bank_deposits = hh_list.size*hh_endowment_payment_account + firm_endowment_payment_account; // each household is endowed with 1 unit of money.
 	double bank_equity = bank_deposits/2;
@@ -291,7 +349,7 @@ int Government_initialization()
 			if(j == firm_list.size)
 			j = 0;
 			
-			add_gov_init_labor_message(hh_list.array[i], firm_list.array[j].enterprise_id, activation_days_list.array[j]);
+			add_gov_init_labor_message(hh_list.array[i], firm_list.array[j].enterprise_id, activation_days_list.array[j], MEAN_WAGE);
 			
 			j++;			
 		}	
@@ -329,9 +387,9 @@ int Government_initialization()
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	CB_DEBT = (hh_list.size*12)/2;
+	CB_DEBT = (MEAN_WAGE*hh_list.size*12)/2;
 	
-	PAYMENT_ACCOUNT = hh_list.size;
+	PAYMENT_ACCOUNT = hh_list.size*MEAN_WAGE;
 	
 	CURRENT_ASSETS = 0;
 	NON_CURRENT_ASSETS = 0;

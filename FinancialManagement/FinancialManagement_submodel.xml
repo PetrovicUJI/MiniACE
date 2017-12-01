@@ -21,8 +21,8 @@
 		   <file>Firm_Financial_Management_Functions.c</file>
 		</functionFiles>
 		<timeUnits/>
-		<dataTypes>
-<!-- 			<dataType>
+<!-- 		<dataTypes>
+			<dataType>
 				<name>Stockholder</name>
 				<description>Used by agents to pay dividends to their stockholders.</description>
 				<variables>
@@ -37,8 +37,8 @@
 						<description></description>
 					</variable>
 				</variables>
-			</dataType> -->
-		</dataTypes>
+			</dataType>
+		</dataTypes> -->
 	</environment>
 	<agents>
 		<xagent>

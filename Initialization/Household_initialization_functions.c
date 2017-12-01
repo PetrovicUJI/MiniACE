@@ -34,7 +34,7 @@ int Household_initialization()
  *\ filter: a.id==m.hh_id
  
  
-  *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day) -->
+  *\ gov_init_labor_message structure: <!-- (hh_id, employer_id, activation_day, wage) -->
  filters: households: a.id == m.hh_id;    firms:  a.id == m.employer_id
  
 *\gov_init_balance_sheets message structure:
@@ -83,6 +83,7 @@ int Household_receive_initialization()
 	
 		EMPLOYER_ID = gov_init_labor_message->employer_id;
 		DAY_OF_MONTH_TO_ACT = gov_init_labor_message->activation_day;
+		WAGE = gov_init_labor_message->wage;
 	
     FINISH_GOV_INIT_LABOR_MESSAGE_LOOP
 	
@@ -90,8 +91,7 @@ int Household_receive_initialization()
 	
 	DAY_OF_WEEK_TO_ACT = random_int(0,4);
 	
-	WAGE = 1;
-	RESERVATION_WAGE = 1;
+	RESERVATION_WAGE = WAGE;
 	
 	
 	START_GOV_INIT_BALANCE_SHEETS_MESSAGE_LOOP

@@ -5,13 +5,13 @@
 	<description>Authors: Marko Petrovic</description>
 	<models/>
 	<environment>
-		<constants>
-			<!-- <variable>
+<!-- 		<constants>
+			<variable>
 			<type>double</type>
 			<name>rawmat2output_innovation</name>
 			<description></description>
-			</variable> -->
-		</constants>
+			</variable>
+		</constants> -->
 		<functionFiles>
 			<file>Firm_statistics_functions.c</file>
 			<file>PCFirm_statistics_functions.c</file>
@@ -24,8 +24,8 @@
 			<file>Credit_Clearing_House_statistics_functions.c</file>
 		</functionFiles>
 		<timeUnits/>
-		<dataTypes>
-			<!-- <dataType>
+<!-- 		<dataTypes>
+			<dataType>
 				<name>Enterprise_initialization</name>
 				<description>Used by government to initialize agents.</description>
 				<variables>
@@ -40,20 +40,20 @@
 						<description>The number of outstanding shares.</description>
 					</variable>
 				</variables>
-			</dataType> -->
-		</dataTypes>
+			</dataType>
+		</dataTypes> -->
 	</environment>
 	<agents>
 		<xagent>
 			<name>Firm</name>
 			<description></description>
-			<memory>
-<!-- 				<variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Firm_send_info</name>
@@ -240,13 +240,13 @@
 		<xagent>
 			<name>Government</name>
 			<description></description>
-			<memory>
-<!-- 				<variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Government_send_info</name>
@@ -321,13 +321,13 @@
 		<xagent>
 			<name>Bank</name>
 			<description></description>
-			<memory>
-<!-- 				<variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Bank_receive_and_send_info</name>
@@ -385,13 +385,13 @@
 		<xagent>
 			<name>Credit_ClearingHouse</name>
 			<description></description>
-			<memory>
-<!-- 				<variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>CCH_receive_info</name>
@@ -506,13 +506,13 @@
 		<xagent>
 			<name>Final_Goods_Market</name>
 			<description></description>
-			<memory>
-<!-- 				<variable>
+<!-- 			<memory>
+				<variable>
 					<type>int</type>
 					<name>initialization</name>
 					<description>Initialization flag. 1 indicates that the agent goes through the initialization process.</description>
-				</variable> -->
-			</memory>
+				</variable>
+			</memory> -->
 			<functions>
 				<function>
 					<name>Final_goods_market_send_statistics</name>
