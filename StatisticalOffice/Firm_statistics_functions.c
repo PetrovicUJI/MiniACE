@@ -113,6 +113,28 @@ int Firm_send_statistics()
 
 	add_firm_send_statistics_message(ID, ACTIVE, PHYSICAL_CAPITAL, INVENTORIES, PRODUCTION);
 	
+	FILE *file1;
+	char *filename;
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Firm_balance_sheet.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"\n %d %d %f %f %f %f %f",DAY, ID, TOTAL_ASSETS, CURRENT_ASSETS, INVENTORIES, NON_CURRENT_ASSETS, PAYMENT_ACCOUNT);
+	fprintf(file1," %f %f %f %f",TOTAL_LIABILITIES, CURRENT_LIABILITIES, NON_CURRENT_LIABILITIES, EQUITY);
+	fprintf(file1," %f %d",PHYSICAL_CAPITAL, ACTIVE);
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Firm_income_statement.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"\n %d %d %f %f %f %f %f",DAY, ID, MONTHLY_REVENUE, VAT_PAYMENT, EBT, MONTHLY_WAGE_PAYMENT, TOTAL_FINANCIAL_PAYMENT);
+	fprintf(file1," %f %f %f %f",PHYSICAL_CAPITAL_DEPRECIATION_COST, DIVIDEND_PAYMENT, CAPITAL_TAX_PAYMENT, NET_EARNINGS);
+	fclose(file1);
+	free(filename);
+	
 
 	return 0;
 }

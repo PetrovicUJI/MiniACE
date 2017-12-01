@@ -42,6 +42,22 @@ int Firm_send_final_goods_to_the_market()
 */
 int Firm_receive_updates_from_the_final_goods_market()
 {
+	if(DEBUG_MODE)
+	{
+		FILE *file1;
+		char *filename;
+		
+		filename = malloc(120*sizeof(char));
+		filename[0]=0;
+		strcpy(filename, "its/Firm_stat.txt");      
+		file1 = fopen(filename,"a");
+		fprintf(file1,"\n %d %d %f %f %f %f %f",DAY, ID, TOTAL_ASSETS, CURRENT_ASSETS, INVENTORIES, NON_CURRENT_ASSETS, PAYMENT_ACCOUNT);
+		fprintf(file1," %f %f %f %f",TOTAL_LIABILITIES, CURRENT_LIABILITIES, NON_CURRENT_LIABILITIES, EQUITY);
+		fclose(file1);
+		free(filename);
+	}
+
+	
 	START_FINAL_GOODS_MARKET_TRANSACTION_UPDATE_MESSAGE_LOOP
 	
 		MONTHLY_SOLD_QUANTITY += final_goods_market_transaction_update_message->sold_quantity;
@@ -53,6 +69,22 @@ int Firm_receive_updates_from_the_final_goods_market()
 	
 	// inventories are estimated at average market price
 	CURRENT_ASSETS = INVENTORIES*PRICE_LEVEL;
+	
+	if(DEBUG_MODE)
+	{
+		FILE *file1;
+		char *filename;
+		
+		filename = malloc(120*sizeof(char));
+		filename[0]=0;
+		strcpy(filename, "its/Firm_stat.txt");      
+		file1 = fopen(filename,"a");
+		fprintf(file1,"\n %d %d %f %f %f %f %f",DAY, ID, TOTAL_ASSETS, CURRENT_ASSETS, INVENTORIES, NON_CURRENT_ASSETS, PAYMENT_ACCOUNT);
+		fprintf(file1," %f %f %f %f",TOTAL_LIABILITIES, CURRENT_LIABILITIES, NON_CURRENT_LIABILITIES, EQUITY);
+		fclose(file1);
+		free(filename);
+	}
+	
 
     return 0;
 }

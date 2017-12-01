@@ -52,6 +52,11 @@
 				<name>total_regions</name>
 				<description>Total number of regions.</description>
 			</variable>
+			<variable>
+				<type>int</type>
+				<name>debug_mode</name>
+				<description>Debug mode print detailed txt files.</description>
+			</variable>
 		</constants>
 		<functionFiles>
 			<file>my_library_functions.c</file>

@@ -604,10 +604,38 @@
 					<outputs/>
 				</function>
 				<function>
+					<name>Idle</name>
+					<description></description>
+					<currentState>Firm_PriceSetting</currentState>
+					<nextState>Firm_PhysicalCapitalMarket</nextState>
+					<condition>
+						<not>
+							<lhs>
+								<value>a.production</value>
+							</lhs>
+							<op>GT</op>
+							<rhs>
+								<value>0</value>
+							</rhs>
+						</not>
+					</condition>
+					<inputs/>
+					<outputs/>
+				</function>
+				<function>
 					<name>Firm_calculate_unit_costs_and_set_price</name>
 					<description></description>
 					<currentState>Firm_PriceSetting</currentState>
 					<nextState>Firm_FinalGoodsShipping</nextState>
+					<condition>
+						<lhs>
+							<value>a.production</value>
+						</lhs>
+						<op>GT</op>
+						<rhs>
+							<value>0</value>
+						</rhs>
+					</condition>
 					<inputs/>
 					<outputs/>
 				</function>

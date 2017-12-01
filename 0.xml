@@ -2,6 +2,7 @@
 <itno>0</itno>
 <environment>
 <total_regions>1</total_regions>
+<debug_mode>0</debug_mode>
 <physical_capital_duration>24</physical_capital_duration>
 <target_profit_rate>0.05</target_profit_rate>
 <profit_rate_weights>0.01</profit_rate_weights>

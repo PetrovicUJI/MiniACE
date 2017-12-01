@@ -40,17 +40,20 @@ int Final_goods_market_receive_products_and_orders()
 		{
 			if (FINAL_GOODS_LIST.array[i].seller_id == seller_id)
 			{
+				present = 1;
+				
 				// remove a seller from the market!
 				if(FINAL_GOODS_LIST.array[i].price == -1)
 				{
 					remove_Final_good(&FINAL_GOODS_LIST,i);
 					break;
 				}
-				
-				FINAL_GOODS_LIST.array[i].quantity += quantity;
-				FINAL_GOODS_LIST.array[i].price = price;
-				present = 1;
-				break;
+				else
+				{
+					FINAL_GOODS_LIST.array[i].quantity += quantity;
+					FINAL_GOODS_LIST.array[i].price = price;
+					break;
+				}
 			}
 		}
 		
@@ -59,7 +62,27 @@ int Final_goods_market_receive_products_and_orders()
 	
     FINISH_FINAL_GOODS_SHIPPING_MESSAGE_LOOP
 	
-	
+	for(int i = 0; i < FINAL_GOODS_LIST.size; i++)
+	{
+		seller_id = FINAL_GOODS_LIST.array[i].seller_id;
+		quantity = FINAL_GOODS_LIST.array[i].quantity;
+		price = FINAL_GOODS_LIST.array[i].price;
+		
+		if(DEBUG_MODE)
+		{
+			FILE *file1;
+			char *filename;
+
+			filename = malloc(120*sizeof(char));
+			filename[0]=0;
+			strcpy(filename, "its/FGM_supply.txt");      
+			file1 = fopen(filename,"a");
+			fprintf(file1,"\n %d %d %d %f %f",DAY, ID, seller_id, quantity, price);
+			fclose(file1);
+			free(filename);
+		}
+	}
+		
 	int buyer_id = 0;
 	double budget = 0.0;
 	
@@ -75,6 +98,27 @@ int Final_goods_market_receive_products_and_orders()
 		add_Final_goods_order(&FINAL_GOODS_ORDERS_LIST, buyer_id, budget);
 		
     FINISH_FINAL_GOODS_ORDER_MESSAGE_LOOP
+	
+	for(int i = 0; i < FINAL_GOODS_ORDERS_LIST.size; i++)
+	{
+		buyer_id = FINAL_GOODS_ORDERS_LIST.array[i].buyer_id;
+		budget = FINAL_GOODS_ORDERS_LIST.array[i].budget;
+		
+		
+		if(DEBUG_MODE)
+		{
+			FILE *file1;
+			char *filename;
+
+			filename = malloc(120*sizeof(char));
+			filename[0]=0;
+			strcpy(filename, "its/FGM_demand.txt");      
+			file1 = fopen(filename,"a");
+			fprintf(file1,"\n %d %d %d %f",DAY, ID, buyer_id, budget);
+			fclose(file1);
+			free(filename);
+		}
+	}
 
 	
     return 0;
@@ -149,26 +193,77 @@ int Final_goods_market_send_products_to_buyers()
 			FINAL_GOODS_LIST.array[index].price,
 			FINAL_GOODS_LIST.array[index].sold_quantity);
 		
+			// the seller is temporary taken out, but later is added back
 			remove_Final_good(&FINAL_GOODS_LIST, index);
 			j++;
 		}
 		
+		int seller_id = 0;
+		double quantity = 0.0;
+		double price = 0.0;
+		double sold = 0.0;
+		
+		for(j = 0; j < final_goods_list.size; j++)
+		{
+			
+			seller_id = final_goods_list.array[j].seller_id,
+			quantity = final_goods_list.array[j].quantity,
+			price = final_goods_list.array[j].price,
+			sold = final_goods_list.array[j].sold_quantity;
+			
+			if(DEBUG_MODE)
+			{
+				FILE *file1;
+				char *filename;
 
-		/*Ranks goods regarding their price.*/
+				filename = malloc(120*sizeof(char));
+				filename[0]=0;
+				strcpy(filename, "its/FGM_final_goods_list_order_1.txt");      
+				file1 = fopen(filename,"a");
+				fprintf(file1,"\n %d %d %d %f %f %f",DAY, buyer_id, seller_id, quantity, price, sold);
+				fclose(file1);
+				free(filename);
+			}
+		}
+
+		/*Ranks goods regarding their price, from the highest to the lower - thus the last price in the array will be the lowest.*/
 		qsort(final_goods_list.array, final_goods_list.size, sizeof(Final_good),final_goods_list_rank_price_function);
 		
+		for(j = 0; j < final_goods_list.size; j++)
+		{
+			
+			seller_id = final_goods_list.array[j].seller_id,
+			quantity = final_goods_list.array[j].quantity,
+			price = final_goods_list.array[j].price,
+			sold = final_goods_list.array[j].sold_quantity;
+			
+			if(DEBUG_MODE)
+			{
+				FILE *file1;
+				char *filename;
 
-		j = 0;
-		while(j < final_goods_list.size && FINAL_GOODS_ORDERS_LIST.array[i].budget > 0)
+				filename = malloc(120*sizeof(char));
+				filename[0]=0;
+				strcpy(filename, "its/FGM_final_goods_list_order_2.txt");      
+				file1 = fopen(filename,"a");
+				fprintf(file1,"\n %d %d %d %f %f %f",DAY, buyer_id, seller_id, quantity, price, sold);
+				fclose(file1);
+				free(filename);
+			}
+		}
+
+		j = final_goods_list.size-1;
+		while(j >= 0 && FINAL_GOODS_ORDERS_LIST.array[i].budget > 0)
 		{
 			if(final_goods_list.array[j].quantity*final_goods_list.array[j].price >= FINAL_GOODS_ORDERS_LIST.array[i].budget)
 			{
 				purchased_quantity += FINAL_GOODS_ORDERS_LIST.array[i].budget/final_goods_list.array[j].price;
 				costs += FINAL_GOODS_ORDERS_LIST.array[i].budget;
-				FINAL_GOODS_ORDERS_LIST.array[i].budget = 0;
 				
 				final_goods_list.array[j].sold_quantity += FINAL_GOODS_ORDERS_LIST.array[i].budget/final_goods_list.array[j].price;
 				final_goods_list.array[j].quantity -= FINAL_GOODS_ORDERS_LIST.array[i].budget/final_goods_list.array[j].price;
+				
+				FINAL_GOODS_ORDERS_LIST.array[i].budget = 0;
 			}
 			else
 			{
@@ -179,11 +274,27 @@ int Final_goods_market_send_products_to_buyers()
 				final_goods_list.array[j].sold_quantity += final_goods_list.array[j].quantity;
 				final_goods_list.array[j].quantity = 0;
 			}
-			j++;
+			j--;
 		}
 		add_final_goods_delivery_to_buyers_message(buyer_id, FINAL_GOODS_ORDERS_LIST.array[i].budget, costs, purchased_quantity);
 		
 		
+		if(DEBUG_MODE)
+		{
+			FILE *file1;
+			char *filename;
+
+			filename = malloc(120*sizeof(char));
+			filename[0]=0;
+			strcpy(filename, "its/FGM_final_goods_delivery.txt");      
+			file1 = fopen(filename,"a");
+			fprintf(file1,"\n %d %d %f %f %f",DAY, buyer_id, FINAL_GOODS_ORDERS_LIST.array[i].budget, costs, purchased_quantity);
+			fclose(file1);
+			free(filename);
+		}
+
+		
+
 		for(j = 0; j < final_goods_list.size; j++)
 		{
 			add_Final_good(&FINAL_GOODS_LIST,
@@ -191,6 +302,25 @@ int Final_goods_market_send_products_to_buyers()
 			final_goods_list.array[j].quantity,
 			final_goods_list.array[j].price,
 			final_goods_list.array[j].sold_quantity);
+			
+			seller_id = final_goods_list.array[j].seller_id,
+			quantity = final_goods_list.array[j].quantity,
+			price = final_goods_list.array[j].price,
+			sold = final_goods_list.array[j].sold_quantity;
+			
+			if(DEBUG_MODE)
+			{
+				FILE *file1;
+				char *filename;
+
+				filename = malloc(120*sizeof(char));
+				filename[0]=0;
+				strcpy(filename, "its/FGM_final_goods_turnover.txt");      
+				file1 = fopen(filename,"a");
+				fprintf(file1,"\n %d %d %f %f %f",DAY, seller_id, quantity, price, sold);
+				fclose(file1);
+				free(filename);
+			}
 		}
 		
 		reset_Final_good_array(&final_goods_list);
@@ -209,6 +339,8 @@ int Final_goods_market_send_products_to_buyers()
  *\ final_goods_market_transaction_update message structure: <!-- (seller_id, sold_quantity, revenue) -->
  
  *\ data type Final_good structure: <!-- (seller_id, quantity, price, sold_quantity) -->
+ 
+ filter: a.id == m.seller_id
  
 * \timing: Daily.
  * \condition:
@@ -234,18 +366,21 @@ int Final_goods_market_update_sellers()
 		DAILY_MARKET_TURNOVER += FINAL_GOODS_LIST.array[i].sold_quantity*FINAL_GOODS_LIST.array[i].price;
 		
 		
-		FILE *file1;
-		char *filename;
+		if(DEBUG_MODE)
+		{
+			FILE *file1;
+			char *filename;
 
-		filename = malloc(120*sizeof(char));
-		filename[0]=0;
-		strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
-		file1 = fopen(filename,"a");
-		fprintf(file1,"\n %f %f",DAILY_SOLD_QUANTITY, DAILY_MARKET_TURNOVER);
-		fclose(file1);
-		free(filename);
-		
-		
+			filename = malloc(120*sizeof(char));
+			filename[0]=0;
+			strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
+			file1 = fopen(filename,"a");
+			fprintf(file1,"\n %f %f",DAILY_SOLD_QUANTITY, DAILY_MARKET_TURNOVER);
+			fclose(file1);
+			free(filename);
+		}
+
+
 		FINAL_GOODS_LIST.array[i].sold_quantity = 0.0;
 	}
 	

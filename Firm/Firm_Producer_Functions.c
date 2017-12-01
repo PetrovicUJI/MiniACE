@@ -239,12 +239,25 @@ int Firm_plan_production_quantity()
 	EXPECTED_DEMAND = 0.0;
 	PRODUCTION_PLAN = 0.0;
 	
+	double average_change_rate = 0.0;
+	int count = 0;
+	
 	for(int i = 0; i < SOLD_QUANTITIES_VECTOR.size; i++)
 	{
 		EXPECTED_DEMAND += SOLD_QUANTITIES_VECTOR.array[i];
+		
+		if(i < SOLD_QUANTITIES_VECTOR.size-1 && SOLD_QUANTITIES_VECTOR.array[i] != 0)
+		{
+			// set different weights "i"
+			count = count+(i+1);
+			average_change_rate += (i+1)*((SOLD_QUANTITIES_VECTOR.array[i+1]-SOLD_QUANTITIES_VECTOR.array[i])/SOLD_QUANTITIES_VECTOR.array[i]);
+		}
 	}
+	average_change_rate = average_change_rate/count;
 	
-	if(SOLD_QUANTITIES_VECTOR.size > 0) {EXPECTED_DEMAND = 1.1*(EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size);}
+	
+	if(SOLD_QUANTITIES_VECTOR.size > 0)
+	EXPECTED_DEMAND = (1+average_change_rate)*(EXPECTED_DEMAND/SOLD_QUANTITIES_VECTOR.size);
 	
 	
 	if(EXPECTED_DEMAND > INVENTORIES)
@@ -439,10 +452,10 @@ int Firm_produce_final_goods()
  
  
 * \timing: Monthly on the last activation day.
- * \condition:
+ * \condition: If production > 0
  
 * \authors: Marko Petrovic
-* \history: 17.10.2017-Marko: First implementation.
+* \history: 1.12.2017-Marko: First implementation.
 */
 int Firm_calculate_unit_costs_and_set_price()
 {

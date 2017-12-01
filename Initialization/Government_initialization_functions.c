@@ -46,16 +46,21 @@ int Government_initialization()
 	
 	// Make file to be printed
 	
+	
 	FILE *file1;
 	char *filename;
 
-	filename = malloc(120*sizeof(char));
-	filename[0]=0;
-	strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
-	file1 = fopen(filename,"a");
-	fprintf(file1,"%s %s","DAILY_SOLD_QUANTITY", "DAILY_MARKET_TURNOVER");
-	fclose(file1);
-	free(filename);
+	if(DEBUG_MODE)
+	{
+		filename = malloc(120*sizeof(char));
+		filename[0]=0;
+		strcpy(filename, "its/DAILY_SOLD_QUANTITY.txt");      
+		file1 = fopen(filename,"a");
+		fprintf(file1,"%s %s","DAILY_SOLD_QUANTITY", "DAILY_MARKET_TURNOVER");
+		fclose(file1);
+		free(filename);
+	}
+
 	
 	filename = malloc(120*sizeof(char));
 	filename[0]=0;
@@ -65,7 +70,7 @@ int Government_initialization()
 	fprintf(file1," %s %s %s","DEBT_TO_GDP_RATIO", "TOTAL_LIABILITIES", "MEAN_WAGE");
 	fclose(file1);
 	free(filename);
-	
+
 	filename = malloc(120*sizeof(char));
 	filename[0]=0;
 	strcpy(filename, "its/Household_receive_initialization.txt");      
@@ -74,6 +79,19 @@ int Government_initialization()
 	fprintf(file1," %s %s %s %s %s","TOTAL_LIABILITIES", "CURRENT_LIABILITIES", "NON_CURRENT_LIABILITIES", "WEALTH", "number_of_assets");
 	fclose(file1);
 	free(filename);
+	
+	if(DEBUG_MODE)
+	{
+		filename = malloc(120*sizeof(char));
+		filename[0]=0;
+		strcpy(filename, "its/Firm_stat.txt");      
+		file1 = fopen(filename,"a");
+		fprintf(file1,"%s %s %s %s %s %s %s","DAY", "ID", "TOTAL_ASSETS", "CURRENT_ASSETS", "INVENTORIES", "NON_CURRENT_ASSETS", "PAYMENT_ACCOUNT");
+		fprintf(file1," %s %s %s %s","TOTAL_LIABILITIES", "CURRENT_LIABILITIES", "NON_CURRENT_LIABILITIES", "EQUITY");
+		fclose(file1);
+		free(filename);
+	}
+
 	
 	filename = malloc(120*sizeof(char));
 	filename[0]=0;
@@ -93,6 +111,26 @@ int Government_initialization()
 	fprintf(file1," %s %s %s","AVERAGE_WAGE", "UNEMPLOYMENT_RATE", "num_of_bankruptcies");
 	fprintf(file1," %s %s %s","agregate_capital_stock", "agregate_inventory_stock", "agregate_production");
 	fprintf(file1," %s %s %s %s","AGGREGATE_VALUE_AT_RISK", "monthly_investments", "physical_capital_price", "real_monthly_investments");
+	fclose(file1);
+	free(filename);
+	
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Firm_balance_sheet.txt");      
+	file1 = fopen(filename,"w");
+	fprintf(file1,"%s %s %s %s %s %s %s","DAY", "ID", "TOTAL_ASSETS", "CURRENT_ASSETS", "INVENTORIES", "NON_CURRENT_ASSETS", "PAYMENT_ACCOUNT");
+	fprintf(file1," %s %s %s %s","TOTAL_LIABILITIES", "CURRENT_LIABILITIES", "NON_CURRENT_LIABILITIES", "EQUITY");
+	fprintf(file1," %s %s","PHYSICAL_CAPITAL", "ACTIVE");
+	fclose(file1);
+	free(filename);
+	
+	filename = malloc(120*sizeof(char));
+	filename[0]=0;
+	strcpy(filename, "its/Firm_income_statement.txt");      
+	file1 = fopen(filename,"a");
+	fprintf(file1,"%s %s %s %s %s %s %s","DAY", "ID", "MONTHLY_REVENUE", "VAT_PAYMENT", "EBT", "MONTHLY_WAGE_PAYMENT", "TOTAL_FINANCIAL_PAYMENT");
+	fprintf(file1," %s %s %s %s","PHYSICAL_CAPITAL_DEPRECIATION_COST", "DIVIDEND_PAYMENT", "CAPITAL_TAX_PAYMENT", "NET_EARNINGS");
 	fclose(file1);
 	free(filename);
 	
@@ -126,7 +164,6 @@ int Government_initialization()
     FINISH_HH_TO_GOV_INI_MESSAGE_LOOP
 	
 	double physical_capital_price = 0.0;
-	
 	START_PCFIRM_PRICE_INFO_MESSAGE_LOOP
 	
 		physical_capital_price = pcfirm_price_info_message->pc_price;
@@ -134,7 +171,6 @@ int Government_initialization()
     FINISH_PCFIRM_PRICE_INFO_MESSAGE_LOOP
 	
 	int cb_id;
-	
 	START_CB_TO_GOV_INI_MESSAGE_LOOP
 	
 		cb_id = cb_to_gov_ini_message->cb_id;
@@ -144,7 +180,7 @@ int Government_initialization()
 
 	// initialize firm balance sheet
 	
-	double total_production = hh_list.size; // given prices and wages equal to 1.
+	double total_production = MEAN_WAGE*hh_list.size; // given prices equal to 1.
 	double firm_production = total_production/number_of_firms;
 	double firm_capital = firm_production; // given productivity = 1
 	double firm_inventories = firm_production;
@@ -166,7 +202,7 @@ int Government_initialization()
 	
 	double hh_endowment_payment_account = MEAN_WAGE;
 	
-	double bank_deposits = hh_list.size*hh_endowment_payment_account + firm_endowment_payment_account; // each household is endowed with 1 unit of money.
+	double bank_deposits = hh_list.size*hh_endowment_payment_account + firm_endowment_payment_account; // each household is endowed with 1 mean salary.
 	double bank_equity = bank_deposits/2;
 	double bank_payment_account = bank_deposits + bank_equity;
 	double bank_cb_debt = 0.0;

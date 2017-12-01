@@ -128,6 +128,8 @@ int Household_receive_initialization()
 	fclose(file1);
 	free(filename);
 	
+	
+	
 	// initialize consumption budget
 	
 	
